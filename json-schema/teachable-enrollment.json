@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/teachable/main/json-schema/teachable-enrollment.json",
+  "title": "TeachableEnrollment",
+  "description": "A student enrollment in a Teachable course.",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "integer",
+      "description": "The unique ID of the enrolled user."
+    },
+    "enrolled_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Datetime when the user enrolled in the course."
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Datetime when the enrollment expires, or null if it does not expire."
+    },
+    "completed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Datetime when the user completed the course, or null if not completed."
+    },
+    "percent_complete": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Percentage of the course the user has completed."
+    }
+  },
+  "required": ["user_id", "enrolled_at", "percent_complete"]
+}

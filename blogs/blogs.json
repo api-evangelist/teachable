@@ -1,0 +1,10 @@
+{
+  "provider": "teachable",
+  "blog": {
+    "url": "https://www.teachable.com/blog",
+    "rss": null,
+    "note": "No RSS/Atom feed discovered. Blog is available at the URL above."
+  },
+  "last_checked": "2026-06-12",
+  "posts": []
+}

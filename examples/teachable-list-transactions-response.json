@@ -1,0 +1,35 @@
+{
+  "transactions": [
+    {
+      "id": 88001,
+      "user_id": 55555,
+      "pricing_plan_id": 7001,
+      "sale_id": 99001,
+      "created_at": "2026-05-15T14:32:00Z",
+      "purchased_at": "2026-05-15T14:32:00Z",
+      "charge": 4900,
+      "final_price": 4900,
+      "currency": "USD",
+      "tax_charge": 0,
+      "revenue": 4900,
+      "status": "paid",
+      "has_chargeback": false,
+      "chargeback_fee": 0,
+      "affiliate_id": null,
+      "affiliate_fees": 0,
+      "author_id": 9876,
+      "author_fees": 0,
+      "coupon_id": null,
+      "refunded_at": null,
+      "amount_refunded": 0
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "page": 1,
+    "from": 1,
+    "to": 1,
+    "per_page": 20,
+    "number_of_pages": 1
+  }
+}

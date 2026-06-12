@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/teachable/main/json-schema/teachable-user.json",
+  "title": "TeachableUser",
+  "description": "A user registered on a Teachable school.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique ID of the user."
+    },
+    "name": {
+      "type": ["string", "null"],
+      "description": "The name of the user."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the user."
+    },
+    "role": {
+      "type": "string",
+      "description": "The role of the user on the school.",
+      "enum": ["student", "owner", "affiliate", "author", "custom"]
+    },
+    "last_sign_in_ip": {
+      "type": ["string", "null"],
+      "description": "IP address of the user's last sign-in, or null if they have never signed in."
+    },
+    "src": {
+      "type": ["string", "null"],
+      "description": "The signup source of the user, displayed on the Information tab."
+    },
+    "courses": {
+      "type": "array",
+      "description": "List of courses the user is or has been enrolled in.",
+      "items": {
+        "$ref": "#/definitions/UserCourse"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags applied to the user.",
+      "items": {
+        "$ref": "#/definitions/UserTag"
+      }
+    }
+  },
+  "required": ["id", "email", "role"],
+  "definitions": {
+    "UserCourse": {
+      "type": "object",
+      "properties": {
+        "course_id": { "type": "integer" },
+        "course_name": { "type": "string" },
+        "enrolled_at": { "type": "string", "format": "date-time" },
+        "is_active_enrollment": { "type": "boolean" },
+        "completed_at": { "type": ["string", "null"], "format": "date-time" },
+        "percent_complete": { "type": "number", "minimum": 0, "maximum": 100 }
+      },
+      "required": ["course_id", "course_name", "enrolled_at", "is_active_enrollment"]
+    },
+    "UserTag": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" }
+      },
+      "required": ["name"]
+    }
+  }
+}

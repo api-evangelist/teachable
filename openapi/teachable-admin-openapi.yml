@@ -1,0 +1,1676 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin API
+  description: >
+    REST API for managing Teachable school data including courses, users,
+    enrollments, quiz responses, pricing plans, transactions, and webhooks.
+    Authenticated via API key header and available on Growth plan and above.
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+  - url: https://developers.teachable.com/v1
+    description: Teachable Admin API
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Courses
+    description: Course management endpoints
+  - name: Lectures
+    description: Lecture management endpoints
+  - name: Quizzes
+    description: Quiz and quiz response endpoints
+  - name: Enrollments
+    description: Enrollment management endpoints
+  - name: Users
+    description: User management endpoints
+  - name: PricingPlans
+    description: Pricing plan endpoints
+  - name: Transactions
+    description: Transaction and sales endpoints
+  - name: Webhooks
+    description: Webhook configuration and event endpoints
+
+paths:
+  /courses:
+    get:
+      operationId: listCourses
+      summary: List all courses
+      description: Fetch all courses at your school.
+      tags:
+        - Courses
+      parameters:
+        - name: name
+          in: query
+          description: Filter courses by course name.
+          schema:
+            type: string
+        - name: is_published
+          in: query
+          description: Filter courses by published status.
+          schema:
+            type: boolean
+        - name: author_bio_id
+          in: query
+          description: Filter courses by a specific course author via the course author's bio ID.
+          schema:
+            type: integer
+            format: int32
+        - name: created_at
+          in: query
+          description: Return courses by the date & time of course creation. Formatted in ISO8601.
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: Used in pagination when number of courses exceed the maximum amount of results per page.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of courses per page, when not defined the maximum is 20.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoursesListResponse'
+
+  /courses/{course_id}:
+    get:
+      operationId: getCourse
+      summary: Get a course
+      description: Return a course by its unique ID.
+      tags:
+        - Courses
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return a course by its unique ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseDetailResponse'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/enrollments:
+    get:
+      operationId: listCourseEnrollments
+      summary: List course enrollments
+      description: Return enrollments for a specific course.
+      tags:
+        - Enrollments
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return enrollments for a specific course by the unique course ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: enrolled_in_after
+          in: query
+          description: Filters for students who enrolled after a specified timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: enrolled_in_before
+          in: query
+          description: Filters for students who enrolled before a specified timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: sort_direction
+          in: query
+          description: Enrollments are sorted by the 'enrolled_at' datetime.
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentsListResponse'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/progress:
+    get:
+      operationId: getCourseProgress
+      summary: Get course progress
+      description: Return the progress of a user in a specific course.
+      tags:
+        - Courses
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: The unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: user_id
+          in: query
+          required: true
+          description: The unique ID of the user.
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: Used in pagination when number of courses exceed the maximum amount of results per page.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of courses per page, when not defined the maximum is 20.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseProgressResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}:
+    get:
+      operationId: getLecture
+      summary: Get a lecture
+      description: Return a lecture by its unique ID within a course.
+      tags:
+        - Lectures
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LectureDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}/mark_complete:
+    post:
+      operationId: markLectureComplete
+      summary: Mark a lecture complete
+      description: Mark a lecture as complete for a specific user.
+      tags:
+        - Lectures
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: The unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: The unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+      responses:
+        '204':
+          description: Lecture marked complete successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}/videos/{video_id}:
+    get:
+      operationId: getVideo
+      summary: Get a video
+      description: Return a specific video attachment within a lecture.
+      tags:
+        - Lectures
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: video_id
+          in: path
+          required: true
+          description: Return results by unique video attachment ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: user_id
+          in: query
+          description: Specify the user who is watching the video.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}/quizzes:
+    get:
+      operationId: listQuizzes
+      summary: List quizzes
+      description: Return all quiz IDs in a specific lecture.
+      tags:
+        - Quizzes
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizListResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}/quizzes/{quiz_id}:
+    get:
+      operationId: getQuiz
+      summary: Get a quiz
+      description: Return details of a specific quiz attachment.
+      tags:
+        - Quizzes
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: quiz_id
+          in: path
+          required: true
+          description: Return results by unique quiz attachment ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /courses/{course_id}/lectures/{lecture_id}/quizzes/{quiz_id}/responses:
+    get:
+      operationId: getQuizResponses
+      summary: Get quiz responses
+      description: Return all student responses for a specific quiz.
+      tags:
+        - Quizzes
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: quiz_id
+          in: path
+          required: true
+          description: Return results by unique quiz attachment ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizResponsesResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /enroll:
+    post:
+      operationId: enrollUser
+      summary: Enroll a user
+      description: Enroll a user in a course.
+      tags:
+        - Enrollments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - course_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+                course_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the course.
+      responses:
+        '204':
+          description: User enrolled successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /unenroll:
+    post:
+      operationId: unenrollUser
+      summary: Unenroll a user
+      description: Remove a user's enrollment from a course.
+      tags:
+        - Enrollments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - course_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+                course_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the course.
+      responses:
+        '204':
+          description: User unenrolled successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: Get a list of users.
+      tags:
+        - Users
+      parameters:
+        - name: page
+          in: query
+          description: Used in pagination when number of users exceed the maximum amount of results per page.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of users per page, when not defined the maximum is 20.
+          schema:
+            type: integer
+            format: int32
+        - name: email
+          in: query
+          description: Filter users by user email.
+          schema:
+            type: string
+        - name: search_after
+          in: query
+          description: Used when number of users exceeds 10,000 records. Use the search_after value to search the next set of records.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListResponse'
+    post:
+      operationId: createUser
+      summary: Create a user
+      description: Create a new user on the school.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /users/{user_id}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: Return a user by their unique ID.
+      tags:
+        - Users
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The unique ID of the user.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      operationId: updateUser
+      summary: Update a user
+      description: Update the name or src of a user.
+      tags:
+        - Users
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The unique ID of the user.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /pricing_plans:
+    get:
+      operationId: listPricingPlans
+      summary: List pricing plans
+      description: Return all pricing plans for the school.
+      tags:
+        - PricingPlans
+      parameters:
+        - name: page
+          in: query
+          description: Used in pagination when number of pricing plans exceeds the maximum amount of results per page.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlansListResponse'
+
+  /pricing_plans/{pricing_plan_id}:
+    get:
+      operationId: getPricingPlan
+      summary: Get a pricing plan
+      description: Search for a pricing plan by its unique ID.
+      tags:
+        - PricingPlans
+      parameters:
+        - name: pricing_plan_id
+          in: path
+          required: true
+          description: Search for a pricing plan by its unique ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlanDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /transactions:
+    get:
+      operationId: listTransactions
+      summary: List transactions
+      description: Return all transactions for the school with optional filters.
+      tags:
+        - Transactions
+      parameters:
+        - name: user_id
+          in: query
+          description: Filter by user.
+          schema:
+            type: integer
+            format: int32
+        - name: affiliate_id
+          in: query
+          description: Filter by affiliate.
+          schema:
+            type: integer
+            format: int32
+        - name: course_id
+          in: query
+          description: Filter by course.
+          schema:
+            type: integer
+            format: int32
+        - name: pricing_plan_id
+          in: query
+          description: Filter by pricing plan.
+          schema:
+            type: integer
+            format: int32
+        - name: is_fully_refunded
+          in: query
+          description: Filter by refund status.
+          schema:
+            type: boolean
+        - name: is_chargeback
+          in: query
+          description: Filter by chargeback status.
+          schema:
+            type: boolean
+        - name: start
+          in: query
+          description: The beginning of the time period to return results for (exclusive). Formatted in ISO8601.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: The end of the time period to return results for (inclusive). Formatted in ISO8601.
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Items per page, maximum is 20 when not specified.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsListResponse'
+
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Fetch all webhook events for your school.
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksListResponse'
+
+  /webhooks/{webhook_id}/events:
+    get:
+      operationId: listWebhookEvents
+      summary: List webhook events
+      description: Return all events for a specific webhook.
+      tags:
+        - Webhooks
+      parameters:
+        - name: webhook_id
+          in: path
+          required: true
+          description: The unique ID of the webhook.
+          schema:
+            type: integer
+            format: int32
+        - name: response_http_status_gte
+          in: query
+          description: Filter by HTTP status code greater than or equal to value.
+          schema:
+            type: integer
+            format: int32
+        - name: response_http_status_lte
+          in: query
+          description: Filter by HTTP status code less than or equal to value.
+          schema:
+            type: integer
+            format: int32
+        - name: created_before
+          in: query
+          description: Search for webhook events that were created before a specific datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: created_after
+          in: query
+          description: Search for webhook events that were created after a specific datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Set the maximum number of results to be returned per page.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookEventsListResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.
+
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: Error message or array of error messages.
+
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique course identifier.
+        name:
+          type: string
+          description: Course title.
+        heading:
+          type: string
+          nullable: true
+          description: The course subtitle, as set in the Information tab.
+        description:
+          type: string
+          nullable: true
+          description: Course description.
+        is_published:
+          type: boolean
+          description: Publication status of the course.
+        image_url:
+          type: string
+          nullable: true
+          description: URL of the course image.
+
+    LectureSection:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        is_published:
+          type: boolean
+        position:
+          type: integer
+        lectures:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              position:
+                type: integer
+              is_published:
+                type: boolean
+
+    AuthorBio:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Author name.
+        bio:
+          type: string
+          nullable: true
+          description: Author biography.
+        profile_image_url:
+          type: string
+          nullable: true
+          description: Author profile image URL.
+        user_id:
+          type: integer
+          nullable: true
+          description: Associated user ID.
+
+    CourseDetail:
+      allOf:
+        - $ref: '#/components/schemas/CourseSummary'
+        - type: object
+          properties:
+            lecture_sections:
+              type: array
+              items:
+                $ref: '#/components/schemas/LectureSection'
+            author_bio:
+              $ref: '#/components/schemas/AuthorBio'
+
+    CoursesListResponse:
+      type: object
+      properties:
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    CourseDetailResponse:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/CourseDetail'
+
+    EnrollmentSummary:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: Unique ID of the enrolled user.
+        enrolled_at:
+          type: string
+          format: date-time
+          description: Datetime of enrollment in ISO8601.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime enrollment expires, if applicable.
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime course was completed, if applicable.
+        percent_complete:
+          type: integer
+          description: Percentage of course completed.
+
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    QuizAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        kind:
+          type: string
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+        file_size:
+          type: integer
+          format: int32
+          nullable: true
+        file_extension:
+          type: string
+          nullable: true
+
+    LectureAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        kind:
+          type: string
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+          nullable: true
+        file_size:
+          type: integer
+          format: int32
+          nullable: true
+        file_extension:
+          type: string
+          nullable: true
+        quiz:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+              format: int32
+            questions:
+              type: array
+              items:
+                type: object
+
+    LectureDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        is_published:
+          type: boolean
+        position:
+          type: integer
+          format: int32
+        lecture_section_id:
+          type: integer
+          format: int32
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureAttachment'
+
+    LectureDetailResponse:
+      type: object
+      properties:
+        lecture:
+          $ref: '#/components/schemas/LectureDetail'
+
+    VideoAsset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: M3U8 playlist file URL.
+        content_type:
+          type: string
+
+    VideoDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        video_asset:
+          $ref: '#/components/schemas/VideoAsset'
+        status:
+          type: string
+          enum: [READY, PROCESSING, PARTIALLY_READY, QUEUED, THUMBNAIL_READY, FAILED]
+        url_thumbnail:
+          type: string
+          description: Poster image URL.
+        media_type:
+          type: string
+          description: Always 'VIDEO'.
+        media_duration:
+          type: integer
+          description: Duration in seconds.
+
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoDetail'
+
+    QuizListResponse:
+      type: object
+      properties:
+        quiz_ids:
+          type: array
+          items:
+            type: integer
+          description: List of unique IDs of quizzes in a lecture.
+
+    QuizQuestion:
+      type: object
+      properties:
+        question:
+          type: string
+        question_type:
+          type: string
+        answers:
+          type: array
+          items:
+            type: string
+        correct_answers:
+          type: array
+          items:
+            type: string
+        graded:
+          type: boolean
+
+    QuizInformation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum: [Quiz]
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+
+    QuizDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Quiz attachment identifier.
+        name:
+          type: string
+          description: Quiz display name.
+        kind:
+          type: string
+          enum: [quiz]
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+        quiz:
+          $ref: '#/components/schemas/QuizInformation'
+
+    QuizStudentResponse:
+      type: object
+      properties:
+        student_id:
+          type: integer
+          description: The unique ID of the student.
+        student_name:
+          type: string
+          description: The name of the student.
+        student_email:
+          type: string
+          description: The email of the student.
+        submitted_at:
+          type: string
+          format: date-time
+          description: Datetime when the student submitted the quiz.
+        percent_correct:
+          type: integer
+          description: Percentage of correct answers.
+
+    QuizResponsesResponse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+          description: The unique ID of the course.
+        course_name:
+          type: string
+          description: The name of the course.
+        lecture_id:
+          type: integer
+          description: The unique ID of the lecture.
+        lecture_name:
+          type: string
+          description: The name of the lecture.
+        graded:
+          type: boolean
+          description: Indicates if the quiz is graded.
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizStudentResponse'
+
+    LectureSectionProgress:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lectures:
+          type: array
+          items:
+            type: object
+
+    CourseProgressDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        certificate:
+          type: object
+          nullable: true
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        enrolled_at:
+          type: string
+          format: date-time
+        lecture_sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureSectionProgress'
+        percent_complete:
+          type: number
+
+    CourseProgressResponse:
+      type: object
+      properties:
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressDetail'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    UserTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tag name.
+
+    UserCourse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+        course_name:
+          type: string
+        enrolled_at:
+          type: string
+          format: date-time
+        is_active_enrollment:
+          type: boolean
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        percent_complete:
+          type: number
+
+    UserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The unique ID of the user.
+        name:
+          type: string
+          nullable: true
+          description: The name of the user.
+        email:
+          type: string
+          description: The email address of the user.
+
+    UserDetail:
+      allOf:
+        - $ref: '#/components/schemas/UserSummary'
+        - type: object
+          properties:
+            role:
+              type: string
+              description: The role of the user (student, owner, affiliate, author, custom, etc.).
+            last_sign_in_ip:
+              type: string
+              nullable: true
+              description: Last sign-in IP address, or null if user hasn't signed in.
+            courses:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserCourse'
+              description: A list of courses the user is or has been enrolled in.
+            tags:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserTag'
+              description: Tags related to the user.
+
+    UsersListResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    UserDetailResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDetail'
+
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: The email address of the new user.
+        name:
+          type: string
+          description: The name of the new user.
+        password:
+          type: string
+          minLength: 6
+          description: Password for the account. Minimum 6 characters.
+        src:
+          type: string
+          description: The signup source of the user. Can store custom values or external system IDs.
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the user.
+        src:
+          type: string
+          description: The signup source of the user, which is displayed on the Information tab of the user profile.
+
+    PricingFrequency:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [free, one_time_payment, subscription, payment_plan]
+        billing_interval:
+          type: string
+          nullable: true
+          enum: [week, month, year]
+        billing_interval_count:
+          type: integer
+          nullable: true
+        access_limit_date:
+          type: string
+          format: date-time
+          nullable: true
+        access_limit_interval:
+          type: string
+          nullable: true
+          enum: [day, week, month, year]
+        access_limit_duration:
+          type: integer
+          nullable: true
+
+    PricingPlanSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique pricing plan identifier.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Pricing plan name.
+        price:
+          type: integer
+          description: Price in smallest currency unit.
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        course_id:
+          type: integer
+          description: Associated course ID.
+
+    PricingPlanDetail:
+      allOf:
+        - $ref: '#/components/schemas/PricingPlanSummary'
+        - type: object
+          properties:
+            description:
+              type: string
+              nullable: true
+            free_trial_length:
+              type: integer
+              nullable: true
+              description: Free trial length in days.
+            enrollment_cap:
+              type: integer
+              nullable: true
+              description: Maximum enrollment count.
+            frequency:
+              $ref: '#/components/schemas/PricingFrequency'
+
+    PricingPlansListResponse:
+      type: object
+      properties:
+        pricing_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingPlanSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    PricingPlanDetailResponse:
+      type: object
+      properties:
+        pricing_plan:
+          $ref: '#/components/schemas/PricingPlanDetail'
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        pricing_plan_id:
+          type: integer
+        sale_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        purchased_at:
+          type: string
+          format: date-time
+        charge:
+          type: integer
+          description: Amount charged in USD (smallest unit).
+        final_price:
+          type: integer
+          description: Final price in currency of choice (smallest unit).
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        tax_charge:
+          type: integer
+        revenue:
+          type: integer
+          description: Revenue in USD (smallest unit).
+        status:
+          type: string
+          description: Transaction status (paid or null).
+        has_chargeback:
+          type: boolean
+        chargeback_fee:
+          type: integer
+        affiliate_id:
+          type: integer
+        affiliate_fees:
+          type: integer
+        author_id:
+          type: integer
+        author_fees:
+          type: integer
+        coupon_id:
+          type: integer
+        refunded_at:
+          type: string
+          format: date-time
+          nullable: true
+        amount_refunded:
+          type: integer
+
+    TransactionsListResponse:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique identifier for the webhook.
+        workflow_state:
+          type: string
+          description: Current webhook state (verified, pending, failed).
+        url:
+          type: string
+          description: The webhook's target URL.
+        event_trigger:
+          type: string
+          description: Event type that activates the webhook.
+        webhook_events_count:
+          type: integer
+          format: int32
+          description: Total occurrences of the webhook event.
+
+    WebhooksListResponse:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+
+    WebhookEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        workflow_state:
+          type: string
+        webhook_id:
+          type: integer
+        attempt_count:
+          type: integer
+        last_attempted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        object_type:
+          type: string
+        object_id:
+          type: integer
+        response_http_status:
+          type: integer
+          nullable: true
+
+    WebhookEventsListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'

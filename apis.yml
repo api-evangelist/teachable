@@ -52,6 +52,8 @@ apis:
         url: https://docs.teachable.com/docs/quickstart-guide
       - type: Changelog
         url: https://docs.teachable.com/changelog
+      - type: OpenAPI
+        url: openapi/teachable-admin-openapi.yml
     contact:
       - FN: Teachable Support
         url: https://support.teachable.com
@@ -71,6 +73,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.teachable.com/docs/overview-1
+      - type: OpenAPI
+        url: openapi/teachable-oauth-openapi.yml
     contact:
       - FN: Teachable Support
         url: https://support.teachable.com

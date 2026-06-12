@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/teachable/main/json-schema/teachable-course.json",
+  "title": "TeachableCourse",
+  "description": "A course on a Teachable school.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique course identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Course title."
+    },
+    "heading": {
+      "type": ["string", "null"],
+      "description": "The course subtitle, as set in the Information tab."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Course description as set on the sales page."
+    },
+    "is_published": {
+      "type": "boolean",
+      "description": "Whether the course is published and visible to students."
+    },
+    "image_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL of the course image."
+    },
+    "lecture_sections": {
+      "type": "array",
+      "description": "Sections of the course containing lectures.",
+      "items": {
+        "$ref": "#/definitions/LectureSection"
+      }
+    },
+    "author_bio": {
+      "$ref": "#/definitions/AuthorBio"
+    }
+  },
+  "required": ["id", "name", "is_published"],
+  "definitions": {
+    "LectureSection": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "is_published": { "type": "boolean" },
+        "position": { "type": "integer" },
+        "lectures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "position": { "type": "integer" },
+              "is_published": { "type": "boolean" }
+            }
+          }
+        }
+      },
+      "required": ["id", "name", "is_published", "position"]
+    },
+    "AuthorBio": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "bio": { "type": ["string", "null"] },
+        "profile_image_url": { "type": ["string", "null"], "format": "uri" },
+        "user_id": { "type": ["integer", "null"] }
+      },
+      "required": ["name"]
+    }
+  }
+}

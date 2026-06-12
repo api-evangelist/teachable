@@ -1,0 +1,186 @@
+vocabulary:
+  provider: Teachable
+  description: Domain vocabulary for the Teachable online course and coaching platform API.
+  version: '1'
+  terms:
+    - term: school
+      definition: >
+        A Teachable account that hosts courses, users, and content. The top-level
+        organizational unit for all Teachable resources.
+      type: noun
+
+    - term: course
+      definition: >
+        An educational product on a Teachable school comprising lecture sections,
+        lectures, attachments, quizzes, and author information. Courses can be
+        published or unpublished.
+      type: noun
+
+    - term: lecture_section
+      definition: >
+        A grouping of lectures within a course, used to organize content into
+        chapters or modules.
+      type: noun
+
+    - term: lecture
+      definition: >
+        An individual content unit within a lecture section. Can contain
+        attachments such as video, text, PDFs, and quizzes.
+      type: noun
+
+    - term: attachment
+      definition: >
+        A content asset associated with a lecture. Supported types include video,
+        text, PDF, quiz, and other file types.
+      type: noun
+
+    - term: quiz
+      definition: >
+        An interactive assessment attached to a lecture. Quizzes may be graded
+        or ungraded and contain multiple-choice questions.
+      type: noun
+
+    - term: quiz_response
+      definition: >
+        A student's submitted answers to a quiz, including their score as a
+        percentage of correct answers.
+      type: noun
+
+    - term: enrollment
+      definition: >
+        The association between a user and a course granting access to course
+        content. Enrollments track completion status and expiry.
+      type: noun
+
+    - term: user
+      definition: >
+        A person registered on a Teachable school. Users have roles such as
+        student, owner, affiliate, author, or custom.
+      type: noun
+
+    - term: user_role
+      definition: >
+        The permission level assigned to a user on a school. Valid roles are
+        student, owner, affiliate, author, and custom.
+      type: noun
+
+    - term: user_tag
+      definition: >
+        A label applied to a user account to segment or categorize users within
+        a school.
+      type: noun
+
+    - term: pricing_plan
+      definition: >
+        A purchasable offer associated with a course defining the price, currency,
+        billing frequency, and access terms.
+      type: noun
+
+    - term: transaction
+      definition: >
+        A record of a financial event when a user purchases or is enrolled in a
+        priced course, including charge, refund, and affiliate fee details.
+      type: noun
+
+    - term: webhook
+      definition: >
+        An HTTP callback configured on a Teachable school to receive event
+        notifications when specific actions occur (e.g., enrollment, lecture
+        completion, sales).
+      type: noun
+
+    - term: webhook_event
+      definition: >
+        A single delivery attempt of a webhook notification, including the HTTP
+        response status, attempt count, and delivery timestamp.
+      type: noun
+
+    - term: apiKey
+      definition: >
+        The HTTP request header used to authenticate Admin API requests. API keys
+        are generated in the school's Settings > API section and require a Growth
+        plan or higher.
+      type: noun
+
+    - term: access_token
+      definition: >
+        An OAuth 2.0 bearer token issued to third-party applications authorizing
+        access to school data on behalf of a school owner.
+      type: noun
+
+    - term: percent_complete
+      definition: >
+        A numeric value between 0 and 100 indicating how much of a course a
+        student has completed.
+      type: noun
+
+    - term: is_published
+      definition: >
+        A boolean flag on courses and lectures indicating whether the content is
+        visible to students.
+      type: noun
+
+    - term: src
+      definition: >
+        The signup source field on a user record. Used to track users across
+        external systems and can store custom identifiers.
+      type: noun
+
+    - term: search_after
+      definition: >
+        A cursor-based pagination parameter used when retrieving more than 10,000
+        users. Contains the last user's ID from the previous page.
+      type: noun
+
+    - term: workflow_state
+      definition: >
+        The current status of a webhook or webhook event. Common values include
+        verified, pending, and failed.
+      type: noun
+
+    - term: billing_interval
+      definition: >
+        The recurring billing period for a subscription pricing plan. Valid values
+        are week, month, and year.
+      type: noun
+
+    - term: free_trial_length
+      definition: >
+        The number of days included in a free trial period for a pricing plan
+        before billing begins.
+      type: noun
+
+    - term: enrollment_cap
+      definition: >
+        The maximum number of students that can enroll under a specific pricing
+        plan. Null indicates unlimited enrollment.
+      type: noun
+
+    - term: chargeback
+      definition: >
+        A disputed transaction where a payment processor reverses a charge. The
+        transactions endpoint supports filtering by chargeback status.
+      type: noun
+
+    - term: affiliate
+      definition: >
+        A user who earns commissions for referring sales to a Teachable school.
+        Transactions record affiliate IDs and affiliate fee amounts.
+      type: noun
+
+    - term: video_asset
+      definition: >
+        The streaming asset associated with a video attachment, providing an M3U8
+        playlist URL and content type for playback.
+      type: noun
+
+    - term: media_duration
+      definition: >
+        The length of a video asset in seconds.
+      type: noun
+
+    - term: mark_complete
+      definition: >
+        An API action that records a lecture as completed for a specific user,
+        advancing their course progress.
+      type: verb

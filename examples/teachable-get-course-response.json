@@ -1,0 +1,49 @@
+{
+  "course": {
+    "id": 12345,
+    "name": "Introduction to Python Programming",
+    "heading": "Learn Python from scratch in 30 days",
+    "description": "A comprehensive beginner's guide to Python programming.",
+    "is_published": true,
+    "image_url": "https://cdn.teachable.com/courses/12345/image.jpg",
+    "lecture_sections": [
+      {
+        "id": 1001,
+        "name": "Getting Started",
+        "is_published": true,
+        "position": 1,
+        "lectures": [
+          {
+            "id": 2001,
+            "position": 1,
+            "is_published": true
+          },
+          {
+            "id": 2002,
+            "position": 2,
+            "is_published": true
+          }
+        ]
+      },
+      {
+        "id": 1002,
+        "name": "Variables and Data Types",
+        "is_published": true,
+        "position": 2,
+        "lectures": [
+          {
+            "id": 2003,
+            "position": 1,
+            "is_published": true
+          }
+        ]
+      }
+    ],
+    "author_bio": {
+      "name": "Jane Smith",
+      "bio": "Software engineer with 10 years of Python experience.",
+      "profile_image_url": "https://cdn.teachable.com/authors/jane-smith.jpg",
+      "user_id": 9876
+    }
+  }
+}

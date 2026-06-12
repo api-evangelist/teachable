@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/teachable/main/json-schema/teachable-webhook.json",
+  "title": "TeachableWebhook",
+  "description": "A webhook configured on a Teachable school to receive event notifications.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the webhook."
+    },
+    "workflow_state": {
+      "type": "string",
+      "description": "Current state of the webhook.",
+      "enum": ["verified", "pending", "failed"]
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The target URL that receives webhook event payloads."
+    },
+    "event_trigger": {
+      "type": "string",
+      "description": "The event type that activates the webhook.",
+      "enum": [
+        "Admission.created",
+        "Admission.disabled",
+        "Comment.created",
+        "EmailLead.created",
+        "Enrollment.created",
+        "Enrollment.completed",
+        "Enrollment.disabled",
+        "LectureProgress.created",
+        "Response.created",
+        "Sale.created",
+        "Sale.subscription_canceled",
+        "Transaction.created",
+        "Transaction.refunded",
+        "User.created",
+        "User.subscribe_to_marketing_emails",
+        "User.unsubscribe_from_marketing_emails",
+        "User.updated",
+        "UserTag.created",
+        "UserTag.removed",
+        "AbandonedOrder.created"
+      ]
+    },
+    "webhook_events_count": {
+      "type": "integer",
+      "description": "Total number of times this webhook has been triggered."
+    }
+  },
+  "required": ["id", "workflow_state", "url", "event_trigger"]
+}

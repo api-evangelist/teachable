@@ -1,0 +1,185 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "teachable": "https://developers.teachable.com/v1/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "school": "teachable:school",
+    "course": "teachable:course",
+    "lecture_section": "teachable:lectureSection",
+    "lecture": "teachable:lecture",
+    "attachment": "teachable:attachment",
+    "quiz": "teachable:quiz",
+    "quiz_response": "teachable:quizResponse",
+    "enrollment": "teachable:enrollment",
+    "pricing_plan": "teachable:pricingPlan",
+    "transaction": "teachable:transaction",
+    "webhook": "teachable:webhook",
+    "webhook_event": "teachable:webhookEvent",
+    "user_tag": "teachable:userTag",
+
+    "Course": {
+      "@id": "teachable:Course",
+      "@type": "@id"
+    },
+    "LectureSection": {
+      "@id": "teachable:LectureSection",
+      "@type": "@id"
+    },
+    "Lecture": {
+      "@id": "teachable:Lecture",
+      "@type": "@id"
+    },
+    "Quiz": {
+      "@id": "teachable:Quiz",
+      "@type": "@id"
+    },
+    "Enrollment": {
+      "@id": "teachable:Enrollment",
+      "@type": "@id"
+    },
+    "User": {
+      "@id": "schema:Person",
+      "@type": "@id"
+    },
+    "PricingPlan": {
+      "@id": "teachable:PricingPlan",
+      "@type": "@id"
+    },
+    "Transaction": {
+      "@id": "schema:PaymentChargeSpecification",
+      "@type": "@id"
+    },
+    "Webhook": {
+      "@id": "teachable:Webhook",
+      "@type": "@id"
+    },
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "heading": "teachable:heading",
+    "email": "schema:email",
+    "role": "teachable:role",
+    "is_published": "teachable:isPublished",
+    "image_url": "schema:image",
+    "position": "teachable:position",
+    "lecture_section_id": "teachable:lectureSectionId",
+    "course_id": "teachable:courseId",
+    "lecture_id": "teachable:lectureId",
+    "quiz_id": "teachable:quizId",
+    "user_id": "teachable:userId",
+    "pricing_plan_id": "teachable:pricingPlanId",
+    "webhook_id": "teachable:webhookId",
+
+    "enrolled_at": {
+      "@id": "teachable:enrolledAt",
+      "@type": "xsd:dateTime"
+    },
+    "expires_at": {
+      "@id": "teachable:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "completed_at": {
+      "@id": "teachable:completedAt",
+      "@type": "xsd:dateTime"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "purchased_at": {
+      "@id": "teachable:purchasedAt",
+      "@type": "xsd:dateTime"
+    },
+    "refunded_at": {
+      "@id": "teachable:refundedAt",
+      "@type": "xsd:dateTime"
+    },
+    "submitted_at": {
+      "@id": "teachable:submittedAt",
+      "@type": "xsd:dateTime"
+    },
+
+    "percent_complete": "teachable:percentComplete",
+    "is_active_enrollment": "teachable:isActiveEnrollment",
+    "src": "teachable:signupSource",
+    "last_sign_in_ip": "teachable:lastSignInIp",
+    "search_after": "teachable:searchAfter",
+
+    "price": "schema:price",
+    "currency": "schema:priceCurrency",
+    "charge": "teachable:charge",
+    "final_price": "teachable:finalPrice",
+    "tax_charge": "teachable:taxCharge",
+    "revenue": "teachable:revenue",
+    "status": "teachable:status",
+    "has_chargeback": "teachable:hasChargeback",
+    "chargeback_fee": "teachable:chargebackFee",
+    "affiliate_id": "teachable:affiliateId",
+    "affiliate_fees": "teachable:affiliateFees",
+    "author_id": "teachable:authorId",
+    "author_fees": "teachable:authorFees",
+    "coupon_id": "teachable:couponId",
+    "amount_refunded": "teachable:amountRefunded",
+    "sale_id": "teachable:saleId",
+    "free_trial_length": "teachable:freeTrialLength",
+    "enrollment_cap": "teachable:enrollmentCap",
+
+    "url": "schema:url",
+    "event_trigger": "teachable:eventTrigger",
+    "workflow_state": "teachable:workflowState",
+    "webhook_events_count": "teachable:webhookEventsCount",
+    "attempt_count": "teachable:attemptCount",
+    "last_attempted_at": "teachable:lastAttemptedAt",
+    "object_type": "teachable:objectType",
+    "object_id": "teachable:objectId",
+    "response_http_status": "teachable:responseHttpStatus",
+
+    "kind": "teachable:kind",
+    "file_size": "schema:contentSize",
+    "file_extension": "teachable:fileExtension",
+    "media_type": "schema:encodingFormat",
+    "media_duration": "schema:duration",
+    "video_asset": "teachable:videoAsset",
+    "url_thumbnail": "schema:thumbnailUrl",
+
+    "bio": "schema:description",
+    "profile_image_url": "schema:image",
+
+    "question": "teachable:question",
+    "question_type": "teachable:questionType",
+    "answers": "teachable:answers",
+    "correct_answers": "teachable:correctAnswers",
+    "graded": "teachable:graded",
+    "percent_correct": "teachable:percentCorrect",
+
+    "courses": "teachable:courses",
+    "lectures": "teachable:lectures",
+    "attachments": "teachable:attachments",
+    "enrollments": "teachable:enrollments",
+    "users": "teachable:users",
+    "tags": "teachable:tags",
+    "pricing_plans": "teachable:pricingPlans",
+    "transactions": "teachable:transactions",
+    "webhooks": "teachable:webhooks",
+    "events": "teachable:events",
+    "questions": "teachable:questions",
+    "responses": "teachable:responses",
+    "quiz_ids": "teachable:quizIds",
+    "lecture_sections": "teachable:lectureSections",
+
+    "meta": "teachable:meta",
+    "total": "teachable:total",
+    "page": "teachable:page",
+    "from": "teachable:from",
+    "to": "teachable:to",
+    "per_page": "teachable:perPage",
+    "number_of_pages": "teachable:numberOfPages",
+    "has_more_results": "teachable:hasMoreResults"
+  }
+}

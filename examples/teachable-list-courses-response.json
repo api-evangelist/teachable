@@ -1,0 +1,28 @@
+{
+  "courses": [
+    {
+      "id": 12345,
+      "name": "Introduction to Python Programming",
+      "heading": "Learn Python from scratch in 30 days",
+      "description": "A comprehensive beginner's guide to Python programming covering variables, functions, loops, and object-oriented programming.",
+      "is_published": true,
+      "image_url": "https://cdn.teachable.com/courses/12345/image.jpg"
+    },
+    {
+      "id": 12346,
+      "name": "Advanced JavaScript Patterns",
+      "heading": null,
+      "description": "Explore closures, prototypes, async/await, and modern JavaScript design patterns.",
+      "is_published": false,
+      "image_url": null
+    }
+  ],
+  "meta": {
+    "total": 42,
+    "page": 1,
+    "from": 1,
+    "to": 20,
+    "per_page": 20,
+    "number_of_pages": 3
+  }
+}

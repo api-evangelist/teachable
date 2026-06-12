@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/teachable/main/json-schema/teachable-transaction.json",
+  "title": "TeachableTransaction",
+  "description": "A financial transaction record for a course purchase on a Teachable school.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique transaction identifier."
+    },
+    "user_id": {
+      "type": "integer",
+      "description": "ID of the user who made the purchase."
+    },
+    "pricing_plan_id": {
+      "type": "integer",
+      "description": "ID of the pricing plan purchased."
+    },
+    "sale_id": {
+      "type": "integer",
+      "description": "ID of the associated sale record."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Datetime the transaction record was created."
+    },
+    "purchased_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Datetime the purchase occurred."
+    },
+    "charge": {
+      "type": "integer",
+      "description": "Amount charged in USD in the smallest currency unit (cents)."
+    },
+    "final_price": {
+      "type": "integer",
+      "description": "Final price in the currency of choice in the smallest unit."
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code."
+    },
+    "tax_charge": {
+      "type": "integer",
+      "description": "Tax amount charged in the smallest currency unit."
+    },
+    "revenue": {
+      "type": "integer",
+      "description": "Net revenue in USD in the smallest currency unit."
+    },
+    "status": {
+      "type": ["string", "null"],
+      "description": "Transaction status. 'paid' for completed transactions."
+    },
+    "has_chargeback": {
+      "type": "boolean",
+      "description": "Whether the transaction has a chargeback."
+    },
+    "chargeback_fee": {
+      "type": "integer",
+      "description": "Chargeback fee amount in smallest currency unit."
+    },
+    "affiliate_id": {
+      "type": ["integer", "null"],
+      "description": "ID of the affiliate who referred the sale, if applicable."
+    },
+    "affiliate_fees": {
+      "type": "integer",
+      "description": "Affiliate commission fees in smallest currency unit."
+    },
+    "author_id": {
+      "type": ["integer", "null"],
+      "description": "ID of the course author."
+    },
+    "author_fees": {
+      "type": "integer",
+      "description": "Author fee amount in smallest currency unit."
+    },
+    "coupon_id": {
+      "type": ["integer", "null"],
+      "description": "ID of the coupon used, if applicable."
+    },
+    "refunded_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Datetime the transaction was refunded, if applicable."
+    },
+    "amount_refunded": {
+      "type": "integer",
+      "description": "Amount refunded in smallest currency unit."
+    }
+  },
+  "required": ["id", "user_id", "pricing_plan_id", "created_at", "charge", "currency"]
+}

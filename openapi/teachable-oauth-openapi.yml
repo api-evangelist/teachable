@@ -1,0 +1,703 @@
+openapi: 3.0.3
+info:
+  title: Teachable OAuth API
+  description: >
+    OAuth 2.0-based API enabling third-party applications to authenticate on
+    behalf of Teachable school owners. Provides access to current user profile,
+    courses, lecture content, progress, and video assets using scoped OAuth
+    tokens with token refresh and revocation support.
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+  - url: https://developers.teachable.com/v1
+    description: Teachable OAuth API
+
+security:
+  - OAuth2:
+      - courses:read
+
+tags:
+  - name: CurrentUser
+    description: Endpoints for the authenticated current user
+  - name: Courses
+    description: Course access endpoints for current user
+  - name: Lectures
+    description: Lecture access endpoints for current user
+  - name: Videos
+    description: Video access endpoints for current user
+
+paths:
+  /current_user/me:
+    get:
+      operationId: getCurrentUser
+      summary: Get current user profile
+      description: Retrieve the current authenticated user's profile information including name, email, and assigned role.
+      tags:
+        - CurrentUser
+      security:
+        - OAuth2:
+            - name:read
+            - email:read
+        - AccessToken: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses:
+    get:
+      operationId: listCurrentUserCourses
+      summary: List current user courses
+      description: Fetch all courses for the current authenticated user.
+      tags:
+        - Courses
+      security:
+        - OAuth2:
+            - courses:read
+        - AccessToken: []
+      parameters:
+        - name: name
+          in: query
+          description: Filter courses by course name.
+          schema:
+            type: string
+        - name: is_published
+          in: query
+          description: Filter courses by published status.
+          schema:
+            type: boolean
+        - name: created_at
+          in: query
+          description: Return courses by the date & time of course creation. Formatted in ISO8601.
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          description: Used in pagination when number of courses exceed the maximum amount of results per page.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of courses per page, when not defined the maximum is 20.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoursesListResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses/{course_id}:
+    get:
+      operationId: getCurrentUserCourse
+      summary: Get a course for current user
+      description: Return a course by its unique ID for the current authenticated user.
+      tags:
+        - Courses
+      security:
+        - OAuth2:
+            - courses:read
+        - AccessToken: []
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return a course by its unique ID number.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseDetailResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses/{course_id}/progress:
+    get:
+      operationId: getCurrentUserCourseProgress
+      summary: Get course progress for current user
+      description: Return the current authenticated user's progress in a specific course.
+      tags:
+        - Courses
+      security:
+        - OAuth2:
+            - courses:read
+        - AccessToken: []
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return a course progress by its unique ID number.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: page
+          in: query
+          description: Used in pagination when number of lecture progresses exceed the maximum amount.
+          schema:
+            type: integer
+            format: int32
+        - name: per
+          in: query
+          description: Used in pagination to define amount of lecture progresses per page, when not defined the maximum is 20.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseProgressResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses/{course_id}/lectures/{lecture_id}:
+    get:
+      operationId: getCurrentUserLecture
+      summary: Get a lecture for current user
+      description: Return a lecture by its unique ID within a course for the current authenticated user.
+      tags:
+        - Lectures
+      security:
+        - OAuth2:
+            - courses:read
+        - AccessToken: []
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Return results by unique course ID number that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Return results by unique lecture ID number.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LectureDetailResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Lecture or course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses/{course_id}/lectures/{lecture_id}/mark_complete:
+    post:
+      operationId: markCurrentUserLectureComplete
+      summary: Mark a lecture complete for current user
+      description: Mark a lecture as complete for the current authenticated user.
+      tags:
+        - Lectures
+      security:
+        - OAuth2:
+            - courses:read
+            - courses:update
+        - AccessToken: []
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Unique course ID that contains the lecture to be completed.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Unique lecture ID to be completed.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '204':
+          description: Lecture marked complete successfully
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Lecture or course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '409':
+          description: Unmet course compliance requirements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+  /current_user/courses/{course_id}/lectures/{lecture_id}/videos/{video_id}:
+    get:
+      operationId: getCurrentUserVideo
+      summary: Get a video for current user
+      description: Return a specific video attachment within a lecture for the current authenticated user.
+      tags:
+        - Videos
+      security:
+        - OAuth2:
+            - courses:read
+        - AccessToken: []
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: Unique course ID that contains the lecture.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: lecture_id
+          in: path
+          required: true
+          description: Unique lecture ID.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: video_id
+          in: path
+          required: true
+          description: Unique attachment ID for the video.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://developers.teachable.com/oauth/authorize
+          tokenUrl: https://developers.teachable.com/oauth/token
+          scopes:
+            name:read: Read the current user's name
+            email:read: Read the current user's email address
+            courses:read: Read courses and course content
+            courses:update: Update course progress
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Bearer access token for OAuth authenticated requests.
+
+  schemas:
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
+
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+
+    CurrentUserResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the user.
+        email:
+          type: string
+          description: The email address of the user.
+        role:
+          type: string
+          enum: [student, owner, author, affiliate]
+          description: The role of the user.
+
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID number of the course.
+        name:
+          type: string
+          description: The name of the course.
+        heading:
+          type: string
+          nullable: true
+          description: The course subtitle, as set in the Information tab.
+        description:
+          type: string
+          nullable: true
+          description: The course description.
+        is_published:
+          type: boolean
+          description: The published status of the course.
+        image_url:
+          type: string
+          nullable: true
+          description: The URL of the course image.
+
+    LectureItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        position:
+          type: integer
+        is_published:
+          type: boolean
+
+    LectureSection:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        is_published:
+          type: boolean
+        position:
+          type: integer
+        lectures:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureItem'
+
+    AuthorBio:
+      type: object
+      properties:
+        name:
+          type: string
+        bio:
+          type: string
+          nullable: true
+        profile_image_url:
+          type: string
+          nullable: true
+        user_id:
+          type: integer
+          nullable: true
+
+    CourseDetail:
+      allOf:
+        - $ref: '#/components/schemas/CourseSummary'
+        - type: object
+          properties:
+            lecture_sections:
+              type: array
+              items:
+                $ref: '#/components/schemas/LectureSection'
+            author_bio:
+              $ref: '#/components/schemas/AuthorBio'
+
+    CoursesListResponse:
+      type: object
+      properties:
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    CourseDetailResponse:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/CourseDetail'
+
+    LectureSectionProgress:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lectures:
+          type: array
+          items:
+            type: object
+
+    CourseProgressDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        certificate:
+          type: object
+          nullable: true
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        enrolled_at:
+          type: string
+          format: date-time
+        lecture_sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureSectionProgress'
+        percent_complete:
+          type: number
+
+    CourseProgressResponse:
+      type: object
+      properties:
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressDetail'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    LectureAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        kind:
+          type: string
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+          nullable: true
+        file_size:
+          type: integer
+          format: int32
+          nullable: true
+        file_extension:
+          type: string
+          nullable: true
+        quiz:
+          type: object
+          nullable: true
+
+    LectureDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        position:
+          type: integer
+          format: int32
+          description: The position of the lecture within the section (1 is first, 2 is second, etc.).
+        name:
+          type: string
+          nullable: true
+        is_published:
+          type: boolean
+        lecture_section_id:
+          type: integer
+          format: int32
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureAttachment'
+
+    LectureDetailResponse:
+      type: object
+      properties:
+        lecture:
+          $ref: '#/components/schemas/LectureDetail'
+
+    VideoAsset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: M3U8 playlist file URL.
+        content_type:
+          type: string
+
+    VideoDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        video_asset:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoAsset'
+        status:
+          type: string
+          enum: [READY, PROCESSING, PARTIALLY_READY, QUEUED, THUMBNAIL_READY, FAILED]
+        url_thumbnail:
+          type: string
+          description: Poster/thumbnail image URL.
+        media_type:
+          type: string
+          description: Always 'VIDEO'.
+        media_duration:
+          type: integer
+          description: Video duration in seconds.
+
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoDetail'
