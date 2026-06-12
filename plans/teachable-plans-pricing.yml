@@ -1,0 +1,128 @@
+name: Teachable Plans and Pricing
+description: >
+  Teachable offers four main paid tiers — Starter, Builder, Growth, and
+  Advanced — plus a custom Unlimited plan for enterprise organizations.
+  API access is available on the Growth plan and above. Transaction fees
+  apply only on the Starter plan. All plans include a 7-day free trial and
+  a 30-day money-back guarantee. Annual billing saves approximately 30%.
+specificationVersion: '0.1'
+url: https://teachable.com/pricing
+plans:
+  - name: Starter
+    description: >
+      Entry-level plan for new course creators testing their first online
+      course. Includes 1 published product and up to 100 students.
+      Charges a 7.5% transaction fee on all sales.
+    monthlyPrice: 39.00
+    annualPrice: 29.00
+    currency: USD
+    billingCycle: monthly
+    transactionFee: '7.5%'
+    features:
+      - 1 published product
+      - 100 students
+      - 1 admin user
+      - 1 third-party integration
+      - 1TB video storage
+      - Drip scheduling
+      - Quizzes and certificates
+      - Community spaces
+      - Mobile app access
+    apiAccess: false
+    apiRequestsPerMonth: 0
+  - name: Builder
+    description: >
+      For course creators ready to scale with multiple products. Supports
+      up to 5 published products and 1,000 students with 0% transaction
+      fees. No API access at this tier.
+    monthlyPrice: 89.00
+    annualPrice: 69.00
+    currency: USD
+    billingCycle: monthly
+    transactionFee: '0%'
+    features:
+      - 5 published products
+      - 1,000 students
+      - 1 admin user
+      - 3 third-party integrations
+      - 1TB video storage
+      - Email marketing tools
+      - Drip scheduling
+      - Quizzes and certificates
+      - Community spaces
+      - Mobile app access
+    apiAccess: false
+    apiRequestsPerMonth: 0
+  - name: Growth
+    description: >
+      Designed for established course businesses. Includes full API access
+      with 10,000 API requests per month, 25 published products, and up
+      to 5,000 students. 0% transaction fees.
+    monthlyPrice: 189.00
+    annualPrice: 139.00
+    currency: USD
+    billingCycle: monthly
+    transactionFee: '0%'
+    features:
+      - 25 published products
+      - 5,000 students
+      - 5 admin users
+      - 5 third-party integrations
+      - 1TB video storage
+      - API access
+      - Webhooks
+      - Email marketing tools
+      - Drip scheduling
+      - Quizzes and certificates
+      - Community spaces
+      - Mobile app access
+    apiAccess: true
+    apiRequestsPerMonth: 10000
+  - name: Advanced
+    description: >
+      For large academies and education businesses at scale. Includes
+      100 published products, 5,000 students, unlimited third-party
+      integrations, and 25,000 API requests per month. 0% transaction fees.
+    monthlyPrice: 399.00
+    annualPrice: 309.00
+    currency: USD
+    billingCycle: monthly
+    transactionFee: '0%'
+    features:
+      - 100 published products
+      - 5,000 students
+      - 5 admin users
+      - Unlimited third-party integrations
+      - 2TB video storage
+      - API access
+      - Webhooks
+      - Advanced analytics
+      - Email marketing tools
+      - Drip scheduling
+      - Quizzes and certificates
+      - Community spaces
+      - Mobile app access
+    apiAccess: true
+    apiRequestsPerMonth: 25000
+  - name: Unlimited
+    description: >
+      Custom enterprise plan for large organizations requiring custom
+      student capacity, product limits, admin users, and API request
+      volumes. Pricing is negotiated directly with Teachable sales.
+    monthlyPrice: null
+    annualPrice: null
+    currency: USD
+    billingCycle: custom
+    transactionFee: '0%'
+    features:
+      - Custom published products
+      - Custom student capacity
+      - Custom admin users
+      - Unlimited third-party integrations
+      - Custom video storage
+      - API access
+      - Webhooks
+      - Priority support
+      - Custom SLAs
+    apiAccess: true
+    apiRequestsPerMonth: custom

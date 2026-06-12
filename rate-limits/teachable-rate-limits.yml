@@ -1,0 +1,59 @@
+name: Teachable API Rate Limits
+description: >
+  The Teachable Admin API enforces per-minute rate limits scoped to each
+  school. All requests share a single bucket of 100 requests per minute.
+  Exceeding the limit returns HTTP 429 with JSON error body and rate limit
+  headers indicating remaining capacity and reset time. For needs beyond
+  current limits, contact apisupport@teachable.com.
+specificationVersion: '0.1'
+url: https://docs.teachable.com/docs/rate-limits
+rateLimits:
+  - name: School Rate Limit
+    description: >
+      Global per-school rate limit applied to all API requests regardless
+      of endpoint. Enforced at a one-minute rolling window.
+    requests: 100
+    period: minute
+    scope: school
+    httpStatusOnExceeded: 429
+    errorBody:
+      message: API rate limit exceeded
+    responseHeaders:
+      - name: RateLimit-Limit
+        description: Maximum permitted requests per minute (e.g., 100)
+      - name: RateLimit-Remaining
+        description: Number of requests remaining in the current minute window
+      - name: RateLimit-Reset
+        description: Seconds to wait before the rate limit window resets
+    retryGuidance: >
+      Wait until the number of seconds indicated by RateLimit-Reset has
+      elapsed before retrying. Implement exponential backoff with jitter
+      to avoid thundering herd when multiple processes hit limits
+      simultaneously.
+    contactForHigherLimits: apisupport@teachable.com
+  - name: Monthly API Request Quota
+    description: >
+      In addition to per-minute rate limits, each plan tier caps total
+      API requests per billing month. Growth plan: 10,000 requests/month.
+      Advanced plan: 25,000 requests/month. Unlimited plan: negotiated.
+    period: month
+    planQuotas:
+      - plan: Growth
+        requests: 10000
+      - plan: Advanced
+        requests: 25000
+      - plan: Unlimited
+        requests: custom
+pagination:
+  type: cursor
+  description: >
+    List endpoints use cursor-based pagination. Use the `page` query
+    parameter with integer page numbers. The `per` parameter controls
+    results per page with a default maximum of 20 items per page.
+  parameters:
+    - name: page
+      type: integer
+      description: Page number for paginated results
+    - name: per
+      type: integer
+      description: Number of results per page (default max 20)

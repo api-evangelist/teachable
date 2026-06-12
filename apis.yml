@@ -1,0 +1,107 @@
+aid: teachable
+name: Teachable
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/teachable/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+description: >
+  Teachable is an online course and coaching platform that empowers creators to
+  build and sell educational content without technical expertise. The Teachable
+  REST API provides programmatic access to school management capabilities
+  including course management, user enrollment, quiz responses, and sales
+  transaction data. The API supports two authentication patterns: a server-side
+  Admin API using API keys and an OAuth API for third-party application
+  integrations. API access is available on Growth and Advanced plans, with
+  webhook support for event-driven workflows covering enrollment, lecture
+  completion, sales, and user lifecycle events.
+tags:
+  - Online Courses
+  - E-Learning
+  - Education
+  - Course Management
+  - Enrollments
+  - Coaching
+  - Memberships
+  - Transactions
+apis:
+  - name: Teachable Admin API
+    description: >
+      REST API for managing Teachable school data including courses, users,
+      enrollments, quiz responses, pricing plans, transactions, and webhooks.
+      Authenticated via API key header and available on Growth plan and above.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.teachable.com/docs/overview-1
+    baseURL: https://developers.teachable.com/v1
+    tags:
+      - Courses
+      - Users
+      - Enrollments
+      - Transactions
+      - Quizzes
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.teachable.com/docs/overview-1
+      - type: Reference
+        url: https://docs.teachable.com/reference/listcourses
+      - type: RateLimits
+        url: https://docs.teachable.com/docs/rate-limits
+      - type: Quickstart
+        url: https://docs.teachable.com/docs/quickstart-guide
+      - type: Changelog
+        url: https://docs.teachable.com/changelog
+    contact:
+      - FN: Teachable Support
+        url: https://support.teachable.com
+        email: support@teachable.com
+  - name: Teachable OAuth API
+    description: >
+      OAuth 2.0-based API enabling third-party applications to authenticate
+      on behalf of Teachable school owners with token refresh and revocation
+      support.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.teachable.com/docs/overview-1
+    baseURL: https://developers.teachable.com/v1
+    tags:
+      - OAuth
+      - Authentication
+      - Third-Party Integration
+    properties:
+      - type: Documentation
+        url: https://docs.teachable.com/docs/overview-1
+    contact:
+      - FN: Teachable Support
+        url: https://support.teachable.com
+        email: support@teachable.com
+common:
+  - type: Website
+    url: https://teachable.com
+  - type: Documentation
+    url: https://docs.teachable.com
+  - type: GitHubOrganization
+    url: https://github.com/usefedora
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/teachable
+  - type: X
+    url: https://x.com/teachable
+  - type: Blog
+    url: https://www.teachable.com/blog
+  - type: Changelog
+    url: https://changelog.teachable.com
+  - type: Pricing
+    url: https://teachable.com/pricing
+  - type: StatusPage
+    url: https://www.teachablestatus.com
+  - type: Support
+    url: https://support.teachable.com
+  - type: Plans
+    url: plans/teachable-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/teachable-rate-limits.yml
+  - type: FinOps
+    url: finops/teachable-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
