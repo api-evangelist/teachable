@@ -1,7 +1,7 @@
 aid: teachable
 name: Teachable
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/teachable/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -31,7 +31,7 @@ apis:
       REST API for managing Teachable school data including courses, users,
       enrollments, quiz responses, pricing plans, transactions, and webhooks.
       Authenticated via API key header and available on Growth plan and above.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.teachable.com/docs/overview-1
     baseURL: https://developers.teachable.com/v1
     tags:
@@ -63,7 +63,7 @@ apis:
       OAuth 2.0-based API enabling third-party applications to authenticate
       on behalf of Teachable school owners with token refresh and revocation
       support.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.teachable.com/docs/overview-1
     baseURL: https://developers.teachable.com/v1
     tags:
