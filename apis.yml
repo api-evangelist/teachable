@@ -48,9 +48,9 @@ apis:
         url: https://docs.teachable.com/reference/listcourses
       - type: RateLimits
         url: https://docs.teachable.com/docs/rate-limits
-      - type: Quickstart
+      - type: GettingStarted
         url: https://docs.teachable.com/docs/quickstart-guide
-      - type: Changelog
+      - type: ChangeLog
         url: https://docs.teachable.com/changelog
       - type: OpenAPI
         url: openapi/teachable-admin-openapi.yml
@@ -92,7 +92,7 @@ common:
     url: https://x.com/teachable
   - type: Blog
     url: https://www.teachable.com/blog
-  - type: Changelog
+  - type: ChangeLog
     url: https://changelog.teachable.com
   - type: Pricing
     url: https://teachable.com/pricing
