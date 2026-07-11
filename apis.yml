@@ -80,6 +80,12 @@ apis:
         url: https://support.teachable.com
         email: support@teachable.com
 common:
+  - type: TrustCenter
+    url: security/teachable-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/teachable-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/teachable-domain-security.yml
   - type: Authentication
     url: authentication/teachable-authentication.yml
   - type: OAuthScopes
