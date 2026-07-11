@@ -80,6 +80,10 @@ apis:
         url: https://support.teachable.com
         email: support@teachable.com
 common:
+  - type: Authentication
+    url: authentication/teachable-authentication.yml
+  - type: OAuthScopes
+    url: scopes/teachable-scopes.yml
   - type: Website
     url: https://teachable.com
   - type: Documentation

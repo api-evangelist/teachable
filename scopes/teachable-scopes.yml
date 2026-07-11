@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/teachable-oauth-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/teachable-oauth-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://developers.teachable.com/oauth/authorize
+    tokenUrl: https://developers.teachable.com/oauth/token
+scopes:
+- scope: courses:read
+  description: Read courses and course content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/teachable-oauth-openapi.yml
+- scope: courses:update
+  description: Update course progress
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/teachable-oauth-openapi.yml
+- scope: email:read
+  description: Read the current user's email address
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/teachable-oauth-openapi.yml
+- scope: name:read
+  description: Read the current user's name
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/teachable-oauth-openapi.yml
