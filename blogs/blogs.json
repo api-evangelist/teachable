@@ -2,13 +2,14 @@
   "repo": "teachable",
   "feeds": [
     {
-      "source": "https://www.teachable.com/blog",
-      "feed_url": "",
-      "saved": 3,
-      "method": "agent-scrape"
+      "source": "https://x.com/teachable",
+      "feed_url": "https://x.com/teachable",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T13:15:10Z",
-  "post_count": 7,
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 11,
   "agent_pulled": "2026-06-27"
 }
