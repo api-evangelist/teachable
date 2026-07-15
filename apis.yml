@@ -80,6 +80,8 @@ apis:
         url: https://support.teachable.com
         email: support@teachable.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/teachable-agentic-access.yml
   - type: TrustCenter
     url: security/teachable-trust-center.yml
   - type: VulnerabilityDisclosure
