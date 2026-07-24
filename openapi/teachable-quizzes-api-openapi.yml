@@ -1,0 +1,271 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses Quizzes API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Quizzes
+  description: Quiz and quiz response endpoints
+paths:
+  /courses/{course_id}/lectures/{lecture_id}/quizzes:
+    get:
+      operationId: listQuizzes
+      summary: List quizzes
+      description: Return all quiz IDs in a specific lecture.
+      tags:
+      - Quizzes
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizListResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /courses/{course_id}/lectures/{lecture_id}/quizzes/{quiz_id}:
+    get:
+      operationId: getQuiz
+      summary: Get a quiz
+      description: Return details of a specific quiz attachment.
+      tags:
+      - Quizzes
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: quiz_id
+        in: path
+        required: true
+        description: Return results by unique quiz attachment ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /courses/{course_id}/lectures/{lecture_id}/quizzes/{quiz_id}/responses:
+    get:
+      operationId: getQuizResponses
+      summary: Get quiz responses
+      description: Return all student responses for a specific quiz.
+      tags:
+      - Quizzes
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: quiz_id
+        in: path
+        required: true
+        description: Return results by unique quiz attachment ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizResponsesResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    QuizStudentResponse:
+      type: object
+      properties:
+        student_id:
+          type: integer
+          description: The unique ID of the student.
+        student_name:
+          type: string
+          description: The name of the student.
+        student_email:
+          type: string
+          description: The email of the student.
+        submitted_at:
+          type: string
+          format: date-time
+          description: Datetime when the student submitted the quiz.
+        percent_correct:
+          type: integer
+          description: Percentage of correct answers.
+    QuizInformation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - Quiz
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+    QuizResponsesResponse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+          description: The unique ID of the course.
+        course_name:
+          type: string
+          description: The name of the course.
+        lecture_id:
+          type: integer
+          description: The unique ID of the lecture.
+        lecture_name:
+          type: string
+          description: The name of the lecture.
+        graded:
+          type: boolean
+          description: Indicates if the quiz is graded.
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizStudentResponse'
+    QuizQuestion:
+      type: object
+      properties:
+        question:
+          type: string
+        question_type:
+          type: string
+        answers:
+          type: array
+          items:
+            type: string
+        correct_answers:
+          type: array
+          items:
+            type: string
+        graded:
+          type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    QuizDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Quiz attachment identifier.
+        name:
+          type: string
+          description: Quiz display name.
+        kind:
+          type: string
+          enum:
+          - quiz
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+        quiz:
+          $ref: '#/components/schemas/QuizInformation'
+    QuizListResponse:
+      type: object
+      properties:
+        quiz_ids:
+          type: array
+          items:
+            type: integer
+          description: List of unique IDs of quizzes in a lecture.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

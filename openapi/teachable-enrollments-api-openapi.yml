@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses Enrollments API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Enrollments
+  description: Enrollment management endpoints
+paths:
+  /courses/{course_id}/enrollments:
+    get:
+      operationId: listCourseEnrollments
+      summary: List course enrollments
+      description: Return enrollments for a specific course.
+      tags:
+      - Enrollments
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return enrollments for a specific course by the unique course ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: enrolled_in_after
+        in: query
+        description: Filters for students who enrolled after a specified timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: enrolled_in_before
+        in: query
+        description: Filters for students who enrolled before a specified timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: sort_direction
+        in: query
+        description: Enrollments are sorted by the 'enrolled_at' datetime.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentsListResponse'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /enroll:
+    post:
+      operationId: enrollUser
+      summary: Enroll a user
+      description: Enroll a user in a course.
+      tags:
+      - Enrollments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - course_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+                course_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the course.
+      responses:
+        '204':
+          description: User enrolled successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /unenroll:
+    post:
+      operationId: unenrollUser
+      summary: Unenroll a user
+      description: Remove a user's enrollment from a course.
+      tags:
+      - Enrollments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - course_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+                course_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the course.
+      responses:
+        '204':
+          description: User unenrolled successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    EnrollmentSummary:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: Unique ID of the enrolled user.
+        enrolled_at:
+          type: string
+          format: date-time
+          description: Datetime of enrollment in ISO8601.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime enrollment expires, if applicable.
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime course was completed, if applicable.
+        percent_complete:
+          type: integer
+          description: Percentage of course completed.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses Transactions API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Transactions
+  description: Transaction and sales endpoints
+paths:
+  /transactions:
+    get:
+      operationId: listTransactions
+      summary: List transactions
+      description: Return all transactions for the school with optional filters.
+      tags:
+      - Transactions
+      parameters:
+      - name: user_id
+        in: query
+        description: Filter by user.
+        schema:
+          type: integer
+          format: int32
+      - name: affiliate_id
+        in: query
+        description: Filter by affiliate.
+        schema:
+          type: integer
+          format: int32
+      - name: course_id
+        in: query
+        description: Filter by course.
+        schema:
+          type: integer
+          format: int32
+      - name: pricing_plan_id
+        in: query
+        description: Filter by pricing plan.
+        schema:
+          type: integer
+          format: int32
+      - name: is_fully_refunded
+        in: query
+        description: Filter by refund status.
+        schema:
+          type: boolean
+      - name: is_chargeback
+        in: query
+        description: Filter by chargeback status.
+        schema:
+          type: boolean
+      - name: start
+        in: query
+        description: The beginning of the time period to return results for (exclusive). Formatted in ISO8601.
+        schema:
+          type: string
+          format: date-time
+      - name: end
+        in: query
+        description: The end of the time period to return results for (inclusive). Formatted in ISO8601.
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          format: int32
+      - name: per
+        in: query
+        description: Items per page, maximum is 20 when not specified.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsListResponse'
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        pricing_plan_id:
+          type: integer
+        sale_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        purchased_at:
+          type: string
+          format: date-time
+        charge:
+          type: integer
+          description: Amount charged in USD (smallest unit).
+        final_price:
+          type: integer
+          description: Final price in currency of choice (smallest unit).
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        tax_charge:
+          type: integer
+        revenue:
+          type: integer
+          description: Revenue in USD (smallest unit).
+        status:
+          type: string
+          description: Transaction status (paid or null).
+        has_chargeback:
+          type: boolean
+        chargeback_fee:
+          type: integer
+        affiliate_id:
+          type: integer
+        affiliate_fees:
+          type: integer
+        author_id:
+          type: integer
+        author_fees:
+          type: integer
+        coupon_id:
+          type: integer
+        refunded_at:
+          type: string
+          format: date-time
+          nullable: true
+        amount_refunded:
+          type: integer
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    TransactionsListResponse:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

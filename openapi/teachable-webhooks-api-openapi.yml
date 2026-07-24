@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses Webhooks API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Webhooks
+  description: Webhook configuration and event endpoints
+paths:
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Fetch all webhook events for your school.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksListResponse'
+  /webhooks/{webhook_id}/events:
+    get:
+      operationId: listWebhookEvents
+      summary: List webhook events
+      description: Return all events for a specific webhook.
+      tags:
+      - Webhooks
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        description: The unique ID of the webhook.
+        schema:
+          type: integer
+          format: int32
+      - name: response_http_status_gte
+        in: query
+        description: Filter by HTTP status code greater than or equal to value.
+        schema:
+          type: integer
+          format: int32
+      - name: response_http_status_lte
+        in: query
+        description: Filter by HTTP status code less than or equal to value.
+        schema:
+          type: integer
+          format: int32
+      - name: created_before
+        in: query
+        description: Search for webhook events that were created before a specific datetime.
+        schema:
+          type: string
+          format: date-time
+      - name: created_after
+        in: query
+        description: Search for webhook events that were created after a specific datetime.
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          format: int32
+      - name: per
+        in: query
+        description: Set the maximum number of results to be returned per page.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookEventsListResponse'
+components:
+  schemas:
+    WebhookEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        workflow_state:
+          type: string
+        webhook_id:
+          type: integer
+        attempt_count:
+          type: integer
+        last_attempted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        object_type:
+          type: string
+        object_id:
+          type: integer
+        response_http_status:
+          type: integer
+          nullable: true
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique identifier for the webhook.
+        workflow_state:
+          type: string
+          description: Current webhook state (verified, pending, failed).
+        url:
+          type: string
+          description: The webhook's target URL.
+        event_trigger:
+          type: string
+          description: Event type that activates the webhook.
+        webhook_events_count:
+          type: integer
+          format: int32
+          description: Total occurrences of the webhook event.
+    WebhooksListResponse:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    WebhookEventsListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

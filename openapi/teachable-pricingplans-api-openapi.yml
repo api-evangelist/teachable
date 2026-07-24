@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses PricingPlans API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: PricingPlans
+  description: Pricing plan endpoints
+paths:
+  /pricing_plans:
+    get:
+      operationId: listPricingPlans
+      summary: List pricing plans
+      description: Return all pricing plans for the school.
+      tags:
+      - PricingPlans
+      parameters:
+      - name: page
+        in: query
+        description: Used in pagination when number of pricing plans exceeds the maximum amount of results per page.
+        schema:
+          type: integer
+          format: int32
+      - name: per
+        in: query
+        description: Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlansListResponse'
+  /pricing_plans/{pricing_plan_id}:
+    get:
+      operationId: getPricingPlan
+      summary: Get a pricing plan
+      description: Search for a pricing plan by its unique ID.
+      tags:
+      - PricingPlans
+      parameters:
+      - name: pricing_plan_id
+        in: path
+        required: true
+        description: Search for a pricing plan by its unique ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlanDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PricingPlanDetailResponse:
+      type: object
+      properties:
+        pricing_plan:
+          $ref: '#/components/schemas/PricingPlanDetail'
+    PricingPlanSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique pricing plan identifier.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Pricing plan name.
+        price:
+          type: integer
+          description: Price in smallest currency unit.
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        course_id:
+          type: integer
+          description: Associated course ID.
+    PricingPlansListResponse:
+      type: object
+      properties:
+        pricing_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingPlanSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PricingFrequency:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - free
+          - one_time_payment
+          - subscription
+          - payment_plan
+        billing_interval:
+          type: string
+          nullable: true
+          enum:
+          - week
+          - month
+          - year
+        billing_interval_count:
+          type: integer
+          nullable: true
+        access_limit_date:
+          type: string
+          format: date-time
+          nullable: true
+        access_limit_interval:
+          type: string
+          nullable: true
+          enum:
+          - day
+          - week
+          - month
+          - year
+        access_limit_duration:
+          type: integer
+          nullable: true
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    PricingPlanDetail:
+      allOf:
+      - $ref: '#/components/schemas/PricingPlanSummary'
+      - type: object
+        properties:
+          description:
+            type: string
+            nullable: true
+          free_trial_length:
+            type: integer
+            nullable: true
+            description: Free trial length in days.
+          enrollment_cap:
+            type: integer
+            nullable: true
+            description: Maximum enrollment count.
+          frequency:
+            $ref: '#/components/schemas/PricingFrequency'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

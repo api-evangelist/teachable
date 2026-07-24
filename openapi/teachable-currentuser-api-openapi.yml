@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses CurrentUser API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: CurrentUser
+  description: Endpoints for the authenticated current user
+paths:
+  /current_user/me:
+    get:
+      operationId: getCurrentUser
+      summary: Get current user profile
+      description: Retrieve the current authenticated user's profile information including name, email, and assigned role.
+      tags:
+      - CurrentUser
+      security:
+      - OAuth2:
+        - name:read
+        - email:read
+      - AccessToken: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+components:
+  schemas:
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
+    CurrentUserResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the user.
+        email:
+          type: string
+          description: The email address of the user.
+        role:
+          type: string
+          enum:
+          - student
+          - owner
+          - author
+          - affiliate
+          description: The role of the user.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.

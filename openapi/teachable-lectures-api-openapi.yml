@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  title: Teachable Admin Courses Lectures API
+  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
+
+    '
+  version: '1'
+  contact:
+    name: Teachable Support
+    url: https://support.teachable.com
+    email: support@teachable.com
+  termsOfService: https://teachable.com/terms-of-use
+servers:
+- url: https://developers.teachable.com/v1
+  description: Teachable Admin API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Lectures
+  description: Lecture management endpoints
+paths:
+  /courses/{course_id}/lectures/{lecture_id}:
+    get:
+      operationId: getLecture
+      summary: Get a lecture
+      description: Return a lecture by its unique ID within a course.
+      tags:
+      - Lectures
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LectureDetailResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /courses/{course_id}/lectures/{lecture_id}/mark_complete:
+    post:
+      operationId: markLectureComplete
+      summary: Mark a lecture complete
+      description: Mark a lecture as complete for a specific user.
+      tags:
+      - Lectures
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: The unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: The unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              properties:
+                user_id:
+                  type: integer
+                  format: int32
+                  description: The unique ID of the user.
+      responses:
+        '204':
+          description: Lecture marked complete successfully
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /courses/{course_id}/lectures/{lecture_id}/videos/{video_id}:
+    get:
+      operationId: getVideo
+      summary: Get a video
+      description: Return a specific video attachment within a lecture.
+      tags:
+      - Lectures
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: video_id
+        in: path
+        required: true
+        description: Return results by unique video attachment ID.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: user_id
+        in: query
+        description: Specify the user who is watching the video.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /current_user/courses/{course_id}/lectures/{lecture_id}:
+    get:
+      operationId: getCurrentUserLecture
+      summary: Get a lecture for current user
+      description: Return a lecture by its unique ID within a course for the current authenticated user.
+      tags:
+      - Lectures
+      security:
+      - OAuth2:
+        - courses:read
+      - AccessToken: []
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Return results by unique course ID number that contains the lecture.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Return results by unique lecture ID number.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LectureDetailResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Lecture or course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+  /current_user/courses/{course_id}/lectures/{lecture_id}/mark_complete:
+    post:
+      operationId: markCurrentUserLectureComplete
+      summary: Mark a lecture complete for current user
+      description: Mark a lecture as complete for the current authenticated user.
+      tags:
+      - Lectures
+      security:
+      - OAuth2:
+        - courses:read
+        - courses:update
+      - AccessToken: []
+      parameters:
+      - name: course_id
+        in: path
+        required: true
+        description: Unique course ID that contains the lecture to be completed.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: lecture_id
+        in: path
+        required: true
+        description: Unique lecture ID to be completed.
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '204':
+          description: Lecture marked complete successfully
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '403':
+          description: Forbidden - not authorized to access this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '404':
+          description: Lecture or course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+        '409':
+          description: Unmet course compliance requirements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+components:
+  schemas:
+    VideoDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        video_asset:
+          $ref: '#/components/schemas/VideoAsset'
+        status:
+          type: string
+          enum:
+          - READY
+          - PROCESSING
+          - PARTIALLY_READY
+          - QUEUED
+          - THUMBNAIL_READY
+          - FAILED
+        url_thumbnail:
+          type: string
+          description: Poster image URL.
+        media_type:
+          type: string
+          description: Always 'VIDEO'.
+        media_duration:
+          type: integer
+          description: Duration in seconds.
+    LectureAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        kind:
+          type: string
+        url:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        position:
+          type: integer
+          format: int32
+          nullable: true
+        file_size:
+          type: integer
+          format: int32
+          nullable: true
+        file_extension:
+          type: string
+          nullable: true
+        quiz:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+              format: int32
+            questions:
+              type: array
+              items:
+                type: object
+    LectureDetailResponse:
+      type: object
+      properties:
+        lecture:
+          $ref: '#/components/schemas/LectureDetail'
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
+    VideoAsset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: M3U8 playlist file URL.
+        content_type:
+          type: string
+    LectureDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        is_published:
+          type: boolean
+        position:
+          type: integer
+          format: int32
+        lecture_section_id:
+          type: integer
+          format: int32
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureAttachment'
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoDetail'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key for Admin API authentication. Available on Growth plan and above.
