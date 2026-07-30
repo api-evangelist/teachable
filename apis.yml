@@ -1,7 +1,20 @@
 aid: teachable
 name: Teachable
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Paid (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/teachable.png
 url: https://raw.githubusercontent.com/api-evangelist/teachable/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -26,59 +39,206 @@ tags:
   - Memberships
   - Transactions
 apis:
-  - name: Teachable Admin API
-    description: >
-      REST API for managing Teachable school data including courses, users,
-      enrollments, quiz responses, pricing plans, transactions, and webhooks.
-      Authenticated via API key header and available on Growth plan and above.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.teachable.com/docs/overview-1
-    baseURL: https://developers.teachable.com/v1
-    tags:
-      - Courses
-      - Users
-      - Enrollments
-      - Transactions
-      - Quizzes
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://docs.teachable.com/docs/overview-1
-      - type: Reference
-        url: https://docs.teachable.com/reference/listcourses
-      - type: RateLimits
-        url: https://docs.teachable.com/docs/rate-limits
-      - type: GettingStarted
-        url: https://docs.teachable.com/docs/quickstart-guide
-      - type: ChangeLog
-        url: https://docs.teachable.com/changelog
-      - type: OpenAPI
-        url: openapi/teachable-admin-openapi.yml
-    contact:
-      - FN: Teachable Support
-        url: https://support.teachable.com
-        email: support@teachable.com
-  - name: Teachable OAuth API
-    description: >
-      OAuth 2.0-based API enabling third-party applications to authenticate
-      on behalf of Teachable school owners with token refresh and revocation
-      support.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.teachable.com/docs/overview-1
-    baseURL: https://developers.teachable.com/v1
-    tags:
-      - OAuth
-      - Authentication
-      - Third-Party Integration
-    properties:
-      - type: Documentation
-        url: https://docs.teachable.com/docs/overview-1
-      - type: OpenAPI
-        url: openapi/teachable-oauth-openapi.yml
-    contact:
-      - FN: Teachable Support
-        url: https://support.teachable.com
-        email: support@teachable.com
+- aid: teachable:teachable-courses-api
+  name: Teachable Courses API
+  description: Course management endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-courses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-currentuser-api
+  name: Teachable CurrentUser API
+  description: Endpoints for the authenticated current user
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - CurrentUser
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-currentuser-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-enrollments-api
+  name: Teachable Enrollments API
+  description: Enrollment management endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-enrollments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-lectures-api
+  name: Teachable Lectures API
+  description: Lecture management endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Lectures
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-lectures-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-pricingplans-api
+  name: Teachable PricingPlans API
+  description: Pricing plan endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - PricingPlans
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-pricingplans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-quizzes-api
+  name: Teachable Quizzes API
+  description: Quiz and quiz response endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Quizzes
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-quizzes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-transactions-api
+  name: Teachable Transactions API
+  description: Transaction and sales endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-users-api
+  name: Teachable Users API
+  description: User management endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-videos-api
+  name: Teachable Videos API
+  description: Video access endpoints for current user
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Videos
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-videos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-webhooks-api
+  name: Teachable Webhooks API
+  description: Webhook configuration and event endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
 common:
   - type: AgenticAccess
     url: agentic-access/teachable-agentic-access.yml
