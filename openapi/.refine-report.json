@@ -1,0 +1,32 @@
+{
+  "provider": "teachable",
+  "sources": [
+    "teachable-courses-api-openapi.yml",
+    "teachable-currentuser-api-openapi.yml",
+    "teachable-enrollments-api-openapi.yml",
+    "teachable-lectures-api-openapi.yml",
+    "teachable-pricingplans-api-openapi.yml",
+    "teachable-quizzes-api-openapi.yml",
+    "teachable-transactions-api-openapi.yml",
+    "teachable-users-api-openapi.yml",
+    "teachable-videos-api-openapi.yml",
+    "teachable-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "teachable-courses-api-openapi.yml",
+    "teachable-currentuser-api-openapi.yml",
+    "teachable-enrollments-api-openapi.yml",
+    "teachable-lectures-api-openapi.yml",
+    "teachable-pricingplans-api-openapi.yml",
+    "teachable-quizzes-api-openapi.yml",
+    "teachable-transactions-api-openapi.yml",
+    "teachable-users-api-openapi.yml",
+    "teachable-videos-api-openapi.yml",
+    "teachable-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
