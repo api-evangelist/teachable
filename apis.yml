@@ -18,7 +18,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/teachable.
 url: https://raw.githubusercontent.com/api-evangelist/teachable/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 description: >
   Teachable is an online course and coaching platform that empowers creators to
   build and sell educational content without technical expertise. The Teachable
