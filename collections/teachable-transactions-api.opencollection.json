@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Transactions API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/transactions",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user."
+              },
+              {
+                "name": "affiliate_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by affiliate."
+              },
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by course."
+              },
+              {
+                "name": "pricing_plan_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by pricing plan."
+              },
+              {
+                "name": "is_fully_refunded",
+                "value": "",
+                "type": "query",
+                "description": "Filter by refund status."
+              },
+              {
+                "name": "is_chargeback",
+                "value": "",
+                "type": "query",
+                "description": "Filter by chargeback status."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The beginning of the time period to return results for (exclusive). Formatted in ISO8601."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end of the time period to return results for (inclusive). Formatted in ISO8601."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per",
+                "value": "",
+                "type": "query",
+                "description": "Items per page, maximum is 20 when not specified."
+              }
+            ]
+          },
+          "docs": "Return all transactions for the school with optional filters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

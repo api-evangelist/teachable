@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "36f9566e-eeb9-4714-8365-4596f869b9e6",
+      "name": "PricingPlans",
+      "description": {
+        "content": "Pricing plan endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7585e521-7ff8-463e-a734-d3e313336b93",
+          "name": "List pricing plans",
+          "request": {
+            "name": "List pricing plans",
+            "description": {
+              "content": "Return all pricing plans for the school.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing_plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used in pagination when number of pricing plans exceeds the maximum amount of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "per",
+                  "value": "<integer>",
+                  "description": "Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "615b3a9c-c411-4db1-a282-68d54bf6123d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pricing_plans\": [\n    {\n      \"id\": 2236,\n      \"created_at\": \"1988-02-01T18:23:39.380Z\",\n      \"updated_at\": \"1970-12-09T11:14:49.955Z\",\n      \"name\": \"string\",\n      \"price\": 9104,\n      \"currency\": \"string\",\n      \"course_id\": 8761\n    },\n    {\n      \"id\": 9213,\n      \"created_at\": \"1963-12-12T11:28:00.689Z\",\n      \"updated_at\": \"1994-09-06T16:22:12.173Z\",\n      \"name\": \"string\",\n      \"price\": 2875,\n      \"currency\": \"string\",\n      \"course_id\": 4835\n    }\n  ],\n  \"meta\": {\n    \"total\": 1741,\n    \"page\": 9193,\n    \"from\": 6011,\n    \"to\": 1826,\n    \"per_page\": 3297,\n    \"number_of_pages\": 5509\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e021c07-d0fb-46be-8e84-2e526a5bf3a4",
+          "name": "Get a pricing plan",
+          "request": {
+            "name": "Get a pricing plan",
+            "description": {
+              "content": "Search for a pricing plan by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing_plans",
+                ":pricing_plan_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "pricing_plan_id",
+                  "description": "(Required) Search for a pricing plan by its unique ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae1dd2f3-b43d-4924-a63b-fabcf86c6068",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing_plans",
+                    ":pricing_plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "pricing_plan_id",
+                      "description": "(Required) Search for a pricing plan by its unique ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pricing_plan\": {\n    \"id\": 1769,\n    \"created_at\": \"2021-06-24T15:23:29.259Z\",\n    \"updated_at\": \"2023-05-06T21:33:13.565Z\",\n    \"name\": \"string\",\n    \"price\": 8600,\n    \"currency\": \"string\",\n    \"course_id\": 8247,\n    \"description\": \"string\",\n    \"free_trial_length\": 3053,\n    \"enrollment_cap\": 4664,\n    \"frequency\": {\n      \"type\": \"free\",\n      \"billing_interval\": \"year\",\n      \"billing_interval_count\": 2501,\n      \"access_limit_date\": \"1974-07-20T15:48:41.524Z\",\n      \"access_limit_interval\": \"month\",\n      \"access_limit_duration\": 7524\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e940400-e51a-48db-9b2b-5c86e515d18a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing_plans",
+                    ":pricing_plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "pricing_plan_id",
+                      "description": "(Required) Search for a pricing plan by its unique ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.teachable.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ef52d242-743e-4815-8043-ab02bb6ccc56",
+    "name": "Teachable Admin Courses PricingPlans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+      "type": "text/plain"
+    }
+  }
+}

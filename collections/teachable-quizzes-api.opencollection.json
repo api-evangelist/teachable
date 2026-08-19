@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Quizzes API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quizzes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List quizzes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id/quizzes",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID."
+              }
+            ]
+          },
+          "docs": "Return all quiz IDs in a specific lecture."
+        },
+        {
+          "info": {
+            "name": "Get a quiz",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID."
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique quiz attachment ID."
+              }
+            ]
+          },
+          "docs": "Return details of a specific quiz attachment."
+        },
+        {
+          "info": {
+            "name": "Get quiz responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id/responses",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID."
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique quiz attachment ID."
+              }
+            ]
+          },
+          "docs": "Return all student responses for a specific quiz."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

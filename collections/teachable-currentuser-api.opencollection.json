@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses CurrentUser API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CurrentUser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/current_user/me"
+          },
+          "docs": "Retrieve the current authenticated user's profile information including name, email, and assigned role."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

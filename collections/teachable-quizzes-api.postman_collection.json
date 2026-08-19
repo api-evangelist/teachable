@@ -1,0 +1,634 @@
+{
+  "item": [
+    {
+      "id": "40afb7fc-f301-4b69-8a7a-d0f25ec33f7e",
+      "name": "Quizzes",
+      "description": {
+        "content": "Quiz and quiz response endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99ca63cc-2c09-4e60-b445-1d440a8a969b",
+          "name": "List quizzes",
+          "request": {
+            "name": "List quizzes",
+            "description": {
+              "content": "Return all quiz IDs in a specific lecture.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id",
+                "lectures",
+                ":lecture_id",
+                "quizzes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return results by unique course ID that contains the lecture."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "lecture_id",
+                  "description": "(Required) Return results by unique lecture ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0a875fe-fb2a-464a-a642-7cf1f3f0c153",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quiz_ids\": [\n    7549,\n    9872\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d05495e-4ff0-42e9-91d3-5d81386cce03",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "587fa824-d007-4990-a858-6edcc4783212",
+          "name": "Get a quiz",
+          "request": {
+            "name": "Get a quiz",
+            "description": {
+              "content": "Return details of a specific quiz attachment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id",
+                "lectures",
+                ":lecture_id",
+                "quizzes",
+                ":quiz_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return results by unique course ID that contains the lecture."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "lecture_id",
+                  "description": "(Required) Return results by unique lecture ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "quiz_id",
+                  "description": "(Required) Return results by unique quiz attachment ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ff1debb-9ff4-466d-926a-39bde7b16320",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes",
+                    ":quiz_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "quiz_id",
+                      "description": "(Required) Return results by unique quiz attachment ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6603,\n  \"name\": \"string\",\n  \"kind\": \"quiz\",\n  \"url\": \"string\",\n  \"text\": \"string\",\n  \"position\": 8193,\n  \"quiz\": {\n    \"id\": 4283,\n    \"type\": \"Quiz\",\n    \"questions\": [\n      {\n        \"question\": \"string\",\n        \"question_type\": \"string\",\n        \"answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"correct_answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"graded\": true\n      },\n      {\n        \"question\": \"string\",\n        \"question_type\": \"string\",\n        \"answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"correct_answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"graded\": false\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c941ba56-1d76-45a2-a8d4-a06733bfa4ad",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes",
+                    ":quiz_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "quiz_id",
+                      "description": "(Required) Return results by unique quiz attachment ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4b24f8d-a595-4d38-b12f-46e1e2829259",
+          "name": "Get quiz responses",
+          "request": {
+            "name": "Get quiz responses",
+            "description": {
+              "content": "Return all student responses for a specific quiz.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id",
+                "lectures",
+                ":lecture_id",
+                "quizzes",
+                ":quiz_id",
+                "responses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return results by unique course ID that contains the lecture."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "lecture_id",
+                  "description": "(Required) Return results by unique lecture ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "quiz_id",
+                  "description": "(Required) Return results by unique quiz attachment ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d458d72-1eb1-4eff-a039-ab30273892d2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes",
+                    ":quiz_id",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "quiz_id",
+                      "description": "(Required) Return results by unique quiz attachment ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_id\": 5951,\n  \"course_name\": \"string\",\n  \"lecture_id\": 2224,\n  \"lecture_name\": \"string\",\n  \"graded\": false,\n  \"responses\": [\n    {\n      \"student_id\": 3477,\n      \"student_name\": \"string\",\n      \"student_email\": \"string\",\n      \"submitted_at\": \"1984-03-09T06:44:37.884Z\",\n      \"percent_correct\": 8703\n    },\n    {\n      \"student_id\": 8612,\n      \"student_name\": \"string\",\n      \"student_email\": \"string\",\n      \"submitted_at\": \"1994-07-28T12:08:02.927Z\",\n      \"percent_correct\": 795\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21d59059-b958-4bf3-a085-ec6c69844e47",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "quizzes",
+                    ":quiz_id",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Return results by unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "quiz_id",
+                      "description": "(Required) Return results by unique quiz attachment ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.teachable.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b30fa49-5a76-4831-afe7-8d9b1f004ba7",
+    "name": "Teachable Admin Courses Quizzes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+      "type": "text/plain"
+    }
+  }
+}

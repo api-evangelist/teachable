@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Enrollments API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List course enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/enrollments",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return enrollments for a specific course by the unique course ID."
+              },
+              {
+                "name": "enrolled_in_after",
+                "value": "",
+                "type": "query",
+                "description": "Filters for students who enrolled after a specified timestamp."
+              },
+              {
+                "name": "enrolled_in_before",
+                "value": "",
+                "type": "query",
+                "description": "Filters for students who enrolled before a specified timestamp."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Enrollments are sorted by the 'enrolled_at' datetime."
+              }
+            ]
+          },
+          "docs": "Return enrollments for a specific course."
+        },
+        {
+          "info": {
+            "name": "Enroll a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://developers.teachable.com/v1/enroll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enroll a user in a course."
+        },
+        {
+          "info": {
+            "name": "Unenroll a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://developers.teachable.com/v1/unenroll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user's enrollment from a course."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

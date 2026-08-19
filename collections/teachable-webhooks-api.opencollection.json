@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Webhooks API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/webhooks"
+          },
+          "docs": "Fetch all webhook events for your school."
+        },
+        {
+          "info": {
+            "name": "List webhook events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/webhooks/:webhook_id/events",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the webhook."
+              },
+              {
+                "name": "response_http_status_gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP status code greater than or equal to value."
+              },
+              {
+                "name": "response_http_status_lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP status code less than or equal to value."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Search for webhook events that were created before a specific datetime."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Search for webhook events that were created after a specific datetime."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per",
+                "value": "",
+                "type": "query",
+                "description": "Set the maximum number of results to be returned per page."
+              }
+            ]
+          },
+          "docs": "Return all events for a specific webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

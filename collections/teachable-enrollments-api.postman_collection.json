@@ -1,0 +1,588 @@
+{
+  "item": [
+    {
+      "id": "59f46cd1-4c73-48e2-bad7-7fb3c2f41dc9",
+      "name": "Enrollments",
+      "description": {
+        "content": "Enrollment management endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e33e470c-df6c-48b9-a29a-0904c2c2d71c",
+          "name": "List course enrollments",
+          "request": {
+            "name": "List course enrollments",
+            "description": {
+              "content": "Return enrollments for a specific course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id",
+                "enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "enrolled_in_after",
+                  "value": "<dateTime>",
+                  "description": "Filters for students who enrolled after a specified timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "enrolled_in_before",
+                  "value": "<dateTime>",
+                  "description": "Filters for students who enrolled before a specified timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Enrollments are sorted by the 'enrolled_at' datetime."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return enrollments for a specific course by the unique course ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ff51df7-11c4-41d8-b601-78c2563fee5e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "enrolled_in_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "enrolled_in_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return enrollments for a specific course by the unique course ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enrollments\": [\n    {\n      \"user_id\": 2633,\n      \"enrolled_at\": \"1994-01-19T01:15:30.693Z\",\n      \"expires_at\": \"1962-12-13T05:39:49.693Z\",\n      \"completed_at\": \"1992-09-07T01:48:37.579Z\",\n      \"percent_complete\": 3536\n    },\n    {\n      \"user_id\": 2880,\n      \"enrolled_at\": \"2009-06-13T08:36:28.783Z\",\n      \"expires_at\": \"2000-10-06T17:11:21.651Z\",\n      \"completed_at\": \"1953-06-18T20:51:29.930Z\",\n      \"percent_complete\": 2204\n    }\n  ],\n  \"meta\": {\n    \"total\": 1271,\n    \"page\": 5435,\n    \"from\": 6959,\n    \"to\": 3299,\n    \"per_page\": 4814,\n    \"number_of_pages\": 7013\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec5c170f-01fb-41d4-8667-293e2ff7c134",
+              "name": "Course not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "enrolled_in_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "enrolled_in_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return enrollments for a specific course by the unique course ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73998fc9-d89f-4286-9b47-4b318c52a82e",
+          "name": "Enroll a user",
+          "request": {
+            "name": "Enroll a user",
+            "description": {
+              "content": "Enroll a user in a course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enroll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db879594-f327-4982-b56b-329bd3cf22f4",
+              "name": "User enrolled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33a599ca-c605-420f-918e-d060379a6b82",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f22557a8-b510-480c-a074-0c91af09344b",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f34ca01-81f1-4896-9d35-77b8166816af",
+          "name": "Unenroll a user",
+          "request": {
+            "name": "Unenroll a user",
+            "description": {
+              "content": "Remove a user's enrollment from a course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unenroll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18d5c577-3ba6-4da0-a3c4-663631c6d22f",
+              "name": "User unenrolled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unenroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9dff764f-bf4d-45b2-90c6-83ffa5d82a98",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unenroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"course_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.teachable.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "491c6e73-60bc-421f-b689-9b929f394119",
+    "name": "Teachable Admin Courses Enrollments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1360 @@
+{
+  "item": [
+    {
+      "id": "fe651d4a-5db1-4dbf-8de2-cf07e8519a4f",
+      "name": "Courses",
+      "description": {
+        "content": "Course management endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6585c4fa-aa83-402b-ac71-d1fe3e2cfdbb",
+          "name": "List all courses",
+          "request": {
+            "name": "List all courses",
+            "description": {
+              "content": "Fetch all courses at your school.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter courses by course name."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_published",
+                  "value": "<boolean>",
+                  "description": "Filter courses by published status."
+                },
+                {
+                  "disabled": false,
+                  "key": "author_bio_id",
+                  "value": "<integer>",
+                  "description": "Filter courses by a specific course author via the course author's bio ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Return courses by the date & time of course creation. Formatted in ISO8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used in pagination when number of courses exceed the maximum amount of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "per",
+                  "value": "<integer>",
+                  "description": "Used in pagination to define amount of courses per page, when not defined the maximum is 20."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f75adb7-4cde-41a9-a36b-50a7ae6215df",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_published",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "author_bio_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"courses\": [\n    {\n      \"id\": 9793,\n      \"name\": \"string\",\n      \"heading\": \"string\",\n      \"description\": \"string\",\n      \"is_published\": true,\n      \"image_url\": \"string\"\n    },\n    {\n      \"id\": 5747,\n      \"name\": \"string\",\n      \"heading\": \"string\",\n      \"description\": \"string\",\n      \"is_published\": false,\n      \"image_url\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 3223,\n    \"page\": 4181,\n    \"from\": 8805,\n    \"to\": 4297,\n    \"per_page\": 655,\n    \"number_of_pages\": 5151\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e8fe496-89be-432a-9955-b125ca461e2d",
+          "name": "Get a course",
+          "request": {
+            "name": "Get a course",
+            "description": {
+              "content": "Return a course by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return a course by its unique ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c3efe03-ba21-48ee-8b2a-719ea6999f1c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course\": {\n    \"id\": 3452,\n    \"name\": \"string\",\n    \"heading\": \"string\",\n    \"description\": \"string\",\n    \"is_published\": false,\n    \"image_url\": \"string\",\n    \"lecture_sections\": [\n      {\n        \"id\": 5367,\n        \"name\": \"string\",\n        \"is_published\": true,\n        \"position\": 7013,\n        \"lectures\": [\n          {\n            \"id\": 3847,\n            \"position\": 453,\n            \"is_published\": false\n          },\n          {\n            \"id\": 3033,\n            \"position\": 8809,\n            \"is_published\": true\n          }\n        ]\n      },\n      {\n        \"id\": 6520,\n        \"name\": \"string\",\n        \"is_published\": true,\n        \"position\": 681,\n        \"lectures\": [\n          {\n            \"id\": 151,\n            \"position\": 1798,\n            \"is_published\": true\n          },\n          {\n            \"id\": 3312,\n            \"position\": 9491,\n            \"is_published\": false\n          }\n        ]\n      }\n    ],\n    \"author_bio\": {\n      \"name\": \"string\",\n      \"bio\": \"string\",\n      \"profile_image_url\": \"string\",\n      \"user_id\": 7533\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caaf9d16-7222-4301-92d7-d90f495e44e1",
+              "name": "Course not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d33c3df6-44c5-4598-9a73-b77529e1ec40",
+          "name": "Get course progress",
+          "request": {
+            "name": "Get course progress",
+            "description": {
+              "content": "Return the progress of a user in a specific course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":course_id",
+                "progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<integer>",
+                  "description": "(Required) The unique ID of the user."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used in pagination when number of courses exceed the maximum amount of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "per",
+                  "value": "<integer>",
+                  "description": "Used in pagination to define amount of courses per page, when not defined the maximum is 20."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) The unique course ID that contains the lecture."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79337a07-a85f-4849-b300-3e302769fbf9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) The unique course ID that contains the lecture."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_progress\": {\n    \"id\": 3180,\n    \"certificate\": {},\n    \"completed_at\": \"1952-06-27T06:22:11.734Z\",\n    \"enrolled_at\": \"2023-10-06T02:58:11.091Z\",\n    \"lecture_sections\": [\n      {\n        \"id\": 1250,\n        \"name\": \"string\"\n      },\n      {\n        \"id\": 346,\n        \"name\": \"string\"\n      }\n    ],\n    \"percent_complete\": 6139.9096228749795\n  },\n  \"meta\": {\n    \"total\": 6488,\n    \"page\": 2166,\n    \"from\": 8827,\n    \"to\": 1775,\n    \"per_page\": 4225,\n    \"number_of_pages\": 5146\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2868d66-7a6d-49a2-b56a-5f6922f55b88",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) The unique course ID that contains the lecture."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9dbd900-43e5-4cba-a208-cfad5be01afd",
+          "name": "List current user courses",
+          "request": {
+            "name": "List current user courses",
+            "description": {
+              "content": "Fetch all courses for the current authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "current_user",
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter courses by course name."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_published",
+                  "value": "<boolean>",
+                  "description": "Filter courses by published status."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<dateTime>",
+                  "description": "Return courses by the date & time of course creation. Formatted in ISO8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used in pagination when number of courses exceed the maximum amount of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "per",
+                  "value": "<integer>",
+                  "description": "Used in pagination to define amount of courses per page, when not defined the maximum is 20."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "26b91a63-764f-4b41-8dfe-5f1e63f30db1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_published",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"courses\": [\n    {\n      \"id\": 4596,\n      \"name\": \"string\",\n      \"heading\": \"string\",\n      \"description\": \"string\",\n      \"is_published\": true,\n      \"image_url\": \"string\"\n    },\n    {\n      \"id\": 1787,\n      \"name\": \"string\",\n      \"heading\": \"string\",\n      \"description\": \"string\",\n      \"is_published\": true,\n      \"image_url\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 1661,\n    \"page\": 2328,\n    \"from\": 1970,\n    \"to\": 7566,\n    \"per_page\": 4730,\n    \"number_of_pages\": 8264\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8593dae-40ad-4a6f-886a-3467bc717223",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_published",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e20d4b0-b002-4895-8717-e6029bfad4a1",
+              "name": "Forbidden - not authorized to access this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_published",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43918d47-835c-4c5e-b0ef-d02e40a5348c",
+          "name": "Get a course for current user",
+          "request": {
+            "name": "Get a course for current user",
+            "description": {
+              "content": "Return a course by its unique ID for the current authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "current_user",
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return a course by its unique ID number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "bd5ab20e-9423-4b37-9091-82dddc76c89f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course\": {\n    \"id\": 9642,\n    \"name\": \"string\",\n    \"heading\": \"string\",\n    \"description\": \"string\",\n    \"is_published\": false,\n    \"image_url\": \"string\",\n    \"lecture_sections\": [\n      {\n        \"id\": 8092,\n        \"name\": \"string\",\n        \"is_published\": false,\n        \"position\": 9700,\n        \"lectures\": [\n          {\n            \"id\": 6002,\n            \"position\": 3113,\n            \"is_published\": false\n          },\n          {\n            \"id\": 394,\n            \"position\": 4068,\n            \"is_published\": true\n          }\n        ]\n      },\n      {\n        \"id\": 1926,\n        \"name\": \"string\",\n        \"is_published\": false,\n        \"position\": 5543,\n        \"lectures\": [\n          {\n            \"id\": 8639,\n            \"position\": 1089,\n            \"is_published\": false\n          },\n          {\n            \"id\": 6748,\n            \"position\": 5522,\n            \"is_published\": false\n          }\n        ]\n      }\n    ],\n    \"author_bio\": {\n      \"name\": \"string\",\n      \"bio\": \"string\",\n      \"profile_image_url\": \"string\",\n      \"user_id\": 4800\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cca88084-d32a-4cee-ab8c-b06cb7e733d0",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "531fb6fa-192c-4e25-a073-b167254a4d01",
+              "name": "Forbidden - not authorized to access this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "031f2062-4d7a-4531-9ac2-c9766f4e58c6",
+              "name": "Course not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2aaa6d58-18da-4884-a176-9f2fb8effffa",
+          "name": "Get course progress for current user",
+          "request": {
+            "name": "Get course progress for current user",
+            "description": {
+              "content": "Return the current authenticated user's progress in a specific course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "current_user",
+                "courses",
+                ":course_id",
+                "progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used in pagination when number of lecture progresses exceed the maximum amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "per",
+                  "value": "<integer>",
+                  "description": "Used in pagination to define amount of lecture progresses per page, when not defined the maximum is 20."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Return a course progress by its unique ID number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8fd4a638-a476-427f-ae23-dd984e797eda",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course progress by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_progress\": {\n    \"id\": 285,\n    \"certificate\": {},\n    \"completed_at\": \"1978-02-12T05:23:17.078Z\",\n    \"enrolled_at\": \"2022-12-07T18:57:35.987Z\",\n    \"lecture_sections\": [\n      {\n        \"id\": 5585,\n        \"name\": \"string\"\n      },\n      {\n        \"id\": 4366,\n        \"name\": \"string\"\n      }\n    ],\n    \"percent_complete\": 2530.685136083296\n  },\n  \"meta\": {\n    \"total\": 9689,\n    \"page\": 4647,\n    \"from\": 1634,\n    \"to\": 9917,\n    \"per_page\": 3768,\n    \"number_of_pages\": 8576\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f8429f7-4d9e-4bfd-9229-67206e54a546",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course progress by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1234f52f-68cb-41c4-985a-952c0a2f5e4e",
+              "name": "Forbidden - not authorized to access this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course progress by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e59e920c-4129-4d71-b9a0-f42ff428c9f6",
+              "name": "Course not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Return a course progress by its unique ID number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.teachable.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "611e4efc-76ce-440a-92a9-ee2c5f86ceee",
+    "name": "Teachable Admin Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Lectures API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lectures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a lecture",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID."
+              }
+            ]
+          },
+          "docs": "Return a lecture by its unique ID within a course."
+        },
+        {
+          "info": {
+            "name": "Mark a lecture complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id/mark_complete",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique lecture ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark a lecture as complete for a specific user."
+        },
+        {
+          "info": {
+            "name": "Get a video",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/courses/:course_id/lectures/:lecture_id/videos/:video_id",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID."
+              },
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique video attachment ID."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Specify the user who is watching the video."
+              }
+            ]
+          },
+          "docs": "Return a specific video attachment within a lecture."
+        },
+        {
+          "info": {
+            "name": "Get a lecture for current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/current_user/courses/:course_id/lectures/:lecture_id",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique course ID number that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Return results by unique lecture ID number."
+              }
+            ]
+          },
+          "docs": "Return a lecture by its unique ID within a course for the current authenticated user."
+        },
+        {
+          "info": {
+            "name": "Mark a lecture complete for current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://developers.teachable.com/v1/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique course ID that contains the lecture to be completed."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique lecture ID to be completed."
+              }
+            ]
+          },
+          "docs": "Mark a lecture as complete for the current authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

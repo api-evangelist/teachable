@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses PricingPlans API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PricingPlans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pricing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/pricing_plans",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Used in pagination when number of pricing plans exceeds the maximum amount of results per page."
+              },
+              {
+                "name": "per",
+                "value": "",
+                "type": "query",
+                "description": "Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5."
+              }
+            ]
+          },
+          "docs": "Return all pricing plans for the school."
+        },
+        {
+          "info": {
+            "name": "Get a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/pricing_plans/:pricing_plan_id",
+            "params": [
+              {
+                "name": "pricing_plan_id",
+                "value": "",
+                "type": "path",
+                "description": "Search for a pricing plan by its unique ID."
+              }
+            ]
+          },
+          "docs": "Search for a pricing plan by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

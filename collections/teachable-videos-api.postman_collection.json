@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "aa788466-9ccd-49f1-b5c0-1087ce8cde08",
+      "name": "Videos",
+      "description": {
+        "content": "Video access endpoints for current user",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0045b659-5386-49c1-91f1-082e6a4e007a",
+          "name": "Get a video for current user",
+          "request": {
+            "name": "Get a video for current user",
+            "description": {
+              "content": "Return a specific video attachment within a lecture for the current authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "current_user",
+                "courses",
+                ":course_id",
+                "lectures",
+                ":lecture_id",
+                "videos",
+                ":video_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "course_id",
+                  "description": "(Required) Unique course ID that contains the lecture."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "lecture_id",
+                  "description": "(Required) Unique lecture ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "video_id",
+                  "description": "(Required) Unique attachment ID for the video."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c95ed573-0e50-4029-be85-1e1bef7458db",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "videos",
+                    ":video_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "video_id",
+                      "description": "(Required) Unique attachment ID for the video."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"video\": {\n    \"id\": 5534,\n    \"video_asset\": [\n      {\n        \"url\": \"string\",\n        \"content_type\": \"string\"\n      },\n      {\n        \"url\": \"string\",\n        \"content_type\": \"string\"\n      }\n    ],\n    \"status\": \"READY\",\n    \"url_thumbnail\": \"string\",\n    \"media_type\": \"string\",\n    \"media_duration\": 6709\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d040515a-df41-4d39-ac9f-e1ea8bdf5c18",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "videos",
+                    ":video_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "video_id",
+                      "description": "(Required) Unique attachment ID for the video."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84fb6572-93aa-43b8-99df-95349b9dae19",
+              "name": "Forbidden - not authorized to access this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "videos",
+                    ":video_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "video_id",
+                      "description": "(Required) Unique attachment ID for the video."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55ccab7b-ef62-4924-9c86-c41f8cf0f4e4",
+              "name": "Video not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user",
+                    "courses",
+                    ":course_id",
+                    "lectures",
+                    ":lecture_id",
+                    "videos",
+                    ":video_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "course_id",
+                      "description": "(Required) Unique course ID that contains the lecture."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lecture_id",
+                      "description": "(Required) Unique lecture ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "video_id",
+                      "description": "(Required) Unique attachment ID for the video."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.teachable.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ea89870-1089-4a95-9d1a-5898c4a80156",
+    "name": "Teachable Admin Courses Videos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+      "type": "text/plain"
+    }
+  }
+}

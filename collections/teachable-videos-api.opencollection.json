@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Teachable Admin Courses Videos API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a video for current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.teachable.com/v1/current_user/courses/:course_id/lectures/:lecture_id/videos/:video_id",
+            "params": [
+              {
+                "name": "course_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique course ID that contains the lecture."
+              },
+              {
+                "name": "lecture_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique lecture ID."
+              },
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique attachment ID for the video."
+              }
+            ]
+          },
+          "docs": "Return a specific video attachment within a lecture for the current authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
