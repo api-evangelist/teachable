@@ -37,6 +37,15 @@ tags:
   - Enrollments
   - Coaching
   - Memberships
+  - Transaction
+tags_raw:
+  - Online Courses
+  - E-Learning
+  - Education
+  - Course Management
+  - Enrollments
+  - Coaching
+  - Memberships
   - Transactions
 apis:
 - aid: teachable:teachable-courses-api
@@ -65,6 +74,8 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
+  - Current User
+  tags_raw:
   - CurrentUser
   properties:
   - type: OpenAPI
@@ -125,6 +136,8 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
+  - Pricing Plans
+  tags_raw:
   - PricingPlans
   properties:
   - type: OpenAPI
@@ -165,6 +178,8 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -185,6 +200,8 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -225,6 +242,8 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
