@@ -1,0 +1,34 @@
+slug: teachable
+provider: Teachable
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Enrollments
+  spec_file: teachable-enrollments-api-openapi.yml
+  capability_id: BC-4720.10
+  capability_id_l1: BC-4720
+  capability_name: Enrolment & Registration
+  confidence: 0.8
+  evidence: POST /enroll enrollUser "Enroll a user"; POST /unenroll "Unenroll a user"; GET /courses/{course_id}/enrollments
+  reason: Directly performs enrolment and un-enrolment of learners into courses, which is course registration/enrolment
+    administration.
+- tag: Quizzes
+  spec_file: teachable-quizzes-api-openapi.yml
+  capability_id: BC-4740
+  capability_id_l1: BC-4740
+  capability_name: Assessment & Examinations Management
+  confidence: 0.75
+  evidence: 'GET .../quizzes/{quiz_id}/responses getQuizResponses "Get quiz responses"; schemas: QuizQuestion,
+    QuizStudentResponse'
+  reason: Quiz definitions, questions and student responses are assessment instruments and their results;
+    spans design and results so the L1 is asserted without a specific L2.

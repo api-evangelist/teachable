@@ -271,6 +271,9 @@ apis:
   - type: ChangeLog
     url: https://docs.teachable.com/changelog
 common:
+  - type: CapabilityMap
+    url: capabilities/teachable-capability-edges.yml
+    name: Teachable Business Capability Map
   - type: AgenticAccess
     url: agentic-access/teachable-agentic-access.yml
   - type: TrustCenter
