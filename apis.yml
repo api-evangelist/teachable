@@ -86,7 +86,7 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
-  - Current User
+  - CurrentUser
   tags_raw:
   - CurrentUser
   properties:
@@ -148,7 +148,7 @@ apis:
   humanURL: https://docs.teachable.com/docs/overview-1
   baseURL: https://developers.teachable.com/v1
   tags:
-  - Pricing Plans
+  - PricingPlans
   tags_raw:
   - PricingPlans
   properties:
