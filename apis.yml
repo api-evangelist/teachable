@@ -80,28 +80,6 @@ apis:
     url: https://docs.teachable.com/docs/quickstart-guide
   - type: ChangeLog
     url: https://docs.teachable.com/changelog
-- aid: teachable:teachable-currentuser-api
-  name: Teachable CurrentUser API
-  description: Endpoints for the authenticated current user
-  humanURL: https://docs.teachable.com/docs/overview-1
-  baseURL: https://developers.teachable.com/v1
-  tags:
-  - Current User
-  tags_raw:
-  - CurrentUser
-  properties:
-  - type: OpenAPI
-    url: openapi/teachable-currentuser-api-openapi.yml
-  - type: Documentation
-    url: https://docs.teachable.com/docs/overview-1
-  - type: Reference
-    url: https://docs.teachable.com/reference/listcourses
-  - type: RateLimits
-    url: https://docs.teachable.com/docs/rate-limits
-  - type: GettingStarted
-    url: https://docs.teachable.com/docs/quickstart-guide
-  - type: ChangeLog
-    url: https://docs.teachable.com/changelog
 - aid: teachable:teachable-enrollments-api
   name: Teachable Enrollments API
   description: Enrollment management endpoints
@@ -132,28 +110,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/teachable-lectures-api-openapi.yml
-  - type: Documentation
-    url: https://docs.teachable.com/docs/overview-1
-  - type: Reference
-    url: https://docs.teachable.com/reference/listcourses
-  - type: RateLimits
-    url: https://docs.teachable.com/docs/rate-limits
-  - type: GettingStarted
-    url: https://docs.teachable.com/docs/quickstart-guide
-  - type: ChangeLog
-    url: https://docs.teachable.com/changelog
-- aid: teachable:teachable-pricingplans-api
-  name: Teachable PricingPlans API
-  description: Pricing plan endpoints
-  humanURL: https://docs.teachable.com/docs/overview-1
-  baseURL: https://developers.teachable.com/v1
-  tags:
-  - Pricing Plans
-  tags_raw:
-  - PricingPlans
-  properties:
-  - type: OpenAPI
-    url: openapi/teachable-pricingplans-api-openapi.yml
   - type: Documentation
     url: https://docs.teachable.com/docs/overview-1
   - type: Reference
@@ -260,6 +216,46 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/teachable-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-current-user-api
+  name: Teachable Current User API
+  description: Endpoints for the authenticated current user
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Current User
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-current-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.teachable.com/docs/overview-1
+  - type: Reference
+    url: https://docs.teachable.com/reference/listcourses
+  - type: RateLimits
+    url: https://docs.teachable.com/docs/rate-limits
+  - type: GettingStarted
+    url: https://docs.teachable.com/docs/quickstart-guide
+  - type: ChangeLog
+    url: https://docs.teachable.com/changelog
+- aid: teachable:teachable-pricing-plans-api
+  name: Teachable Pricing Plans API
+  description: Pricing plan endpoints
+  humanURL: https://docs.teachable.com/docs/overview-1
+  baseURL: https://developers.teachable.com/v1
+  tags:
+  - Pricing Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/teachable-pricing-plans-api-openapi.yml
   - type: Documentation
     url: https://docs.teachable.com/docs/overview-1
   - type: Reference
