@@ -1,32 +1,45 @@
 {
   "provider": "teachable",
   "sources": [
-    "teachable-courses-api-openapi.yml",
-    "teachable-currentuser-api-openapi.yml",
-    "teachable-enrollments-api-openapi.yml",
-    "teachable-lectures-api-openapi.yml",
-    "teachable-pricingplans-api-openapi.yml",
-    "teachable-quizzes-api-openapi.yml",
-    "teachable-transactions-api-openapi.yml",
-    "teachable-users-api-openapi.yml",
-    "teachable-videos-api-openapi.yml",
-    "teachable-webhooks-api-openapi.yml"
+    "_original/teachable-admin-openapi.yml",
+    "_original/teachable-oauth-openapi.yml"
   ],
   "outputs": [
     "teachable-courses-api-openapi.yml",
-    "teachable-currentuser-api-openapi.yml",
     "teachable-enrollments-api-openapi.yml",
     "teachable-lectures-api-openapi.yml",
     "teachable-pricingplans-api-openapi.yml",
     "teachable-quizzes-api-openapi.yml",
     "teachable-transactions-api-openapi.yml",
     "teachable-users-api-openapi.yml",
-    "teachable-videos-api-openapi.yml",
-    "teachable-webhooks-api-openapi.yml"
+    "teachable-webhooks-api-openapi.yml",
+    "teachable-currentuser-api-openapi.yml",
+    "teachable-videos-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "teachable-admin-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "teachable-oauth-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Courses' spans 2 source specs (teachable-admin-openapi.yml, teachable-oauth-openapi.yml): per-path servers applied",
+    "tag 'Lectures' spans 2 source specs (teachable-admin-openapi.yml, teachable-oauth-openapi.yml): per-path servers applied",
+    "superseded outputs removed: teachable-current-user-api-openapi.yml, teachable-pricing-plans-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 10 total)"
+  ],
+  "skipped": [
+    "teachable-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-current-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-enrollments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-lectures-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-pricing-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-quizzes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-videos-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "teachable-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

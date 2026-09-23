@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses PricingPlans API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Admin Pricing Plans API
+  description: REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
   version: '1'
   contact:
     name: Teachable Support
@@ -16,7 +14,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: PricingPlans
+- name: Pricing Plans
   description: Pricing plan endpoints
 paths:
   /pricing_plans:
@@ -25,7 +23,7 @@ paths:
       summary: List pricing plans
       description: Return all pricing plans for the school.
       tags:
-      - PricingPlans
+      - Pricing Plans
       parameters:
       - name: page
         in: query
@@ -52,7 +50,7 @@ paths:
       summary: Get a pricing plan
       description: Search for a pricing plan by its unique ID.
       tags:
-      - PricingPlans
+      - Pricing Plans
       parameters:
       - name: pricing_plan_id
         in: path
@@ -77,11 +75,112 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
     PricingPlanDetailResponse:
       type: object
       properties:
         pricing_plan:
           $ref: '#/components/schemas/PricingPlanDetail'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    PricingFrequency:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - free
+          - one_time_payment
+          - subscription
+          - payment_plan
+        billing_interval:
+          type:
+          - string
+          - 'null'
+          enum:
+          - week
+          - month
+          - year
+        billing_interval_count:
+          type:
+          - integer
+          - 'null'
+        access_limit_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        access_limit_interval:
+          type:
+          - string
+          - 'null'
+          enum:
+          - day
+          - week
+          - month
+          - year
+        access_limit_duration:
+          type:
+          - integer
+          - 'null'
+    PricingPlansListResponse:
+      type: object
+      properties:
+        pricing_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingPlanSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PricingPlanDetail:
+      allOf:
+      - $ref: '#/components/schemas/PricingPlanSummary'
+      - type: object
+        properties:
+          description:
+            type:
+            - string
+            - 'null'
+          free_trial_length:
+            type:
+            - integer
+            - 'null'
+            description: Free trial length in days.
+          enrollment_cap:
+            type:
+            - integer
+            - 'null'
+            description: Maximum enrollment count.
+          frequency:
+            $ref: '#/components/schemas/PricingFrequency'
     PricingPlanSummary:
       type: object
       properties:
@@ -106,99 +205,6 @@ components:
         course_id:
           type: integer
           description: Associated course ID.
-    PricingPlansListResponse:
-      type: object
-      properties:
-        pricing_plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingPlanSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    PricingFrequency:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - free
-          - one_time_payment
-          - subscription
-          - payment_plan
-        billing_interval:
-          type: string
-          nullable: true
-          enum:
-          - week
-          - month
-          - year
-        billing_interval_count:
-          type: integer
-          nullable: true
-        access_limit_date:
-          type: string
-          format: date-time
-          nullable: true
-        access_limit_interval:
-          type: string
-          nullable: true
-          enum:
-          - day
-          - week
-          - month
-          - year
-        access_limit_duration:
-          type: integer
-          nullable: true
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items.
-        page:
-          type: integer
-          description: Current page number.
-        from:
-          type: integer
-          description: First item position on current page.
-        to:
-          type: integer
-          description: Last item position on current page.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        number_of_pages:
-          type: integer
-          description: Total number of pages.
-    PricingPlanDetail:
-      allOf:
-      - $ref: '#/components/schemas/PricingPlanSummary'
-      - type: object
-        properties:
-          description:
-            type: string
-            nullable: true
-          free_trial_length:
-            type: integer
-            nullable: true
-            description: Free trial length in days.
-          enrollment_cap:
-            type: integer
-            nullable: true
-            description: Maximum enrollment count.
-          frequency:
-            $ref: '#/components/schemas/PricingFrequency'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

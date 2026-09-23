@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses Quizzes API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Admin Quizzes API
+  description: REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
   version: '1'
   contact:
     name: Teachable Support
@@ -148,6 +146,31 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    QuizListResponse:
+      type: object
+      properties:
+        quiz_ids:
+          type: array
+          items:
+            type: integer
+          description: List of unique IDs of quizzes in a lecture.
+    QuizQuestion:
+      type: object
+      properties:
+        question:
+          type: string
+        question_type:
+          type: string
+        answers:
+          type: array
+          items:
+            type: string
+        correct_answers:
+          type: array
+          items:
+            type: string
+        graded:
+          type: boolean
     QuizStudentResponse:
       type: object
       properties:
@@ -167,6 +190,33 @@ components:
         percent_correct:
           type: integer
           description: Percentage of correct answers.
+    QuizDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Quiz attachment identifier.
+        name:
+          type: string
+          description: Quiz display name.
+        kind:
+          type: string
+          enum:
+          - quiz
+        url:
+          type:
+          - string
+          - 'null'
+        text:
+          type:
+          - string
+          - 'null'
+        position:
+          type: integer
+          format: int32
+        quiz:
+          $ref: '#/components/schemas/QuizInformation'
     QuizInformation:
       type: object
       properties:
@@ -203,23 +253,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QuizStudentResponse'
-    QuizQuestion:
-      type: object
-      properties:
-        question:
-          type: string
-        question_type:
-          type: string
-        answers:
-          type: array
-          items:
-            type: string
-        correct_answers:
-          type: array
-          items:
-            type: string
-        graded:
-          type: boolean
     ErrorResponse:
       type: object
       properties:
@@ -230,39 +263,6 @@ components:
             items:
               type: string
           description: Error message or array of error messages.
-    QuizDetailResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Quiz attachment identifier.
-        name:
-          type: string
-          description: Quiz display name.
-        kind:
-          type: string
-          enum:
-          - quiz
-        url:
-          type: string
-          nullable: true
-        text:
-          type: string
-          nullable: true
-        position:
-          type: integer
-          format: int32
-        quiz:
-          $ref: '#/components/schemas/QuizInformation'
-    QuizListResponse:
-      type: object
-      properties:
-        quiz_ids:
-          type: array
-          items:
-            type: integer
-          description: List of unique IDs of quizzes in a lecture.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

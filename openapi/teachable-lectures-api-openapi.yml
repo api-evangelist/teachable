@@ -1,20 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses Lectures API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Lectures API
   version: '1'
   contact:
     name: Teachable Support
     url: https://support.teachable.com
     email: support@teachable.com
   termsOfService: https://teachable.com/terms-of-use
+  description: 'Operations tagged Lectures across 2 of this provider''s published API definitions: teachable-admin-openapi.yml, teachable-oauth-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://developers.teachable.com/v1
   description: Teachable Admin API
-security:
-- ApiKeyAuth: []
 tags:
 - name: Lectures
   description: Lecture management endpoints
@@ -56,6 +52,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /courses/{course_id}/lectures/{lecture_id}/mark_complete:
     post:
       operationId: markLectureComplete
@@ -108,6 +109,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /courses/{course_id}/lectures/{lecture_id}/videos/{video_id}:
     get:
       operationId: getVideo
@@ -159,6 +165,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /current_user/courses/{course_id}/lectures/{lecture_id}:
     get:
       operationId: getCurrentUserLecture
@@ -212,6 +223,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthErrorResponse'
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable OAuth API
   /current_user/courses/{course_id}/lectures/{lecture_id}/mark_complete:
     post:
       operationId: markCurrentUserLectureComplete
@@ -268,8 +282,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthErrorResponse'
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable OAuth API
 components:
   schemas:
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoDetail'
     VideoDetail:
       type: object
       properties:
@@ -303,30 +325,37 @@ components:
           type: integer
           format: int32
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         kind:
           type: string
         url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         text:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         position:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         file_size:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         file_extension:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         quiz:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             id:
               type: integer
@@ -340,15 +369,16 @@ components:
       properties:
         lecture:
           $ref: '#/components/schemas/LectureDetail'
-    OAuthErrorResponse:
+    ErrorResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
     VideoAsset:
       type: object
       properties:
@@ -364,8 +394,9 @@ components:
           type: integer
           format: int32
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_published:
           type: boolean
         position:
@@ -378,24 +409,98 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LectureAttachment'
-    VideoResponse:
+    LectureAttachment_2:
       type: object
       properties:
-        video:
-          $ref: '#/components/schemas/VideoDetail'
-    ErrorResponse:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        kind:
+          type: string
+        url:
+          type:
+          - string
+          - 'null'
+        text:
+          type:
+          - string
+          - 'null'
+        position:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        file_size:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        file_extension:
+          type:
+          - string
+          - 'null'
+        quiz:
+          type:
+          - object
+          - 'null'
+    LectureDetail_2:
       type: object
       properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
+        id:
+          type: integer
+          format: int32
+        position:
+          type: integer
+          format: int32
+          description: The position of the lecture within the section (1 is first, 2 is second, etc.).
+        name:
+          type:
+          - string
+          - 'null'
+        is_published:
+          type: boolean
+        lecture_section_id:
+          type: integer
+          format: int32
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureAttachment_2'
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: apiKey
       description: API key for Admin API authentication. Available on Growth plan and above.
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://developers.teachable.com/oauth/authorize
+          tokenUrl: https://developers.teachable.com/oauth/token
+          scopes:
+            name:read: Read the current user's name
+            email:read: Read the current user's email address
+            courses:read: Read courses and course content
+            courses:update: Update course progress
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Bearer access token for OAuth authenticated requests.
+x-refined-from:
+- teachable-admin-openapi.yml
+- teachable-oauth-openapi.yml

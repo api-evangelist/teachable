@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses Enrollments API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Admin Enrollments API
+  description: REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
   version: '1'
   contact:
     name: Teachable Support
@@ -144,6 +142,40 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    EnrollmentSummary:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: Unique ID of the enrolled user.
+        enrolled_at:
+          type: string
+          format: date-time
+          description: Datetime of enrollment in ISO8601.
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime enrollment expires, if applicable.
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime course was completed, if applicable.
+        percent_complete:
+          type: integer
+          description: Percentage of course completed.
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -165,38 +197,6 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    EnrollmentsListResponse:
-      type: object
-      properties:
-        enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrollmentSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    EnrollmentSummary:
-      type: object
-      properties:
-        user_id:
-          type: integer
-          description: Unique ID of the enrolled user.
-        enrolled_at:
-          type: string
-          format: date-time
-          description: Datetime of enrollment in ISO8601.
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: Datetime enrollment expires, if applicable.
-        completed_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: Datetime course was completed, if applicable.
-        percent_complete:
-          type: integer
-          description: Percentage of course completed.
     ErrorResponse:
       type: object
       properties:

@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses CurrentUser API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable OAuth Current User API
+  description: OAuth 2.0-based API enabling third-party applications to authenticate on behalf of Teachable school owners. Provides access to current user profile, courses, lecture content, progress, and video assets using scoped OAuth tokens with token refresh and revocation support.
   version: '1'
   contact:
     name: Teachable Support
@@ -12,11 +10,12 @@ info:
   termsOfService: https://teachable.com/terms-of-use
 servers:
 - url: https://developers.teachable.com/v1
-  description: Teachable Admin API
+  description: Teachable OAuth API
 security:
-- ApiKeyAuth: []
+- OAuth2:
+  - courses:read
 tags:
-- name: CurrentUser
+- name: Current User
   description: Endpoints for the authenticated current user
 paths:
   /current_user/me:
@@ -25,7 +24,7 @@ paths:
       summary: Get current user profile
       description: Retrieve the current authenticated user's profile information including name, email, and assigned role.
       tags:
-      - CurrentUser
+      - Current User
       security:
       - OAuth2:
         - name:read
@@ -65,8 +64,9 @@ components:
       type: object
       properties:
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The name of the user.
         email:
           type: string
@@ -80,8 +80,19 @@ components:
           - affiliate
           description: The role of the user.
   securitySchemes:
-    ApiKeyAuth:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://developers.teachable.com/oauth/authorize
+          tokenUrl: https://developers.teachable.com/oauth/token
+          scopes:
+            name:read: Read the current user's name
+            email:read: Read the current user's email address
+            courses:read: Read courses and course content
+            courses:update: Update course progress
+    AccessToken:
       type: apiKey
       in: header
-      name: apiKey
-      description: API key for Admin API authentication. Available on Growth plan and above.
+      name: Authorization
+      description: Bearer access token for OAuth authenticated requests.

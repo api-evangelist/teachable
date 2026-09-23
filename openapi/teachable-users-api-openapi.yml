@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses Users API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Admin Users API
+  description: REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
   version: '1'
   contact:
     name: Teachable Support
@@ -147,6 +145,12 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    UserTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tag name.
     UserDetail:
       allOf:
       - $ref: '#/components/schemas/UserSummary'
@@ -156,8 +160,9 @@ components:
             type: string
             description: The role of the user (student, owner, affiliate, author, custom, etc.).
           last_sign_in_ip:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             description: Last sign-in IP address, or null if user hasn't signed in.
           courses:
             type: array
@@ -169,16 +174,6 @@ components:
             items:
               $ref: '#/components/schemas/UserTag'
             description: Tags related to the user.
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
     PaginationMeta:
       type: object
       properties:
@@ -200,6 +195,11 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
+    UserDetailResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDetail'
     UserCourse:
       type: object
       properties:
@@ -213,34 +213,27 @@ components:
         is_active_enrollment:
           type: boolean
         completed_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         percent_complete:
           type: number
-    UpdateUserRequest:
+    UserSummary:
       type: object
       properties:
+        id:
+          type: integer
+          format: int32
+          description: The unique ID of the user.
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The name of the user.
-        src:
+        email:
           type: string
-          description: The signup source of the user, which is displayed on the Information tab of the user profile.
-    UsersListResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    UserDetailResponse:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDetail'
+          description: The email address of the user.
     CreateUserRequest:
       type: object
       required:
@@ -259,26 +252,34 @@ components:
         src:
           type: string
           description: The signup source of the user. Can store custom values or external system IDs.
-    UserSummary:
+    ErrorResponse:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          description: The unique ID of the user.
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    UsersListResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    UpdateUserRequest:
+      type: object
+      properties:
         name:
           type: string
-          nullable: true
           description: The name of the user.
-        email:
+        src:
           type: string
-          description: The email address of the user.
-    UserTag:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Tag name.
+          description: The signup source of the user, which is displayed on the Information tab of the user profile.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

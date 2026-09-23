@@ -1,20 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Teachable Admin Courses API
-  description: 'REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.
-
-    '
+  title: Teachable Courses API
   version: '1'
   contact:
     name: Teachable Support
     url: https://support.teachable.com
     email: support@teachable.com
   termsOfService: https://teachable.com/terms-of-use
+  description: 'Operations tagged Courses across 2 of this provider''s published API definitions: teachable-admin-openapi.yml, teachable-oauth-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://developers.teachable.com/v1
   description: Teachable Admin API
-security:
-- ApiKeyAuth: []
 tags:
 - name: Courses
   description: Course management endpoints
@@ -68,6 +64,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CoursesListResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /courses/{course_id}:
     get:
       operationId: getCourse
@@ -97,6 +98,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /courses/{course_id}/progress:
     get:
       operationId: getCourseProgress
@@ -145,6 +151,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable Admin API
   /current_user/courses:
     get:
       operationId: listCurrentUserCourses
@@ -204,6 +215,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthErrorResponse'
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable OAuth API
   /current_user/courses/{course_id}:
     get:
       operationId: getCurrentUserCourse
@@ -249,6 +263,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthErrorResponse'
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable OAuth API
   /current_user/courses/{course_id}/progress:
     get:
       operationId: getCurrentUserCourseProgress
@@ -306,42 +323,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthErrorResponse'
+    servers:
+    - url: https://developers.teachable.com/v1
+      description: Teachable OAuth API
 components:
   schemas:
-    CourseSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique course identifier.
-        name:
-          type: string
-          description: Course title.
-        heading:
-          type: string
-          nullable: true
-          description: The course subtitle, as set in the Information tab.
-        description:
-          type: string
-          nullable: true
-          description: Course description.
-        is_published:
-          type: boolean
-          description: Publication status of the course.
-        image_url:
-          type: string
-          nullable: true
-          description: URL of the course image.
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
     PaginationMeta:
       type: object
       properties:
@@ -363,15 +349,23 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    OAuthErrorResponse:
+    ErrorResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    CourseProgressResponse:
+      type: object
+      properties:
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressDetail'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     LectureSectionProgress:
       type: object
       properties:
@@ -383,36 +377,27 @@ components:
           type: array
           items:
             type: object
-    CourseProgressDetail:
+    AuthorBio:
       type: object
       properties:
-        id:
-          type: integer
-        certificate:
-          type: object
-          nullable: true
-        completed_at:
+        name:
           type: string
-          format: date-time
-          nullable: true
-        enrolled_at:
-          type: string
-          format: date-time
-        lecture_sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/LectureSectionProgress'
-        percent_complete:
-          type: number
-    CoursesListResponse:
-      type: object
-      properties:
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          description: Author name.
+        bio:
+          type:
+          - string
+          - 'null'
+          description: Author biography.
+        profile_image_url:
+          type:
+          - string
+          - 'null'
+          description: Author profile image URL.
+        user_id:
+          type:
+          - integer
+          - 'null'
+          description: Associated user ID.
     CourseDetail:
       allOf:
       - $ref: '#/components/schemas/CourseSummary'
@@ -424,36 +409,42 @@ components:
               $ref: '#/components/schemas/LectureSection'
           author_bio:
             $ref: '#/components/schemas/AuthorBio'
-    CourseProgressResponse:
+    CoursesListResponse:
       type: object
       properties:
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressDetail'
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseSummary'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    AuthorBio:
+    CourseSummary:
       type: object
       properties:
+        id:
+          type: integer
+          description: Unique course identifier.
         name:
           type: string
-          description: Author name.
-        bio:
-          type: string
-          nullable: true
-          description: Author biography.
-        profile_image_url:
-          type: string
-          nullable: true
-          description: Author profile image URL.
-        user_id:
-          type: integer
-          nullable: true
-          description: Associated user ID.
-    CourseDetailResponse:
-      type: object
-      properties:
-        course:
-          $ref: '#/components/schemas/CourseDetail'
+          description: Course title.
+        heading:
+          type:
+          - string
+          - 'null'
+          description: The course subtitle, as set in the Information tab.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Course description.
+        is_published:
+          type: boolean
+          description: Publication status of the course.
+        image_url:
+          type:
+          - string
+          - 'null'
+          description: URL of the course image.
     LectureSection:
       type: object
       properties:
@@ -476,9 +467,133 @@ components:
                 type: integer
               is_published:
                 type: boolean
+    CourseProgressDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        certificate:
+          type:
+          - object
+          - 'null'
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        enrolled_at:
+          type: string
+          format: date-time
+        lecture_sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureSectionProgress'
+        percent_complete:
+          type: number
+    CourseDetailResponse:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/CourseDetail'
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
+    LectureItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        position:
+          type: integer
+        is_published:
+          type: boolean
+    AuthorBio_2:
+      type: object
+      properties:
+        name:
+          type: string
+        bio:
+          type:
+          - string
+          - 'null'
+        profile_image_url:
+          type:
+          - string
+          - 'null'
+        user_id:
+          type:
+          - integer
+          - 'null'
+    CourseSummary_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID number of the course.
+        name:
+          type: string
+          description: The name of the course.
+        heading:
+          type:
+          - string
+          - 'null'
+          description: The course subtitle, as set in the Information tab.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The course description.
+        is_published:
+          type: boolean
+          description: The published status of the course.
+        image_url:
+          type:
+          - string
+          - 'null'
+          description: The URL of the course image.
+    LectureSection_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        is_published:
+          type: boolean
+        position:
+          type: integer
+        lectures:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureItem'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: apiKey
       description: API key for Admin API authentication. Available on Growth plan and above.
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://developers.teachable.com/oauth/authorize
+          tokenUrl: https://developers.teachable.com/oauth/token
+          scopes:
+            name:read: Read the current user's name
+            email:read: Read the current user's email address
+            courses:read: Read courses and course content
+            courses:update: Update course progress
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Bearer access token for OAuth authenticated requests.
+x-refined-from:
+- teachable-admin-openapi.yml
+- teachable-oauth-openapi.yml
