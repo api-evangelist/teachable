@@ -91,15 +91,33 @@ paths:
                 $ref: '#/components/schemas/WebhookEventsListResponse'
 components:
   schemas:
-    WebhookEventsListResponse:
+    WebhookEvent:
       type: object
       properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookEvent'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+        id:
+          type: integer
+        workflow_state:
+          type: string
+        webhook_id:
+          type: integer
+        attempt_count:
+          type: integer
+        last_attempted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        object_type:
+          type: string
+        object_id:
+          type: integer
+        response_http_status:
+          type:
+          - integer
+          - 'null'
     WebhooksListResponse:
       type: object
       properties:
@@ -148,33 +166,15 @@ components:
           type: integer
           format: int32
           description: Total occurrences of the webhook event.
-    WebhookEvent:
+    WebhookEventsListResponse:
       type: object
       properties:
-        id:
-          type: integer
-        workflow_state:
-          type: string
-        webhook_id:
-          type: integer
-        attempt_count:
-          type: integer
-        last_attempted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        object_type:
-          type: string
-        object_id:
-          type: integer
-        response_http_status:
-          type:
-          - integer
-          - 'null'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

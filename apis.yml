@@ -50,6 +50,7 @@ tags:
   - Coaching
   - Membership
   - Transaction
+  - Creator Economy
 tags_raw:
   - Online Courses
   - E-Learning
@@ -59,6 +60,7 @@ tags_raw:
   - Coaching
   - Memberships
   - Transactions
+  - Creator Economy
 apis:
 - aid: teachable:teachable-courses-api
   name: Teachable Courses API

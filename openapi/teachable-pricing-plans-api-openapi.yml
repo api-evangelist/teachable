@@ -75,6 +75,51 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    PricingPlanDetail:
+      allOf:
+      - $ref: '#/components/schemas/PricingPlanSummary'
+      - type: object
+        properties:
+          description:
+            type:
+            - string
+            - 'null'
+          free_trial_length:
+            type:
+            - integer
+            - 'null'
+            description: Free trial length in days.
+          enrollment_cap:
+            type:
+            - integer
+            - 'null'
+            description: Maximum enrollment count.
+          frequency:
+            $ref: '#/components/schemas/PricingFrequency'
+    PricingPlansListResponse:
+      type: object
+      properties:
+        pricing_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingPlanSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PricingPlanDetailResponse:
+      type: object
+      properties:
+        pricing_plan:
+          $ref: '#/components/schemas/PricingPlanDetail'
     PaginationMeta:
       type: object
       properties:
@@ -96,21 +141,30 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    PricingPlanDetailResponse:
+    PricingPlanSummary:
       type: object
       properties:
-        pricing_plan:
-          $ref: '#/components/schemas/PricingPlanDetail'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
+        id:
+          type: integer
+          description: Unique pricing plan identifier.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Pricing plan name.
+        price:
+          type: integer
+          description: Price in smallest currency unit.
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        course_id:
+          type: integer
+          description: Associated course ID.
     PricingFrequency:
       type: object
       properties:
@@ -151,60 +205,6 @@ components:
           type:
           - integer
           - 'null'
-    PricingPlansListResponse:
-      type: object
-      properties:
-        pricing_plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingPlanSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    PricingPlanDetail:
-      allOf:
-      - $ref: '#/components/schemas/PricingPlanSummary'
-      - type: object
-        properties:
-          description:
-            type:
-            - string
-            - 'null'
-          free_trial_length:
-            type:
-            - integer
-            - 'null'
-            description: Free trial length in days.
-          enrollment_cap:
-            type:
-            - integer
-            - 'null'
-            description: Maximum enrollment count.
-          frequency:
-            $ref: '#/components/schemas/PricingFrequency'
-    PricingPlanSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique pricing plan identifier.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          description: Pricing plan name.
-        price:
-          type: integer
-          description: Price in smallest currency unit.
-        currency:
-          type: string
-          description: ISO4217 currency code.
-        course_id:
-          type: integer
-          description: Associated course ID.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

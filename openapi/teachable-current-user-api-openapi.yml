@@ -51,15 +51,6 @@ paths:
                 $ref: '#/components/schemas/OAuthErrorResponse'
 components:
   schemas:
-    OAuthErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
     CurrentUserResponse:
       type: object
       properties:
@@ -79,6 +70,15 @@ components:
           - author
           - affiliate
           description: The role of the user.
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     OAuth2:
       type: oauth2

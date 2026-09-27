@@ -142,6 +142,16 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
     EnrollmentSummary:
       type: object
       properties:
@@ -167,15 +177,6 @@ components:
         percent_complete:
           type: integer
           description: Percentage of course completed.
-    EnrollmentsListResponse:
-      type: object
-      properties:
-        enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrollmentSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -197,16 +198,15 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    ErrorResponse:
+    EnrollmentsListResponse:
       type: object
       properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
