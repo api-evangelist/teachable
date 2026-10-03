@@ -152,6 +152,15 @@ components:
             items:
               type: string
           description: Error message or array of error messages.
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     EnrollmentSummary:
       type: object
       properties:
@@ -198,15 +207,6 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    EnrollmentsListResponse:
-      type: object
-      properties:
-        enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrollmentSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

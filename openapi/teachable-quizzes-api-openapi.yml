@@ -146,60 +146,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    QuizListResponse:
-      type: object
-      properties:
-        quiz_ids:
-          type: array
-          items:
-            type: integer
-          description: List of unique IDs of quizzes in a lecture.
-    QuizResponsesResponse:
-      type: object
-      properties:
-        course_id:
-          type: integer
-          description: The unique ID of the course.
-        course_name:
-          type: string
-          description: The name of the course.
-        lecture_id:
-          type: integer
-          description: The unique ID of the lecture.
-        lecture_name:
-          type: string
-          description: The name of the lecture.
-        graded:
-          type: boolean
-          description: Indicates if the quiz is graded.
-        responses:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuizStudentResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
-    QuizInformation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          type: string
-          enum:
-          - Quiz
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuizQuestion'
     QuizStudentResponse:
       type: object
       properties:
@@ -263,6 +209,60 @@ components:
             type: string
         graded:
           type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    QuizInformation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+          - Quiz
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+    QuizListResponse:
+      type: object
+      properties:
+        quiz_ids:
+          type: array
+          items:
+            type: integer
+          description: List of unique IDs of quizzes in a lecture.
+    QuizResponsesResponse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+          description: The unique ID of the course.
+        course_name:
+          type: string
+          description: The name of the course.
+        lecture_id:
+          type: integer
+          description: The unique ID of the lecture.
+        lecture_name:
+          type: string
+          description: The name of the lecture.
+        graded:
+          type: boolean
+          description: Indicates if the quiz is graded.
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizStudentResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

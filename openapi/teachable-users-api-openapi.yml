@@ -145,30 +145,34 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateUserRequest:
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          description: The email address of the new user.
-        name:
-          type: string
-          description: The name of the new user.
-        password:
-          type: string
-          minLength: 6
-          description: Password for the account. Minimum 6 characters.
-        src:
-          type: string
-          description: The signup source of the user. Can store custom values or external system IDs.
-    UserTag:
+    UsersListResponse:
       type: object
       properties:
-        name:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    UserCourse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+        course_name:
           type: string
-          description: Tag name.
+        enrolled_at:
+          type: string
+          format: date-time
+        is_active_enrollment:
+          type: boolean
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        percent_complete:
+          type: number
     ErrorResponse:
       type: object
       properties:
@@ -179,6 +183,27 @@ components:
             items:
               type: string
           description: Error message or array of error messages.
+    UserTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tag name.
+    UserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The unique ID of the user.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the user.
+        email:
+          type: string
+          description: The email address of the user.
     PaginationMeta:
       type: object
       properties:
@@ -200,6 +225,11 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
+    UserDetailResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDetail'
     UpdateUserRequest:
       type: object
       properties:
@@ -209,34 +239,24 @@ components:
         src:
           type: string
           description: The signup source of the user, which is displayed on the Information tab of the user profile.
-    UserCourse:
+    CreateUserRequest:
       type: object
+      required:
+      - email
       properties:
-        course_id:
-          type: integer
-        course_name:
+        email:
           type: string
-        enrolled_at:
+          description: The email address of the new user.
+        name:
           type: string
-          format: date-time
-        is_active_enrollment:
-          type: boolean
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        percent_complete:
-          type: number
-    UsersListResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          description: The name of the new user.
+        password:
+          type: string
+          minLength: 6
+          description: Password for the account. Minimum 6 characters.
+        src:
+          type: string
+          description: The signup source of the user. Can store custom values or external system IDs.
     UserDetail:
       allOf:
       - $ref: '#/components/schemas/UserSummary'
@@ -260,26 +280,6 @@ components:
             items:
               $ref: '#/components/schemas/UserTag'
             description: Tags related to the user.
-    UserSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: The unique ID of the user.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the user.
-        email:
-          type: string
-          description: The email address of the user.
-    UserDetailResponse:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDetail'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

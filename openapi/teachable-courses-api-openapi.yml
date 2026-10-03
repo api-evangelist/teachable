@@ -328,65 +328,6 @@ paths:
       description: Teachable OAuth API
 components:
   schemas:
-    CourseDetail:
-      allOf:
-      - $ref: '#/components/schemas/CourseSummary'
-      - type: object
-        properties:
-          lecture_sections:
-            type: array
-            items:
-              $ref: '#/components/schemas/LectureSection'
-          author_bio:
-            $ref: '#/components/schemas/AuthorBio'
-    CoursesListResponse:
-      type: object
-      properties:
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    CourseProgressResponse:
-      type: object
-      properties:
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressDetail'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    LectureSection:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        is_published:
-          type: boolean
-        position:
-          type: integer
-        lectures:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              position:
-                type: integer
-              is_published:
-                type: boolean
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
     LectureSectionProgress:
       type: object
       properties:
@@ -398,29 +339,62 @@ components:
           type: array
           items:
             type: object
-    CourseProgressDetail:
+    CourseDetail:
+      allOf:
+      - $ref: '#/components/schemas/CourseSummary'
+      - type: object
+        properties:
+          lecture_sections:
+            type: array
+            items:
+              $ref: '#/components/schemas/LectureSection'
+          author_bio:
+            $ref: '#/components/schemas/AuthorBio'
+    ErrorResponse:
       type: object
       properties:
-        id:
-          type: integer
-        certificate:
-          type:
-          - object
-          - 'null'
-        completed_at:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    CourseDetailResponse:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/CourseDetail'
+    CoursesListResponse:
+      type: object
+      properties:
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    AuthorBio:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Author name.
+        bio:
           type:
           - string
           - 'null'
-          format: date-time
-        enrolled_at:
-          type: string
-          format: date-time
-        lecture_sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/LectureSectionProgress'
-        percent_complete:
-          type: number
+          description: Author biography.
+        profile_image_url:
+          type:
+          - string
+          - 'null'
+          description: Author profile image URL.
+        user_id:
+          type:
+          - integer
+          - 'null'
+          description: Associated user ID.
     PaginationMeta:
       type: object
       properties:
@@ -469,41 +443,58 @@ components:
           - string
           - 'null'
           description: URL of the course image.
-    CourseDetailResponse:
+    CourseProgressResponse:
       type: object
       properties:
-        course:
-          $ref: '#/components/schemas/CourseDetail'
-    AuthorBio:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Author name.
-        bio:
-          type:
-          - string
-          - 'null'
-          description: Author biography.
-        profile_image_url:
-          type:
-          - string
-          - 'null'
-          description: Author profile image URL.
-        user_id:
-          type:
-          - integer
-          - 'null'
-          description: Associated user ID.
-    LectureItem:
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressDetail'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    LectureSection:
       type: object
       properties:
         id:
           type: integer
-        position:
-          type: integer
+        name:
+          type: string
         is_published:
           type: boolean
+        position:
+          type: integer
+        lectures:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              position:
+                type: integer
+              is_published:
+                type: boolean
+    CourseProgressDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        certificate:
+          type:
+          - object
+          - 'null'
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        enrolled_at:
+          type: string
+          format: date-time
+        lecture_sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureSectionProgress'
+        percent_complete:
+          type: number
     LectureSection_2:
       type: object
       properties:
@@ -519,6 +510,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LectureItem'
+    LectureItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        position:
+          type: integer
+        is_published:
+          type: boolean
+    AuthorBio_2:
+      type: object
+      properties:
+        name:
+          type: string
+        bio:
+          type:
+          - string
+          - 'null'
+        profile_image_url:
+          type:
+          - string
+          - 'null'
+        user_id:
+          type:
+          - integer
+          - 'null'
     CourseSummary_2:
       type: object
       properties:
@@ -555,23 +572,6 @@ components:
         error_description:
           type: string
           description: Human-readable error description.
-    AuthorBio_2:
-      type: object
-      properties:
-        name:
-          type: string
-        bio:
-          type:
-          - string
-          - 'null'
-        profile_image_url:
-          type:
-          - string
-          - 'null'
-        user_id:
-          type:
-          - integer
-          - 'null'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

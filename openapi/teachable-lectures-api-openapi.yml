@@ -287,29 +287,6 @@ paths:
       description: Teachable OAuth API
 components:
   schemas:
-    VideoAsset:
-      type: object
-      properties:
-        url:
-          type: string
-          description: M3U8 playlist file URL.
-        content_type:
-          type: string
-    LectureDetailResponse:
-      type: object
-      properties:
-        lecture:
-          $ref: '#/components/schemas/LectureDetail'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
     LectureDetail:
       type: object
       properties:
@@ -332,6 +309,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LectureAttachment'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
     LectureAttachment:
       type: object
       properties:
@@ -383,6 +370,19 @@ components:
       properties:
         video:
           $ref: '#/components/schemas/VideoDetail'
+    LectureDetailResponse:
+      type: object
+      properties:
+        lecture:
+          $ref: '#/components/schemas/LectureDetail'
+    VideoAsset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: M3U8 playlist file URL.
+        content_type:
+          type: string
     VideoDetail:
       type: object
       properties:
@@ -409,6 +409,38 @@ components:
         media_duration:
           type: integer
           description: Duration in seconds.
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
+    LectureDetail_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        position:
+          type: integer
+          format: int32
+          description: The position of the lecture within the section (1 is first, 2 is second, etc.).
+        name:
+          type:
+          - string
+          - 'null'
+        is_published:
+          type: boolean
+        lecture_section_id:
+          type: integer
+          format: int32
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureAttachment_2'
     LectureAttachment_2:
       type: object
       properties:
@@ -447,38 +479,6 @@ components:
           type:
           - object
           - 'null'
-    OAuthErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
-    LectureDetail_2:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        position:
-          type: integer
-          format: int32
-          description: The position of the lecture within the section (1 is first, 2 is second, etc.).
-        name:
-          type:
-          - string
-          - 'null'
-        is_published:
-          type: boolean
-        lecture_section_id:
-          type: integer
-          format: int32
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/LectureAttachment_2'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

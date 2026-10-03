@@ -91,6 +91,15 @@ paths:
                 $ref: '#/components/schemas/WebhookEventsListResponse'
 components:
   schemas:
+    WebhookEventsListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     WebhookEvent:
       type: object
       properties:
@@ -118,13 +127,6 @@ components:
           type:
           - integer
           - 'null'
-    WebhooksListResponse:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webhook'
     PaginationMeta:
       type: object
       properties:
@@ -166,15 +168,13 @@ components:
           type: integer
           format: int32
           description: Total occurrences of the webhook event.
-    WebhookEventsListResponse:
+    WebhooksListResponse:
       type: object
       properties:
-        events:
+        webhooks:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookEvent'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+            $ref: '#/components/schemas/Webhook'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

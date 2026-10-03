@@ -109,11 +109,6 @@ components:
         media_duration:
           type: integer
           description: Video duration in seconds.
-    VideoResponse:
-      type: object
-      properties:
-        video:
-          $ref: '#/components/schemas/VideoDetail'
     OAuthErrorResponse:
       type: object
       properties:
@@ -131,6 +126,11 @@ components:
           description: M3U8 playlist file URL.
         content_type:
           type: string
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoDetail'
   securitySchemes:
     OAuth2:
       type: oauth2
