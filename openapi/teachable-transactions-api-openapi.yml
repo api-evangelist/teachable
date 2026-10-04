@@ -92,6 +92,15 @@ paths:
                 $ref: '#/components/schemas/TransactionsListResponse'
 components:
   schemas:
+    TransactionsListResponse:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Transaction:
       type: object
       properties:
@@ -168,15 +177,6 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    TransactionsListResponse:
-      type: object
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

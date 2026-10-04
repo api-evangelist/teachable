@@ -91,15 +91,6 @@ paths:
                 $ref: '#/components/schemas/WebhookEventsListResponse'
 components:
   schemas:
-    WebhookEventsListResponse:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookEvent'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     WebhookEvent:
       type: object
       properties:
@@ -127,6 +118,15 @@ components:
           type:
           - integer
           - 'null'
+    WebhookEventsListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:

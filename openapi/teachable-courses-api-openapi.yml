@@ -328,52 +328,36 @@ paths:
       description: Teachable OAuth API
 components:
   schemas:
-    LectureSectionProgress:
+    CourseProgressResponse:
+      type: object
+      properties:
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressDetail'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    CourseProgressDetail:
       type: object
       properties:
         id:
           type: integer
-        name:
+        certificate:
+          type:
+          - object
+          - 'null'
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        enrolled_at:
           type: string
-        lectures:
+          format: date-time
+        lecture_sections:
           type: array
           items:
-            type: object
-    CourseDetail:
-      allOf:
-      - $ref: '#/components/schemas/CourseSummary'
-      - type: object
-        properties:
-          lecture_sections:
-            type: array
-            items:
-              $ref: '#/components/schemas/LectureSection'
-          author_bio:
-            $ref: '#/components/schemas/AuthorBio'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
-    CourseDetailResponse:
-      type: object
-      properties:
-        course:
-          $ref: '#/components/schemas/CourseDetail'
-    CoursesListResponse:
-      type: object
-      properties:
-        courses:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+            $ref: '#/components/schemas/LectureSectionProgress'
+        percent_complete:
+          type: number
     AuthorBio:
       type: object
       properties:
@@ -395,27 +379,17 @@ components:
           - integer
           - 'null'
           description: Associated user ID.
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items.
-        page:
-          type: integer
-          description: Current page number.
-        from:
-          type: integer
-          description: First item position on current page.
-        to:
-          type: integer
-          description: Last item position on current page.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        number_of_pages:
-          type: integer
-          description: Total number of pages.
+    CourseDetail:
+      allOf:
+      - $ref: '#/components/schemas/CourseSummary'
+      - type: object
+        properties:
+          lecture_sections:
+            type: array
+            items:
+              $ref: '#/components/schemas/LectureSection'
+          author_bio:
+            $ref: '#/components/schemas/AuthorBio'
     CourseSummary:
       type: object
       properties:
@@ -443,13 +417,6 @@ components:
           - string
           - 'null'
           description: URL of the course image.
-    CourseProgressResponse:
-      type: object
-      properties:
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressDetail'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     LectureSection:
       type: object
       properties:
@@ -472,53 +439,71 @@ components:
                 type: integer
               is_published:
                 type: boolean
-    CourseProgressDetail:
+    CoursesListResponse:
       type: object
       properties:
-        id:
-          type: integer
-        certificate:
-          type:
-          - object
-          - 'null'
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        enrolled_at:
-          type: string
-          format: date-time
-        lecture_sections:
+        courses:
           type: array
           items:
-            $ref: '#/components/schemas/LectureSectionProgress'
-        percent_complete:
-          type: number
-    LectureSection_2:
+            $ref: '#/components/schemas/CourseSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    CourseDetailResponse:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/CourseDetail'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    LectureSectionProgress:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-        is_published:
-          type: boolean
-        position:
-          type: integer
         lectures:
           type: array
           items:
-            $ref: '#/components/schemas/LectureItem'
-    LectureItem:
+            type: object
+    OAuthErrorResponse:
       type: object
       properties:
-        id:
-          type: integer
-        position:
-          type: integer
-        is_published:
-          type: boolean
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
     AuthorBio_2:
       type: object
       properties:
@@ -536,6 +521,15 @@ components:
           type:
           - integer
           - 'null'
+    LectureItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        position:
+          type: integer
+        is_published:
+          type: boolean
     CourseSummary_2:
       type: object
       properties:
@@ -563,15 +557,21 @@ components:
           - string
           - 'null'
           description: The URL of the course image.
-    OAuthErrorResponse:
+    LectureSection_2:
       type: object
       properties:
-        error:
+        id:
+          type: integer
+        name:
           type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
+        is_published:
+          type: boolean
+        position:
+          type: integer
+        lectures:
+          type: array
+          items:
+            $ref: '#/components/schemas/LectureItem'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

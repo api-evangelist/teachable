@@ -75,6 +75,27 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    PricingPlanDetail:
+      allOf:
+      - $ref: '#/components/schemas/PricingPlanSummary'
+      - type: object
+        properties:
+          description:
+            type:
+            - string
+            - 'null'
+          free_trial_length:
+            type:
+            - integer
+            - 'null'
+            description: Free trial length in days.
+          enrollment_cap:
+            type:
+            - integer
+            - 'null'
+            description: Maximum enrollment count.
+          frequency:
+            $ref: '#/components/schemas/PricingFrequency'
     PricingPlansListResponse:
       type: object
       properties:
@@ -108,16 +129,6 @@ components:
         course_id:
           type: integer
           description: Associated course ID.
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
     PricingFrequency:
       type: object
       properties:
@@ -158,6 +169,16 @@ components:
           type:
           - integer
           - 'null'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
     PaginationMeta:
       type: object
       properties:
@@ -179,27 +200,6 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    PricingPlanDetail:
-      allOf:
-      - $ref: '#/components/schemas/PricingPlanSummary'
-      - type: object
-        properties:
-          description:
-            type:
-            - string
-            - 'null'
-          free_trial_length:
-            type:
-            - integer
-            - 'null'
-            description: Free trial length in days.
-          enrollment_cap:
-            type:
-            - integer
-            - 'null'
-            description: Maximum enrollment count.
-          frequency:
-            $ref: '#/components/schemas/PricingFrequency'
     PricingPlanDetailResponse:
       type: object
       properties:

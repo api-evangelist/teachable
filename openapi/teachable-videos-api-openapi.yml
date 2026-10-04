@@ -81,6 +81,15 @@ paths:
                 $ref: '#/components/schemas/OAuthErrorResponse'
 components:
   schemas:
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
     VideoDetail:
       type: object
       properties:
@@ -109,15 +118,6 @@ components:
         media_duration:
           type: integer
           description: Video duration in seconds.
-    OAuthErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
-          type: string
-          description: Human-readable error description.
     VideoAsset:
       type: object
       properties:

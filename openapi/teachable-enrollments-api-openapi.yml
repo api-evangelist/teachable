@@ -142,6 +142,36 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
     ErrorResponse:
       type: object
       properties:
@@ -152,15 +182,6 @@ components:
             items:
               type: string
           description: Error message or array of error messages.
-    EnrollmentsListResponse:
-      type: object
-      properties:
-        enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrollmentSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     EnrollmentSummary:
       type: object
       properties:
@@ -186,27 +207,6 @@ components:
         percent_complete:
           type: integer
           description: Percentage of course completed.
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items.
-        page:
-          type: integer
-          description: Current page number.
-        from:
-          type: integer
-          description: First item position on current page.
-        to:
-          type: integer
-          description: Last item position on current page.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        number_of_pages:
-          type: integer
-          description: Total number of pages.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
