@@ -2,6 +2,13 @@
   "repo": "teachable",
   "feeds": [
     {
+      "source": "https://www.teachable.com/blog",
+      "feed_url": "https://www.teachable.com/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://x.com/teachable",
       "feed_url": "https://x.com/teachable",
       "title": "",
@@ -9,7 +16,7 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 11,
   "agent_pulled": "2026-06-27",
   "feed_nature": "vendor-blog",
