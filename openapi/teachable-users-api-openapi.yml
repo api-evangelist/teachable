@@ -145,12 +145,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    UserTag:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Tag name.
     UsersListResponse:
       type: object
       properties:
@@ -160,35 +154,6 @@ components:
             $ref: '#/components/schemas/UserSummary'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
-    UserCourse:
-      type: object
-      properties:
-        course_id:
-          type: integer
-        course_name:
-          type: string
-        enrolled_at:
-          type: string
-          format: date-time
-        is_active_enrollment:
-          type: boolean
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        percent_complete:
-          type: number
     PaginationMeta:
       type: object
       properties:
@@ -210,11 +175,34 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
-    UserDetailResponse:
+    ErrorResponse:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/UserDetail'
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
+    CreateUserRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: The email address of the new user.
+        name:
+          type: string
+          description: The name of the new user.
+        password:
+          type: string
+          minLength: 6
+          description: Password for the account. Minimum 6 characters.
+        src:
+          type: string
+          description: The signup source of the user. Can store custom values or external system IDs.
     UserDetail:
       allOf:
       - $ref: '#/components/schemas/UserSummary'
@@ -238,24 +226,6 @@ components:
             items:
               $ref: '#/components/schemas/UserTag'
             description: Tags related to the user.
-    CreateUserRequest:
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          description: The email address of the new user.
-        name:
-          type: string
-          description: The name of the new user.
-        password:
-          type: string
-          minLength: 6
-          description: Password for the account. Minimum 6 characters.
-        src:
-          type: string
-          description: The signup source of the user. Can store custom values or external system IDs.
     UserSummary:
       type: object
       properties:
@@ -271,6 +241,12 @@ components:
         email:
           type: string
           description: The email address of the user.
+    UserTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tag name.
     UpdateUserRequest:
       type: object
       properties:
@@ -280,6 +256,30 @@ components:
         src:
           type: string
           description: The signup source of the user, which is displayed on the Information tab of the user profile.
+    UserCourse:
+      type: object
+      properties:
+        course_id:
+          type: integer
+        course_name:
+          type: string
+        enrolled_at:
+          type: string
+          format: date-time
+        is_active_enrollment:
+          type: boolean
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        percent_complete:
+          type: number
+    UserDetailResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDetail'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

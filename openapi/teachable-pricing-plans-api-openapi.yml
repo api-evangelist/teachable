@@ -75,6 +75,42 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items.
+        page:
+          type: integer
+          description: Current page number.
+        from:
+          type: integer
+          description: First item position on current page.
+        to:
+          type: integer
+          description: Last item position on current page.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        number_of_pages:
+          type: integer
+          description: Total number of pages.
+    PricingPlanDetailResponse:
+      type: object
+      properties:
+        pricing_plan:
+          $ref: '#/components/schemas/PricingPlanDetail'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Error message or array of error messages.
     PricingPlanDetail:
       allOf:
       - $ref: '#/components/schemas/PricingPlanSummary'
@@ -96,39 +132,6 @@ components:
             description: Maximum enrollment count.
           frequency:
             $ref: '#/components/schemas/PricingFrequency'
-    PricingPlansListResponse:
-      type: object
-      properties:
-        pricing_plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingPlanSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    PricingPlanSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique pricing plan identifier.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          description: Pricing plan name.
-        price:
-          type: integer
-          description: Price in smallest currency unit.
-        currency:
-          type: string
-          description: ISO4217 currency code.
-        course_id:
-          type: integer
-          description: Associated course ID.
     PricingFrequency:
       type: object
       properties:
@@ -169,42 +172,39 @@ components:
           type:
           - integer
           - 'null'
-    ErrorResponse:
+    PricingPlanSummary:
       type: object
       properties:
-        message:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Error message or array of error messages.
-    PaginationMeta:
+        id:
+          type: integer
+          description: Unique pricing plan identifier.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Pricing plan name.
+        price:
+          type: integer
+          description: Price in smallest currency unit.
+        currency:
+          type: string
+          description: ISO4217 currency code.
+        course_id:
+          type: integer
+          description: Associated course ID.
+    PricingPlansListResponse:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total number of items.
-        page:
-          type: integer
-          description: Current page number.
-        from:
-          type: integer
-          description: First item position on current page.
-        to:
-          type: integer
-          description: Last item position on current page.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        number_of_pages:
-          type: integer
-          description: Total number of pages.
-    PricingPlanDetailResponse:
-      type: object
-      properties:
-        pricing_plan:
-          $ref: '#/components/schemas/PricingPlanDetail'
+        pricing_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingPlanSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

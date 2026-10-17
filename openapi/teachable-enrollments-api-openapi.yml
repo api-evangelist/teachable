@@ -142,15 +142,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    EnrollmentsListResponse:
-      type: object
-      properties:
-        enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrollmentSummary'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -172,6 +163,15 @@ components:
         number_of_pages:
           type: integer
           description: Total number of pages.
+    EnrollmentsListResponse:
+      type: object
+      properties:
+        enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrollmentSummary'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     ErrorResponse:
       type: object
       properties:

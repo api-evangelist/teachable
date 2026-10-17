@@ -81,15 +81,14 @@ paths:
                 $ref: '#/components/schemas/OAuthErrorResponse'
 components:
   schemas:
-    OAuthErrorResponse:
+    VideoAsset:
       type: object
       properties:
-        error:
+        url:
           type: string
-          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
-        error_description:
+          description: M3U8 playlist file URL.
+        content_type:
           type: string
-          description: Human-readable error description.
     VideoDetail:
       type: object
       properties:
@@ -118,19 +117,20 @@ components:
         media_duration:
           type: integer
           description: Video duration in seconds.
-    VideoAsset:
-      type: object
-      properties:
-        url:
-          type: string
-          description: M3U8 playlist file URL.
-        content_type:
-          type: string
     VideoResponse:
       type: object
       properties:
         video:
           $ref: '#/components/schemas/VideoDetail'
+    OAuthErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code (e.g., invalid_token, access_forbidden, resource_not_found, unmet_requirements).
+        error_description:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     OAuth2:
       type: oauth2
