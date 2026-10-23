@@ -273,6 +273,8 @@ apis:
   - type: ChangeLog
     url: https://docs.teachable.com/changelog
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/teachable/overview
   - type: CapabilityMap
     url: capabilities/teachable-capability-edges.yml
     name: Teachable Business Capability Map
