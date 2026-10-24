@@ -1,203 +1,200 @@
 {
+  "info": {
+    "_postman_id": "8625b2b9-88ee-48ae-863a-015fb6e56a61",
+    "name": "Teachable Admin Transactions API",
+    "description": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:25:53.000Z",
+    "updatedAt": "2026-10-22T02:25:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8625b2b9-88ee-48ae-863a-015fb6e56a61"
+  },
   "item": [
     {
-      "id": "9b566f5f-9b10-409c-aab9-1c4a8e444763",
-      "name": "Transactions",
-      "description": {
-        "content": "Transaction and sales endpoints",
-        "type": "text/plain"
-      },
+      "name": "transactions",
       "item": [
         {
-          "id": "65408f4f-a4cf-4775-ba91-988b98705d6a",
           "name": "List transactions",
+          "id": "13eca005-d2b6-421a-abc1-305f523ff6b3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List transactions",
-            "description": {
-              "content": "Return all transactions for the school with optional filters.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "transactions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "user_id",
-                  "value": "<integer>",
-                  "description": "Filter by user."
-                },
-                {
-                  "disabled": false,
-                  "key": "affiliate_id",
-                  "value": "<integer>",
-                  "description": "Filter by affiliate."
-                },
-                {
-                  "disabled": false,
-                  "key": "course_id",
-                  "value": "<integer>",
-                  "description": "Filter by course."
-                },
-                {
-                  "disabled": false,
-                  "key": "pricing_plan_id",
-                  "value": "<integer>",
-                  "description": "Filter by pricing plan."
-                },
-                {
-                  "disabled": false,
-                  "key": "is_fully_refunded",
-                  "value": "<boolean>",
-                  "description": "Filter by refund status."
-                },
-                {
-                  "disabled": false,
-                  "key": "is_chargeback",
-                  "value": "<boolean>",
-                  "description": "Filter by chargeback status."
-                },
-                {
-                  "disabled": false,
-                  "key": "start",
-                  "value": "<dateTime>",
-                  "description": "The beginning of the time period to return results for (exclusive). Formatted in ISO8601."
-                },
-                {
-                  "disabled": false,
-                  "key": "end",
-                  "value": "<dateTime>",
-                  "description": "The end of the time period to return results for (inclusive). Formatted in ISO8601."
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Page number for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "per",
-                  "value": "<integer>",
-                  "description": "Items per page, maximum is 20 when not specified."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/transactions?user_id=<integer>&affiliate_id=<integer>&course_id=<integer>&pricing_plan_id=<integer>&is_fully_refunded=<boolean>&is_chargeback=<boolean>&start=<dateTime>&end=<dateTime>&page=<integer>&per=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "description": "Filter by user.",
+                  "key": "user_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by affiliate.",
+                  "key": "affiliate_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by course.",
+                  "key": "course_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by pricing plan.",
+                  "key": "pricing_plan_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by refund status.",
+                  "key": "is_fully_refunded",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Filter by chargeback status.",
+                  "key": "is_chargeback",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "The beginning of the time period to return results for (exclusive). Formatted in ISO8601.",
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "The end of the time period to return results for (inclusive). Formatted in ISO8601.",
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Page number for pagination.",
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Items per page, maximum is 20 when not specified.",
+                  "key": "per",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Return all transactions for the school with optional filters."
           },
           "response": [
             {
-              "id": "6a77093c-695b-4ea3-82c3-957b5f8e802a",
+              "id": "8163bc25-cda8-4e87-a8a1-b8de0a0720a4",
               "name": "Successful response",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "transactions"
-                  ],
+                  "raw": "{{baseUrl}}/transactions?user_id=<integer>&affiliate_id=<integer>&course_id=<integer>&pricing_plan_id=<integer>&is_fully_refunded=<boolean>&is_chargeback=<boolean>&start=<dateTime>&end=<dateTime>&page=<integer>&per=<integer>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "transactions"
+                  ],
                   "query": [
                     {
+                      "description": "Filter by user.",
                       "key": "user_id",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Filter by affiliate.",
                       "key": "affiliate_id",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Filter by course.",
                       "key": "course_id",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Filter by pricing plan.",
                       "key": "pricing_plan_id",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Filter by refund status.",
                       "key": "is_fully_refunded",
                       "value": "<boolean>"
                     },
                     {
+                      "description": "Filter by chargeback status.",
                       "key": "is_chargeback",
                       "value": "<boolean>"
                     },
                     {
+                      "description": "The beginning of the time period to return results for (exclusive). Formatted in ISO8601.",
                       "key": "start",
                       "value": "<dateTime>"
                     },
                     {
+                      "description": "The end of the time period to return results for (inclusive). Formatted in ISO8601.",
                       "key": "end",
                       "value": "<dateTime>"
                     },
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Items per page, maximum is 20 when not specified.",
                       "key": "per",
                       "value": "<integer>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"transactions\": [\n    {\n      \"id\": 1073,\n      \"user_id\": 9784,\n      \"pricing_plan_id\": 3115,\n      \"sale_id\": 9753,\n      \"created_at\": \"1966-06-13T04:42:19.958Z\",\n      \"purchased_at\": \"1966-08-05T01:15:33.603Z\",\n      \"charge\": 1694,\n      \"final_price\": 8463,\n      \"currency\": \"string\",\n      \"tax_charge\": 382,\n      \"revenue\": 5835,\n      \"status\": \"string\",\n      \"has_chargeback\": true,\n      \"chargeback_fee\": 4846,\n      \"affiliate_id\": 1375,\n      \"affiliate_fees\": 5275,\n      \"author_id\": 4421,\n      \"author_fees\": 5722,\n      \"coupon_id\": 365,\n      \"refunded_at\": \"1964-09-14T23:03:23.790Z\",\n      \"amount_refunded\": 1686\n    },\n    {\n      \"id\": 6777,\n      \"user_id\": 6024,\n      \"pricing_plan_id\": 7748,\n      \"sale_id\": 4728,\n      \"created_at\": \"2010-12-23T20:40:39.676Z\",\n      \"purchased_at\": \"1979-06-18T07:26:01.745Z\",\n      \"charge\": 2053,\n      \"final_price\": 4674,\n      \"currency\": \"string\",\n      \"tax_charge\": 9714,\n      \"revenue\": 374,\n      \"status\": \"string\",\n      \"has_chargeback\": true,\n      \"chargeback_fee\": 7462,\n      \"affiliate_id\": 45,\n      \"affiliate_fees\": 8144,\n      \"author_id\": 7048,\n      \"author_fees\": 7096,\n      \"coupon_id\": 3116,\n      \"refunded_at\": \"1987-03-25T20:05:20.047Z\",\n      \"amount_refunded\": 1736\n    }\n  ],\n  \"meta\": {\n    \"total\": 7791,\n    \"page\": 171,\n    \"from\": 5585,\n    \"to\": 5434,\n    \"per_page\": 6456,\n    \"number_of_pages\": 8631\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"transactions\": [\n    {\n      \"id\": \"<integer>\",\n      \"user_id\": \"<integer>\",\n      \"pricing_plan_id\": \"<integer>\",\n      \"sale_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"purchased_at\": \"<dateTime>\",\n      \"charge\": \"<integer>\",\n      \"final_price\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"tax_charge\": \"<integer>\",\n      \"revenue\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"has_chargeback\": \"<boolean>\",\n      \"chargeback_fee\": \"<integer>\",\n      \"affiliate_id\": \"<integer>\",\n      \"affiliate_fees\": \"<integer>\",\n      \"author_id\": \"<integer>\",\n      \"author_fees\": \"<integer>\",\n      \"coupon_id\": \"<integer>\",\n      \"refunded_at\": \"<string,null-date-time>\",\n      \"amount_refunded\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"user_id\": \"<integer>\",\n      \"pricing_plan_id\": \"<integer>\",\n      \"sale_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"purchased_at\": \"<dateTime>\",\n      \"charge\": \"<integer>\",\n      \"final_price\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"tax_charge\": \"<integer>\",\n      \"revenue\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"has_chargeback\": \"<boolean>\",\n      \"chargeback_fee\": \"<integer>\",\n      \"affiliate_id\": \"<integer>\",\n      \"affiliate_fees\": \"<integer>\",\n      \"author_id\": \"<integer>\",\n      \"author_fees\": \"<integer>\",\n      \"coupon_id\": \"<integer>\",\n      \"refunded_at\": \"<string,null-date-time>\",\n      \"amount_refunded\": \"<integer>\"\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"from\": \"<integer>\",\n    \"to\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"number_of_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:25:53.000Z",
+              "updatedAt": "2026-10-22T02:25:53.000Z",
+              "uid": "35240-8163bc25-cda8-4e87-a8a1-b8de0a0720a4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:25:53.000Z",
+          "updatedAt": "2026-10-22T02:25:53.000Z",
+          "uid": "35240-13eca005-d2b6-421a-abc1-305f523ff6b3"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://developers.teachable.com/v1",
-      "key": "baseUrl"
+      "id": "5008e68d-1b87-42c6-adbe-f3d5958c84a2",
+      "createdAt": "2026-10-22T02:25:53.000Z",
+      "updatedAt": "2026-10-22T02:25:53.000Z",
+      "uid": "35240-5008e68d-1b87-42c6-adbe-f3d5958c84a2"
     }
   ],
   "auth": {
@@ -205,25 +202,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "apiKey"
+        "value": "apiKey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e2f77e23-8f22-4b36-a504-0b054a57c781",
-    "name": "Teachable Admin Courses Transactions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
     }
-  }
+  ]
 }

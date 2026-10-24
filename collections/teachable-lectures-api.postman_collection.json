@@ -1,1382 +1,1433 @@
 {
+  "info": {
+    "_postman_id": "3d408484-a6b8-43ce-b947-c3e29d126d94",
+    "name": "Teachable Lectures API",
+    "description": "Operations tagged Lectures across 2 of this provider's published API definitions: teachable-admin-openapi.yml, teachable-oauth-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:25:41.000Z",
+    "updatedAt": "2026-10-22T02:25:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d408484-a6b8-43ce-b947-c3e29d126d94"
+  },
   "item": [
     {
-      "id": "564653a7-b47f-43fe-ae32-50e2e476bf4a",
-      "name": "Lectures",
-      "description": {
-        "content": "Lecture management endpoints",
-        "type": "text/plain"
-      },
+      "name": "courses",
       "item": [
         {
-          "id": "da1bb6d6-9e7b-48ae-b59f-77d9854df7ba",
-          "name": "Get a lecture",
-          "request": {
-            "name": "Get a lecture",
-            "description": {
-              "content": "Return a lecture by its unique ID within a course.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{course_id}",
+          "item": [
             {
-              "id": "1a8ed5da-db95-4287-88ec-73bd852a2751",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "lectures",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{lecture_id}",
+                  "item": [
+                    {
+                      "name": "mark_complete",
+                      "item": [
+                        {
+                          "name": "Mark a lecture complete",
+                          "id": "9fbb4f7a-dd89-4fd5-ba5c-01c67d1ecd03",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "apiKey",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_id\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/mark_complete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "courses",
+                                ":course_id",
+                                "lectures",
+                                ":lecture_id",
+                                "mark_complete"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "17d1999c-e40d-468d-ad88-92fb518c3cfb",
+                                  "key": "course_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The unique course ID that contains the lecture."
+                                },
+                                {
+                                  "id": "a7f8afab-dcd9-4084-817c-8dae254b8516",
+                                  "key": "lecture_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The unique lecture ID."
+                                }
+                              ]
+                            },
+                            "description": "Mark a lecture as complete for a specific user."
+                          },
+                          "response": [
+                            {
+                              "id": "aa1c7604-45f9-46c6-8704-6e50232f0dd1",
+                              "name": "Lecture marked complete successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "apiKey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "mark_complete"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-aa1c7604-45f9-46c6-8704-6e50232f0dd1"
+                            },
+                            {
+                              "id": "1cc3a6b7-88f4-4b1a-9dca-e38d791dc33c",
+                              "name": "Not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "apiKey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "mark_complete"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-1cc3a6b7-88f4-4b1a-9dca-e38d791dc33c"
+                            },
+                            {
+                              "id": "50275504-53de-49b9-bd38-0dda50a9bc57",
+                              "name": "Conflict",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "apiKey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "mark_complete"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-50275504-53de-49b9-bd38-0dda50a9bc57"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-9fbb4f7a-dd89-4fd5-ba5c-01c67d1ecd03"
+                        }
+                      ],
+                      "id": "0bc29089-d759-4320-aebc-fcb71a3b08c6",
+                      "createdAt": "2026-10-22T02:25:42.000Z",
+                      "updatedAt": "2026-10-22T02:25:42.000Z",
+                      "uid": "35240-0bc29089-d759-4320-aebc-fcb71a3b08c6"
+                    },
+                    {
+                      "name": "videos",
+                      "item": [
+                        {
+                          "name": "{video_id}",
+                          "item": [
+                            {
+                              "name": "Get a video",
+                              "id": "288a94f4-1784-4965-bd60-cdf96f259c07",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "apiKey",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "{{apiKey}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/videos/:video_id?user_id=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "videos",
+                                    ":video_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Specify the user who is watching the video.",
+                                      "key": "user_id",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "548a83b3-1fe5-4d96-a189-80ca30bf3008",
+                                      "key": "course_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                                    },
+                                    {
+                                      "id": "fc5815cc-3c91-4dc2-ab59-ee129187e31e",
+                                      "key": "lecture_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique lecture ID."
+                                    },
+                                    {
+                                      "id": "e87a8b08-8583-401e-807d-20e69afbe4ec",
+                                      "key": "video_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique video attachment ID."
+                                    }
+                                  ]
+                                },
+                                "description": "Return a specific video attachment within a lecture."
+                              },
+                              "response": [
+                                {
+                                  "id": "87df7db6-b447-4f33-9cdd-391ce4d18775",
+                                  "name": "Successful response",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "apiKey",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/videos/:video_id?user_id=<integer>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "videos",
+                                        ":video_id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Specify the user who is watching the video.",
+                                          "key": "user_id",
+                                          "value": "<integer>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        },
+                                        {
+                                          "key": "video_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"video\": {\n    \"id\": \"<integer>\",\n    \"video_asset\": {\n      \"url\": \"<string>\",\n      \"content_type\": \"<string>\"\n    },\n    \"status\": \"READY\",\n    \"url_thumbnail\": \"<string>\",\n    \"media_type\": \"<string>\",\n    \"media_duration\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-87df7db6-b447-4f33-9cdd-391ce4d18775"
+                                },
+                                {
+                                  "id": "8b0fa754-78cc-4766-85ac-c3b99fa6c059",
+                                  "name": "Not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "apiKey",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/videos/:video_id?user_id=<integer>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "videos",
+                                        ":video_id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Specify the user who is watching the video.",
+                                          "key": "user_id",
+                                          "value": "<integer>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        },
+                                        {
+                                          "key": "video_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-8b0fa754-78cc-4766-85ac-c3b99fa6c059"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-288a94f4-1784-4965-bd60-cdf96f259c07"
+                            }
+                          ],
+                          "id": "a670995c-1129-46ac-84df-f66c1a54de0f",
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-a670995c-1129-46ac-84df-f66c1a54de0f"
+                        }
+                      ],
+                      "id": "e2a05ba6-d956-47c7-a7ae-5c180e3c353a",
+                      "createdAt": "2026-10-22T02:25:42.000Z",
+                      "updatedAt": "2026-10-22T02:25:42.000Z",
+                      "uid": "35240-e2a05ba6-d956-47c7-a7ae-5c180e3c353a"
+                    },
+                    {
+                      "name": "Get a lecture",
+                      "id": "004101b0-6294-4b86-93b3-f426f7ec6a65",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "apiKey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "courses",
+                            ":course_id",
+                            "lectures",
+                            ":lecture_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9e840732-8f80-4ef6-a2fd-9146324ed9ca",
+                              "key": "course_id",
+                              "value": "<integer>",
+                              "description": "(Required) Return results by unique course ID that contains the lecture."
+                            },
+                            {
+                              "id": "a5097a75-6cfe-4879-b207-a5804866cef7",
+                              "key": "lecture_id",
+                              "value": "<integer>",
+                              "description": "(Required) Return results by unique lecture ID."
+                            }
+                          ]
+                        },
+                        "description": "Return a lecture by its unique ID within a course."
+                      },
+                      "response": [
+                        {
+                          "id": "196a071e-452f-4583-bd27-5f2bbfa5a0a2",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "apiKey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "courses",
+                                ":course_id",
+                                "lectures",
+                                ":lecture_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "course_id"
+                                },
+                                {
+                                  "key": "lecture_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"lecture\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string,null>\",\n    \"is_published\": \"<boolean>\",\n    \"position\": \"<integer>\",\n    \"lecture_section_id\": \"<integer>\",\n    \"attachments\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"kind\": \"<string>\",\n        \"url\": \"<string,null>\",\n        \"text\": \"<string,null>\",\n        \"position\": \"<integer,null>\",\n        \"file_size\": \"<integer,null>\",\n        \"file_extension\": \"<string,null>\",\n        \"quiz\": {\n          \"id\": \"<integer>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"kind\": \"<string>\",\n        \"url\": \"<string,null>\",\n        \"text\": \"<string,null>\",\n        \"position\": \"<integer,null>\",\n        \"file_size\": \"<integer,null>\",\n        \"file_extension\": \"<string,null>\",\n        \"quiz\": {\n          \"id\": \"<integer>\"\n        }\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-196a071e-452f-4583-bd27-5f2bbfa5a0a2"
+                        },
+                        {
+                          "id": "2443a94a-f7f9-4ea7-a6b2-111c5cf4ba32",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "apiKey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "courses",
+                                ":course_id",
+                                "lectures",
+                                ":lecture_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "course_id"
+                                },
+                                {
+                                  "key": "lecture_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-2443a94a-f7f9-4ea7-a6b2-111c5cf4ba32"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:25:42.000Z",
+                      "updatedAt": "2026-10-22T02:25:42.000Z",
+                      "uid": "35240-004101b0-6294-4b86-93b3-f426f7ec6a65"
+                    }
+                  ],
+                  "id": "8e9977d8-f47a-47fe-a46c-b15c93b0d6e3",
+                  "createdAt": "2026-10-22T02:25:42.000Z",
+                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                  "uid": "35240-8e9977d8-f47a-47fe-a46c-b15c93b0d6e3"
                 }
               ],
-              "body": "{\n  \"lecture\": {\n    \"id\": 1608,\n    \"name\": \"string\",\n    \"is_published\": false,\n    \"position\": 8121,\n    \"lecture_section_id\": 9877,\n    \"attachments\": [\n      {\n        \"id\": 9628,\n        \"name\": \"string\",\n        \"kind\": \"string\",\n        \"url\": \"string\",\n        \"text\": \"string\",\n        \"position\": 9797,\n        \"file_size\": 2882,\n        \"file_extension\": \"string\",\n        \"quiz\": {\n          \"id\": 8846\n        }\n      },\n      {\n        \"id\": 2500,\n        \"name\": \"string\",\n        \"kind\": \"string\",\n        \"url\": \"string\",\n        \"text\": \"string\",\n        \"position\": 9862,\n        \"file_size\": 2930,\n        \"file_extension\": \"string\",\n        \"quiz\": {\n          \"id\": 1473\n        }\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d879cbcb-a2a6-46c9-a9b7-6fedcbdb8802",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "a8e680f0-3353-49f2-9d25-eabf8345da6c",
+              "createdAt": "2026-10-22T02:25:42.000Z",
+              "updatedAt": "2026-10-22T02:25:42.000Z",
+              "uid": "35240-a8e680f0-3353-49f2-9d25-eabf8345da6c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "844de755-680c-4331-a16c-2d812d0abac1",
-          "name": "Mark a lecture complete",
-          "request": {
-            "name": "Mark a lecture complete",
-            "description": {
-              "content": "Mark a lecture as complete for a specific user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "mark_complete"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) The unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) The unique lecture ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"user_id\": \"<integer>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "66c1e837-4144-4167-a4c1-85c37da6726c",
-              "name": "Lecture marked complete successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) The unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) The unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d794a20a-23a0-4cc2-bb09-2da6604004a1",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) The unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) The unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "07bdde30-1aa8-43b5-b51e-5ecd568d3774",
-              "name": "Conflict",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) The unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) The unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user_id\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "16b25668-6937-4284-90fe-e505e82936a9",
-          "name": "Get a video",
-          "request": {
-            "name": "Get a video",
-            "description": {
-              "content": "Return a specific video attachment within a lecture.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "videos",
-                ":video_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "user_id",
-                  "value": "<integer>",
-                  "description": "Specify the user who is watching the video."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "video_id",
-                  "description": "(Required) Return results by unique video attachment ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "823da073-c66e-4987-8b72-a0351bd6bfca",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "videos",
-                    ":video_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "user_id",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "video_id",
-                      "description": "(Required) Return results by unique video attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"video\": {\n    \"id\": 9202,\n    \"video_asset\": {\n      \"url\": \"string\",\n      \"content_type\": \"string\"\n    },\n    \"status\": \"PARTIALLY_READY\",\n    \"url_thumbnail\": \"string\",\n    \"media_type\": \"string\",\n    \"media_duration\": 9866\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5e73cba3-f2bf-45d7-a0ce-439a681aadcb",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "videos",
-                    ":video_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "user_id",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "video_id",
-                      "description": "(Required) Return results by unique video attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4a9a658b-fbf5-489f-a062-90194c461c9e",
-          "name": "Get a lecture for current user",
-          "request": {
-            "name": "Get a lecture for current user",
-            "description": {
-              "content": "Return a lecture by its unique ID within a course for the current authenticated user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "current_user",
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID number that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID number."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET"
-          },
-          "response": [
-            {
-              "id": "438f3137-8174-4b96-b6f8-bc810a4f506b",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID number that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID number."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"lecture\": {\n    \"id\": 9070,\n    \"name\": \"string\",\n    \"is_published\": true,\n    \"position\": 3130,\n    \"lecture_section_id\": 7091,\n    \"attachments\": [\n      {\n        \"id\": 4429,\n        \"name\": \"string\",\n        \"kind\": \"string\",\n        \"url\": \"string\",\n        \"text\": \"string\",\n        \"position\": 2238,\n        \"file_size\": 4319,\n        \"file_extension\": \"string\",\n        \"quiz\": {\n          \"id\": 102\n        }\n      },\n      {\n        \"id\": 4843,\n        \"name\": \"string\",\n        \"kind\": \"string\",\n        \"url\": \"string\",\n        \"text\": \"string\",\n        \"position\": 785,\n        \"file_size\": 6318,\n        \"file_extension\": \"string\",\n        \"quiz\": {\n          \"id\": 2207\n        }\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "90d4bffb-20f9-4bdc-afd8-66f8c67dadb5",
-              "name": "Unauthorized - invalid or expired access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID number that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID number."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d0daf064-dff4-43f7-8bba-b3ad9da99796",
-              "name": "Forbidden - not authorized to access this endpoint",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID number that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID number."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6aa475c9-f663-4094-a4d5-bf6ac5a81582",
-              "name": "Lecture or course not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID number that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID number."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d7e0ee7b-1f9a-4073-982d-7f3db0ec4e9a",
-          "name": "Mark a lecture complete for current user",
-          "request": {
-            "name": "Mark a lecture complete for current user",
-            "description": {
-              "content": "Mark a lecture as complete for the current authenticated user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "current_user",
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "mark_complete"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Unique course ID that contains the lecture to be completed."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Unique lecture ID to be completed."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST"
-          },
-          "response": [
-            {
-              "id": "92fc98ed-8816-44e6-8800-21449ce22df6",
-              "name": "Lecture marked complete successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Unique course ID that contains the lecture to be completed."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Unique lecture ID to be completed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "35fff036-5931-4bc0-8640-8e9f8fc2eb58",
-              "name": "Unauthorized - invalid or expired access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Unique course ID that contains the lecture to be completed."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Unique lecture ID to be completed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e0ad6f08-ce83-4c9f-b3a8-3cb800ee6bd9",
-              "name": "Forbidden - not authorized to access this endpoint",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Unique course ID that contains the lecture to be completed."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Unique lecture ID to be completed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "254e1513-ba02-43c0-9f29-9b9035791187",
-              "name": "Lecture or course not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Unique course ID that contains the lecture to be completed."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Unique lecture ID to be completed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8c140641-222b-454c-8d1b-1602062ce472",
-              "name": "Unmet course compliance requirements",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "current_user",
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "mark_complete"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Unique course ID that contains the lecture to be completed."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Unique lecture ID to be completed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c2ce8194-926e-43a7-beda-7d161b9f0874",
+          "createdAt": "2026-10-22T02:25:42.000Z",
+          "updatedAt": "2026-10-22T02:25:42.000Z",
+          "uid": "35240-c2ce8194-926e-43a7-beda-7d161b9f0874"
         }
       ],
-      "event": []
+      "id": "ab8e9da9-6f9a-4e87-87df-8a224acb1fed",
+      "createdAt": "2026-10-22T02:25:42.000Z",
+      "updatedAt": "2026-10-22T02:25:42.000Z",
+      "uid": "35240-ab8e9da9-6f9a-4e87-87df-8a224acb1fed"
+    },
+    {
+      "name": "current_user",
+      "item": [
+        {
+          "name": "courses",
+          "item": [
+            {
+              "name": "{course_id}",
+              "item": [
+                {
+                  "name": "lectures",
+                  "item": [
+                    {
+                      "name": "{lecture_id}",
+                      "item": [
+                        {
+                          "name": "mark_complete",
+                          "item": [
+                            {
+                              "name": "Mark a lecture complete for current user",
+                              "id": "d44c13cc-29e1-4e03-8899-d00cc9031a8e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "oauth2",
+                                  "oauth2": [
+                                    {
+                                      "key": "scope",
+                                      "value": "name:read email:read courses:read courses:update",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "accessTokenUrl",
+                                      "value": "https://developers.teachable.com/oauth/token",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "authUrl",
+                                      "value": "https://developers.teachable.com/oauth/authorize",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "grant_type",
+                                      "value": "authorization_code",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "current_user",
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "mark_complete"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b427ebed-4980-4a5c-b99d-4535a0af04c5",
+                                      "key": "course_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Unique course ID that contains the lecture to be completed."
+                                    },
+                                    {
+                                      "id": "0d8e7d54-420c-4b3c-8d9b-144a843950f7",
+                                      "key": "lecture_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Unique lecture ID to be completed."
+                                    }
+                                  ]
+                                },
+                                "description": "Mark a lecture as complete for the current authenticated user."
+                              },
+                              "response": [
+                                {
+                                  "id": "0fc135f7-480b-42a0-a535-e5a72b05da69",
+                                  "name": "Lecture marked complete successfully",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "current_user",
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "mark_complete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-0fc135f7-480b-42a0-a535-e5a72b05da69"
+                                },
+                                {
+                                  "id": "91379d0c-7543-4bf7-bb30-824eb5047a99",
+                                  "name": "Unauthorized - invalid or expired access token",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "current_user",
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "mark_complete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-91379d0c-7543-4bf7-bb30-824eb5047a99"
+                                },
+                                {
+                                  "id": "03a28c76-71ee-4423-a5f9-86d9df4e38fc",
+                                  "name": "Forbidden - not authorized to access this endpoint",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "current_user",
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "mark_complete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-03a28c76-71ee-4423-a5f9-86d9df4e38fc"
+                                },
+                                {
+                                  "id": "65d31b52-2a05-4681-91fb-f0445b188fc6",
+                                  "name": "Lecture or course not found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "current_user",
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "mark_complete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-65d31b52-2a05-4681-91fb-f0445b188fc6"
+                                },
+                                {
+                                  "id": "2357de39-c6a8-449c-aee9-b8a796dba868",
+                                  "name": "Unmet course compliance requirements",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id/mark_complete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "current_user",
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "mark_complete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Conflict",
+                                  "code": 409,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:42.000Z",
+                                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                                  "uid": "35240-2357de39-c6a8-449c-aee9-b8a796dba868"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-d44c13cc-29e1-4e03-8899-d00cc9031a8e"
+                            }
+                          ],
+                          "id": "a3ba2012-d943-45d0-af3d-81c45ee8e0ac",
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-a3ba2012-d943-45d0-af3d-81c45ee8e0ac"
+                        },
+                        {
+                          "name": "Get a lecture for current user",
+                          "id": "326c37f9-e41b-4278-b564-e97ec28b8952",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "name:read email:read courses:read courses:update",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "https://developers.teachable.com/oauth/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://developers.teachable.com/oauth/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "authorization_code",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "current_user",
+                                "courses",
+                                ":course_id",
+                                "lectures",
+                                ":lecture_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1a90c780-d22c-46b4-9335-6b82a0505352",
+                                  "key": "course_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Return results by unique course ID number that contains the lecture."
+                                },
+                                {
+                                  "id": "e93512a1-6a71-4871-81dc-ad024d90ae7e",
+                                  "key": "lecture_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Return results by unique lecture ID number."
+                                }
+                              ]
+                            },
+                            "description": "Return a lecture by its unique ID within a course for the current authenticated user."
+                          },
+                          "response": [
+                            {
+                              "id": "54ed8f30-32e0-4eed-9609-f87508a8a13e",
+                              "name": "Successful response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "current_user",
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"lecture\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string,null>\",\n    \"is_published\": \"<boolean>\",\n    \"position\": \"<integer>\",\n    \"lecture_section_id\": \"<integer>\",\n    \"attachments\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"kind\": \"<string>\",\n        \"url\": \"<string,null>\",\n        \"text\": \"<string,null>\",\n        \"position\": \"<integer,null>\",\n        \"file_size\": \"<integer,null>\",\n        \"file_extension\": \"<string,null>\",\n        \"quiz\": {\n          \"id\": \"<integer>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string,null>\",\n        \"kind\": \"<string>\",\n        \"url\": \"<string,null>\",\n        \"text\": \"<string,null>\",\n        \"position\": \"<integer,null>\",\n        \"file_size\": \"<integer,null>\",\n        \"file_extension\": \"<string,null>\",\n        \"quiz\": {\n          \"id\": \"<integer>\"\n        }\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-54ed8f30-32e0-4eed-9609-f87508a8a13e"
+                            },
+                            {
+                              "id": "46c624f3-eaf5-447f-8cae-7b5db1a3c575",
+                              "name": "Unauthorized - invalid or expired access token",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "current_user",
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-46c624f3-eaf5-447f-8cae-7b5db1a3c575"
+                            },
+                            {
+                              "id": "a688b419-2af5-4fee-9bac-4229022d451a",
+                              "name": "Forbidden - not authorized to access this endpoint",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "current_user",
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-a688b419-2af5-4fee-9bac-4229022d451a"
+                            },
+                            {
+                              "id": "0d423656-4c4d-4c65-ae61-5bb968af8fbe",
+                              "name": "Lecture or course not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/current_user/courses/:course_id/lectures/:lecture_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "current_user",
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:42.000Z",
+                              "updatedAt": "2026-10-22T02:25:42.000Z",
+                              "uid": "35240-0d423656-4c4d-4c65-ae61-5bb968af8fbe"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:25:42.000Z",
+                          "updatedAt": "2026-10-22T02:25:42.000Z",
+                          "uid": "35240-326c37f9-e41b-4278-b564-e97ec28b8952"
+                        }
+                      ],
+                      "id": "9ba47901-8a6f-4b5b-b9c0-2ce0a97f59ea",
+                      "createdAt": "2026-10-22T02:25:42.000Z",
+                      "updatedAt": "2026-10-22T02:25:42.000Z",
+                      "uid": "35240-9ba47901-8a6f-4b5b-b9c0-2ce0a97f59ea"
+                    }
+                  ],
+                  "id": "1e08c35f-d552-4ee4-8c44-de776611e301",
+                  "createdAt": "2026-10-22T02:25:42.000Z",
+                  "updatedAt": "2026-10-22T02:25:42.000Z",
+                  "uid": "35240-1e08c35f-d552-4ee4-8c44-de776611e301"
+                }
+              ],
+              "id": "375c1146-001b-41f3-b9a7-8c91aa0c6a0d",
+              "createdAt": "2026-10-22T02:25:42.000Z",
+              "updatedAt": "2026-10-22T02:25:42.000Z",
+              "uid": "35240-375c1146-001b-41f3-b9a7-8c91aa0c6a0d"
+            }
+          ],
+          "id": "e6473aa3-df01-4508-9f41-e40ab9249366",
+          "createdAt": "2026-10-22T02:25:42.000Z",
+          "updatedAt": "2026-10-22T02:25:42.000Z",
+          "uid": "35240-e6473aa3-df01-4508-9f41-e40ab9249366"
+        }
+      ],
+      "id": "83f32f2e-dca9-4568-9012-a3c0bcbfa101",
+      "createdAt": "2026-10-22T02:25:42.000Z",
+      "updatedAt": "2026-10-22T02:25:42.000Z",
+      "uid": "35240-83f32f2e-dca9-4568-9012-a3c0bcbfa101"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://developers.teachable.com/v1",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "apiKey"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "c6e1cd4d-1532-4b7b-801a-4b38a727502d",
-    "name": "Teachable Admin Courses Lectures API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

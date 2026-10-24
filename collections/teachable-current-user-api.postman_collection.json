@@ -1,0 +1,249 @@
+{
+  "info": {
+    "_postman_id": "57856a72-6abd-4594-9d71-6902add6d77c",
+    "name": "Teachable OAuth Current User API",
+    "description": "OAuth 2.0-based API enabling third-party applications to authenticate on behalf of Teachable school owners. Provides access to current user profile, courses, lecture content, progress, and video assets using scoped OAuth tokens with token refresh and revocation support.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:18.000Z",
+    "updatedAt": "2026-10-22T02:26:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-57856a72-6abd-4594-9d71-6902add6d77c"
+  },
+  "item": [
+    {
+      "name": "current_user",
+      "item": [
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "Get current user profile",
+              "id": "28259eea-8bb7-4192-91d2-4eb49f340aa4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "name:read email:read courses:read courses:update",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://developers.teachable.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://developers.teachable.com/oauth/authorize",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current_user/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current_user",
+                    "me"
+                  ]
+                },
+                "description": "Retrieve the current authenticated user's profile information including name, email, and assigned role."
+              },
+              "response": [
+                {
+                  "id": "7de97414-4114-43ef-a896-132332741342",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/current_user/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "current_user",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string,null>\",\n  \"email\": \"<string>\",\n  \"role\": \"owner\"\n}",
+                  "createdAt": "2026-10-22T02:26:18.000Z",
+                  "updatedAt": "2026-10-22T02:26:18.000Z",
+                  "uid": "35240-7de97414-4114-43ef-a896-132332741342"
+                },
+                {
+                  "id": "09bd4503-49ec-423b-9d6e-8ffe65c8a5fc",
+                  "name": "Unauthorized - invalid or expired access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/current_user/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "current_user",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:26:18.000Z",
+                  "updatedAt": "2026-10-22T02:26:18.000Z",
+                  "uid": "35240-09bd4503-49ec-423b-9d6e-8ffe65c8a5fc"
+                },
+                {
+                  "id": "4718a242-09b5-4490-b680-038a17cfbb15",
+                  "name": "Forbidden - not authorized to access this endpoint",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/current_user/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "current_user",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:26:18.000Z",
+                  "updatedAt": "2026-10-22T02:26:18.000Z",
+                  "uid": "35240-4718a242-09b5-4490-b680-038a17cfbb15"
+                }
+              ],
+              "createdAt": "2026-10-22T02:26:18.000Z",
+              "updatedAt": "2026-10-22T02:26:18.000Z",
+              "uid": "35240-28259eea-8bb7-4192-91d2-4eb49f340aa4"
+            }
+          ],
+          "id": "b69c19a7-299b-4ec7-8c0d-a1e5ced6dd30",
+          "createdAt": "2026-10-22T02:26:18.000Z",
+          "updatedAt": "2026-10-22T02:26:18.000Z",
+          "uid": "35240-b69c19a7-299b-4ec7-8c0d-a1e5ced6dd30"
+        }
+      ],
+      "id": "0851b2f1-11e3-49c0-817b-fc5bb1c19391",
+      "createdAt": "2026-10-22T02:26:18.000Z",
+      "updatedAt": "2026-10-22T02:26:18.000Z",
+      "uid": "35240-0851b2f1-11e3-49c0-817b-fc5bb1c19391"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "name:read email:read courses:read courses:update",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://developers.teachable.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://developers.teachable.com/oauth/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
+    }
+  ]
+}

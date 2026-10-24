@@ -1,608 +1,581 @@
 {
+  "info": {
+    "_postman_id": "0ba06823-2fae-4c28-8540-c8ae98c2f28c",
+    "name": "Teachable Admin Quizzes API",
+    "description": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:25:48.000Z",
+    "updatedAt": "2026-10-22T02:25:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0ba06823-2fae-4c28-8540-c8ae98c2f28c"
+  },
   "item": [
     {
-      "id": "40afb7fc-f301-4b69-8a7a-d0f25ec33f7e",
-      "name": "Quizzes",
-      "description": {
-        "content": "Quiz and quiz response endpoints",
-        "type": "text/plain"
-      },
+      "name": "courses",
       "item": [
         {
-          "id": "99ca63cc-2c09-4e60-b445-1d440a8a969b",
-          "name": "List quizzes",
-          "request": {
-            "name": "List quizzes",
-            "description": {
-              "content": "Return all quiz IDs in a specific lecture.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "quizzes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{course_id}",
+          "item": [
             {
-              "id": "e0a875fe-fb2a-464a-a642-7cf1f3f0c153",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "lectures",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{lecture_id}",
+                  "item": [
+                    {
+                      "name": "quizzes",
+                      "item": [
+                        {
+                          "name": "{quiz_id}",
+                          "item": [
+                            {
+                              "name": "responses",
+                              "item": [
+                                {
+                                  "name": "Get quiz responses",
+                                  "id": "69f21301-8223-4d41-a63e-baad8881cc01",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id/responses",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "quizzes",
+                                        ":quiz_id",
+                                        "responses"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "f9d35c52-2178-4230-a89f-1b528fb59d4b",
+                                          "key": "course_id",
+                                          "value": "<integer>",
+                                          "description": "(Required) Return results by unique course ID that contains the lecture."
+                                        },
+                                        {
+                                          "id": "1e02335e-364a-4a14-a3ff-fd5f33743c62",
+                                          "key": "lecture_id",
+                                          "value": "<integer>",
+                                          "description": "(Required) Return results by unique lecture ID."
+                                        },
+                                        {
+                                          "id": "dacfdfa4-dc5e-4582-baf0-78fc89add51a",
+                                          "key": "quiz_id",
+                                          "value": "<integer>",
+                                          "description": "(Required) Return results by unique quiz attachment ID."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Return all student responses for a specific quiz."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "2bd4ef02-ca43-4c9a-8acc-9cbc31be65b4",
+                                      "name": "Successful response",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "apiKey",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id/responses",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "courses",
+                                            ":course_id",
+                                            "lectures",
+                                            ":lecture_id",
+                                            "quizzes",
+                                            ":quiz_id",
+                                            "responses"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "course_id"
+                                            },
+                                            {
+                                              "key": "lecture_id"
+                                            },
+                                            {
+                                              "key": "quiz_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"course_id\": \"<integer>\",\n  \"course_name\": \"<string>\",\n  \"lecture_id\": \"<integer>\",\n  \"lecture_name\": \"<string>\",\n  \"graded\": \"<boolean>\",\n  \"responses\": [\n    {\n      \"student_id\": \"<integer>\",\n      \"student_name\": \"<string>\",\n      \"student_email\": \"<string>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"percent_correct\": \"<integer>\"\n    },\n    {\n      \"student_id\": \"<integer>\",\n      \"student_name\": \"<string>\",\n      \"student_email\": \"<string>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"percent_correct\": \"<integer>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-10-22T02:25:48.000Z",
+                                      "updatedAt": "2026-10-22T02:25:48.000Z",
+                                      "uid": "35240-2bd4ef02-ca43-4c9a-8acc-9cbc31be65b4"
+                                    },
+                                    {
+                                      "id": "98956fd6-2b6d-47ff-8831-38d89786a539",
+                                      "name": "Not found",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "apiKey",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id/responses",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "courses",
+                                            ":course_id",
+                                            "lectures",
+                                            ":lecture_id",
+                                            "quizzes",
+                                            ":quiz_id",
+                                            "responses"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "course_id"
+                                            },
+                                            {
+                                              "key": "lecture_id"
+                                            },
+                                            {
+                                              "key": "quiz_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-10-22T02:25:48.000Z",
+                                      "updatedAt": "2026-10-22T02:25:48.000Z",
+                                      "uid": "35240-98956fd6-2b6d-47ff-8831-38d89786a539"
+                                    }
+                                  ],
+                                  "createdAt": "2026-10-22T02:25:48.000Z",
+                                  "updatedAt": "2026-10-22T02:25:48.000Z",
+                                  "uid": "35240-69f21301-8223-4d41-a63e-baad8881cc01"
+                                }
+                              ],
+                              "id": "8f8400eb-4e26-43d6-a051-13a0fcc01814",
+                              "createdAt": "2026-10-22T02:25:48.000Z",
+                              "updatedAt": "2026-10-22T02:25:48.000Z",
+                              "uid": "35240-8f8400eb-4e26-43d6-a051-13a0fcc01814"
+                            },
+                            {
+                              "name": "Get a quiz",
+                              "id": "11be44eb-2d56-4d08-a2c9-5fd484c56f04",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "quizzes",
+                                    ":quiz_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0e93b93b-1635-4fbc-89ae-0b137d2458bd",
+                                      "key": "course_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique course ID that contains the lecture."
+                                    },
+                                    {
+                                      "id": "5c1d2b30-0fff-4e46-8db5-e4addc767f64",
+                                      "key": "lecture_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique lecture ID."
+                                    },
+                                    {
+                                      "id": "029939f8-96f6-4925-8ed6-361f437619a0",
+                                      "key": "quiz_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Return results by unique quiz attachment ID."
+                                    }
+                                  ]
+                                },
+                                "description": "Return details of a specific quiz attachment."
+                              },
+                              "response": [
+                                {
+                                  "id": "79cacd2f-e7cf-44d9-8620-87af6822b04a",
+                                  "name": "Successful response",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "apiKey",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "quizzes",
+                                        ":quiz_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        },
+                                        {
+                                          "key": "quiz_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"kind\": \"quiz\",\n  \"url\": \"<string,null>\",\n  \"text\": \"<string,null>\",\n  \"position\": \"<integer>\",\n  \"quiz\": {\n    \"id\": \"<integer>\",\n    \"type\": \"Quiz\",\n    \"questions\": [\n      {\n        \"question\": \"<string>\",\n        \"question_type\": \"<string>\",\n        \"answers\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"correct_answers\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"graded\": \"<boolean>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"question_type\": \"<string>\",\n        \"answers\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"correct_answers\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"graded\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                                  "createdAt": "2026-10-22T02:25:48.000Z",
+                                  "updatedAt": "2026-10-22T02:25:48.000Z",
+                                  "uid": "35240-79cacd2f-e7cf-44d9-8620-87af6822b04a"
+                                },
+                                {
+                                  "id": "ef429243-82e8-442e-a42e-f6d6e06d2355",
+                                  "name": "Not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "apiKey",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes/:quiz_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "courses",
+                                        ":course_id",
+                                        "lectures",
+                                        ":lecture_id",
+                                        "quizzes",
+                                        ":quiz_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "course_id"
+                                        },
+                                        {
+                                          "key": "lecture_id"
+                                        },
+                                        {
+                                          "key": "quiz_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T02:25:48.000Z",
+                                  "updatedAt": "2026-10-22T02:25:48.000Z",
+                                  "uid": "35240-ef429243-82e8-442e-a42e-f6d6e06d2355"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T02:25:48.000Z",
+                              "updatedAt": "2026-10-22T02:25:48.000Z",
+                              "uid": "35240-11be44eb-2d56-4d08-a2c9-5fd484c56f04"
+                            }
+                          ],
+                          "id": "7f825b6c-fd68-461e-8453-e83ce995c475",
+                          "createdAt": "2026-10-22T02:25:48.000Z",
+                          "updatedAt": "2026-10-22T02:25:48.000Z",
+                          "uid": "35240-7f825b6c-fd68-461e-8453-e83ce995c475"
+                        },
+                        {
+                          "name": "List quizzes",
+                          "id": "2911cd7f-0c5f-4094-b507-1a307af0f384",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "courses",
+                                ":course_id",
+                                "lectures",
+                                ":lecture_id",
+                                "quizzes"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6af19094-025b-48be-8ef0-4e1e727b39da",
+                                  "key": "course_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Return results by unique course ID that contains the lecture."
+                                },
+                                {
+                                  "id": "c4561183-6659-4d1a-92cc-87dfb26c32d4",
+                                  "key": "lecture_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Return results by unique lecture ID."
+                                }
+                              ]
+                            },
+                            "description": "Return all quiz IDs in a specific lecture."
+                          },
+                          "response": [
+                            {
+                              "id": "f5239294-50fb-40c4-9ea8-dc8a0d89ebc5",
+                              "name": "Successful response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "apiKey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "quizzes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"quiz_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                              "createdAt": "2026-10-22T02:25:48.000Z",
+                              "updatedAt": "2026-10-22T02:25:48.000Z",
+                              "uid": "35240-f5239294-50fb-40c4-9ea8-dc8a0d89ebc5"
+                            },
+                            {
+                              "id": "000ab396-4cdc-45e3-b9f6-1cda020f74a0",
+                              "name": "Not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "apiKey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/courses/:course_id/lectures/:lecture_id/quizzes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "courses",
+                                    ":course_id",
+                                    "lectures",
+                                    ":lecture_id",
+                                    "quizzes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "course_id"
+                                    },
+                                    {
+                                      "key": "lecture_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:25:48.000Z",
+                              "updatedAt": "2026-10-22T02:25:48.000Z",
+                              "uid": "35240-000ab396-4cdc-45e3-b9f6-1cda020f74a0"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:25:48.000Z",
+                          "updatedAt": "2026-10-22T02:25:48.000Z",
+                          "uid": "35240-2911cd7f-0c5f-4094-b507-1a307af0f384"
+                        }
+                      ],
+                      "id": "f2391a73-4fbe-416b-a90d-a980983f801a",
+                      "createdAt": "2026-10-22T02:25:48.000Z",
+                      "updatedAt": "2026-10-22T02:25:48.000Z",
+                      "uid": "35240-f2391a73-4fbe-416b-a90d-a980983f801a"
+                    }
+                  ],
+                  "id": "b779ec58-09d9-4923-99c4-c1048f405b24",
+                  "createdAt": "2026-10-22T02:25:48.000Z",
+                  "updatedAt": "2026-10-22T02:25:48.000Z",
+                  "uid": "35240-b779ec58-09d9-4923-99c4-c1048f405b24"
                 }
               ],
-              "body": "{\n  \"quiz_ids\": [\n    7549,\n    9872\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6d05495e-4ff0-42e9-91d3-5d81386cce03",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "b98c76d1-f7e6-409c-97ed-6f016160a75f",
+              "createdAt": "2026-10-22T02:25:48.000Z",
+              "updatedAt": "2026-10-22T02:25:48.000Z",
+              "uid": "35240-b98c76d1-f7e6-409c-97ed-6f016160a75f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "587fa824-d007-4990-a858-6edcc4783212",
-          "name": "Get a quiz",
-          "request": {
-            "name": "Get a quiz",
-            "description": {
-              "content": "Return details of a specific quiz attachment.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "quizzes",
-                ":quiz_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "quiz_id",
-                  "description": "(Required) Return results by unique quiz attachment ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6ff1debb-9ff4-466d-926a-39bde7b16320",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes",
-                    ":quiz_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "quiz_id",
-                      "description": "(Required) Return results by unique quiz attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 6603,\n  \"name\": \"string\",\n  \"kind\": \"quiz\",\n  \"url\": \"string\",\n  \"text\": \"string\",\n  \"position\": 8193,\n  \"quiz\": {\n    \"id\": 4283,\n    \"type\": \"Quiz\",\n    \"questions\": [\n      {\n        \"question\": \"string\",\n        \"question_type\": \"string\",\n        \"answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"correct_answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"graded\": true\n      },\n      {\n        \"question\": \"string\",\n        \"question_type\": \"string\",\n        \"answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"correct_answers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"graded\": false\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c941ba56-1d76-45a2-a8d4-a06733bfa4ad",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes",
-                    ":quiz_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "quiz_id",
-                      "description": "(Required) Return results by unique quiz attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c4b24f8d-a595-4d38-b12f-46e1e2829259",
-          "name": "Get quiz responses",
-          "request": {
-            "name": "Get quiz responses",
-            "description": {
-              "content": "Return all student responses for a specific quiz.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "courses",
-                ":course_id",
-                "lectures",
-                ":lecture_id",
-                "quizzes",
-                ":quiz_id",
-                "responses"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "course_id",
-                  "description": "(Required) Return results by unique course ID that contains the lecture."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "lecture_id",
-                  "description": "(Required) Return results by unique lecture ID."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "quiz_id",
-                  "description": "(Required) Return results by unique quiz attachment ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8d458d72-1eb1-4eff-a039-ab30273892d2",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes",
-                    ":quiz_id",
-                    "responses"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "quiz_id",
-                      "description": "(Required) Return results by unique quiz attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"course_id\": 5951,\n  \"course_name\": \"string\",\n  \"lecture_id\": 2224,\n  \"lecture_name\": \"string\",\n  \"graded\": false,\n  \"responses\": [\n    {\n      \"student_id\": 3477,\n      \"student_name\": \"string\",\n      \"student_email\": \"string\",\n      \"submitted_at\": \"1984-03-09T06:44:37.884Z\",\n      \"percent_correct\": 8703\n    },\n    {\n      \"student_id\": 8612,\n      \"student_name\": \"string\",\n      \"student_email\": \"string\",\n      \"submitted_at\": \"1994-07-28T12:08:02.927Z\",\n      \"percent_correct\": 795\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "21d59059-b958-4bf3-a085-ec6c69844e47",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "courses",
-                    ":course_id",
-                    "lectures",
-                    ":lecture_id",
-                    "quizzes",
-                    ":quiz_id",
-                    "responses"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "course_id",
-                      "description": "(Required) Return results by unique course ID that contains the lecture."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "lecture_id",
-                      "description": "(Required) Return results by unique lecture ID."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "quiz_id",
-                      "description": "(Required) Return results by unique quiz attachment ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "1a78c467-2413-42dd-b586-2235f8957f19",
+          "createdAt": "2026-10-22T02:25:48.000Z",
+          "updatedAt": "2026-10-22T02:25:48.000Z",
+          "uid": "35240-1a78c467-2413-42dd-b586-2235f8957f19"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://developers.teachable.com/v1",
-      "key": "baseUrl"
+      "id": "2a0c8ec7-9ed5-444d-88ea-643b88bdf4ca",
+      "createdAt": "2026-10-22T02:25:48.000Z",
+      "updatedAt": "2026-10-22T02:25:48.000Z",
+      "uid": "35240-2a0c8ec7-9ed5-444d-88ea-643b88bdf4ca"
     }
   ],
   "auth": {
@@ -610,25 +583,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "apiKey"
+        "value": "apiKey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "2b30fa49-5a76-4831-afe7-8d9b1f004ba7",
-    "name": "Teachable Admin Courses Quizzes API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
     }
-  }
+  ]
 }

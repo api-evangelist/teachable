@@ -1,152 +1,466 @@
 {
+  "info": {
+    "_postman_id": "2831f043-c4aa-43b0-a3c7-0150c7c47c0e",
+    "name": "Teachable Admin Users API",
+    "description": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:25:58.000Z",
+    "updatedAt": "2026-10-22T02:25:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2831f043-c4aa-43b0-a3c7-0150c7c47c0e"
+  },
   "item": [
     {
-      "id": "dd07e906-3e8c-4d33-9da2-1f64243ab6ca",
-      "name": "Users",
-      "description": {
-        "content": "User management endpoints",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "6fb73542-4770-49f2-a634-5c65fbdb3c10",
-          "name": "List users",
-          "request": {
-            "name": "List users",
-            "description": {
-              "content": "Get a list of users.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Used in pagination when number of users exceed the maximum amount of results per page."
-                },
-                {
-                  "disabled": false,
-                  "key": "per",
-                  "value": "<integer>",
-                  "description": "Used in pagination to define amount of users per page, when not defined the maximum is 20."
-                },
-                {
-                  "disabled": false,
-                  "key": "email",
-                  "value": "<string>",
-                  "description": "Filter users by user email."
-                },
-                {
-                  "disabled": false,
-                  "key": "search_after",
-                  "value": "<integer>",
-                  "description": "Used when number of users exceeds 10,000 records. Use the search_after value to search the next set of records."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{user_id}",
+          "item": [
             {
-              "id": "afc7d81b-3256-4f41-9377-ebaeb56887ed",
-              "name": "Successful response",
-              "originalRequest": {
+              "name": "Get a user",
+              "id": "c8db44f9-f937-4d57-814a-d35bebfddd05",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "users"
-                  ],
+                  "raw": "{{baseUrl}}/users/:user_id",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "variable": [
                     {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
+                      "id": "925862b9-075b-41da-ad64-7cf1f2558969",
+                      "key": "user_id",
+                      "value": "<integer>",
+                      "description": "(Required) The unique ID of the user."
+                    }
+                  ]
+                },
+                "description": "Return a user by their unique ID."
+              },
+              "response": [
+                {
+                  "id": "4a941f52-166b-4a3f-8c25-9ca1e91646d6",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "per",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "email",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "search_after",
-                      "value": "<integer>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string,null>\",\n    \"email\": \"<string>\",\n    \"role\": \"<string>\",\n    \"last_sign_in_ip\": \"<string,null>\",\n    \"courses\": [\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      },\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-22T02:25:59.000Z",
+                  "updatedAt": "2026-10-22T02:25:59.000Z",
+                  "uid": "35240-4a941f52-166b-4a3f-8c25-9ca1e91646d6"
                 },
+                {
+                  "id": "49c62d7a-25d2-4d8f-bf93-c4fa8e2a2925",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:25:59.000Z",
+                  "updatedAt": "2026-10-22T02:25:59.000Z",
+                  "uid": "35240-49c62d7a-25d2-4d8f-bf93-c4fa8e2a2925"
+                }
+              ],
+              "createdAt": "2026-10-22T02:25:58.000Z",
+              "updatedAt": "2026-10-22T02:25:58.000Z",
+              "uid": "35240-c8db44f9-f937-4d57-814a-d35bebfddd05"
+            },
+            {
+              "name": "Update a user",
+              "id": "dea65fd8-947d-4454-9c1b-c2c47384f388",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:user_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "295bf2d3-2c65-478e-a4b5-c2c664a6aa5c",
+                      "key": "user_id",
+                      "value": "<integer>",
+                      "description": "(Required) The unique ID of the user."
+                    }
+                  ]
+                },
+                "description": "Update the name or src of a user."
+              },
+              "response": [
+                {
+                  "id": "9aab5246-7656-4e76-b693-2a383fc69230",
+                  "name": "User updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string,null>\",\n    \"email\": \"<string>\",\n    \"role\": \"<string>\",\n    \"last_sign_in_ip\": \"<string,null>\",\n    \"courses\": [\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      },\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-22T02:25:59.000Z",
+                  "updatedAt": "2026-10-22T02:25:59.000Z",
+                  "uid": "35240-9aab5246-7656-4e76-b693-2a383fc69230"
+                },
+                {
+                  "id": "2d8971c9-91fc-45eb-83d5-dca5adc5ea70",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:25:59.000Z",
+                  "updatedAt": "2026-10-22T02:25:59.000Z",
+                  "uid": "35240-2d8971c9-91fc-45eb-83d5-dca5adc5ea70"
+                }
+              ],
+              "createdAt": "2026-10-22T02:25:58.000Z",
+              "updatedAt": "2026-10-22T02:25:58.000Z",
+              "uid": "35240-dea65fd8-947d-4454-9c1b-c2c47384f388"
+            }
+          ],
+          "id": "98a26e6e-6d1c-44b8-b23c-cc1f4a5833b1",
+          "createdAt": "2026-10-22T02:25:58.000Z",
+          "updatedAt": "2026-10-22T02:25:58.000Z",
+          "uid": "35240-98a26e6e-6d1c-44b8-b23c-cc1f4a5833b1"
+        },
+        {
+          "name": "List users",
+          "id": "094e9248-a717-49ba-a14c-298dc2c1ea95",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?page=<integer>&per=<integer>&email=<string>&search_after=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "description": "Used in pagination when number of users exceed the maximum amount of results per page.",
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Used in pagination to define amount of users per page, when not defined the maximum is 20.",
+                  "key": "per",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter users by user email.",
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Used when number of users exceeds 10,000 records. Use the search_after value to search the next set of records.",
+                  "key": "search_after",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Get a list of users."
+          },
+          "response": [
+            {
+              "id": "5496b77f-8db9-422f-bb88-544b4a854d50",
+              "name": "Successful response",
+              "originalRequest": {
                 "method": "GET",
-                "body": {}
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?page=<integer>&per=<integer>&email=<string>&search_after=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Used in pagination when number of users exceed the maximum amount of results per page.",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Used in pagination to define amount of users per page, when not defined the maximum is 20.",
+                      "key": "per",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter users by user email.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Used when number of users exceeds 10,000 records. Use the search_after value to search the next set of records.",
+                      "key": "search_after",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"users\": [\n    {\n      \"id\": 8627,\n      \"name\": \"string\",\n      \"email\": \"string\"\n    },\n    {\n      \"id\": 5645,\n      \"name\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 2236,\n    \"page\": 9656,\n    \"from\": 3139,\n    \"to\": 1241,\n    \"per_page\": 1177,\n    \"number_of_pages\": 3427\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"users\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string,null>\",\n      \"email\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string,null>\",\n      \"email\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"from\": \"<integer>\",\n    \"to\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"number_of_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:25:59.000Z",
+              "updatedAt": "2026-10-22T02:25:59.000Z",
+              "uid": "35240-5496b77f-8db9-422f-bb88-544b4a854d50"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:25:58.000Z",
+          "updatedAt": "2026-10-22T02:25:58.000Z",
+          "uid": "35240-094e9248-a717-49ba-a14c-298dc2c1ea95"
         },
         {
-          "id": "ebf05d8f-817d-4cba-8e7b-27e085e87c52",
           "name": "Create a user",
+          "id": "439bc691-6aa2-4625-a702-3668c7e6138e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create a user",
-            "description": {
-              "content": "Create a new user on the school.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -157,462 +471,150 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"src\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Create a new user on the school."
           },
           "response": [
             {
-              "id": "8c1a87ea-87b7-4df0-ac3b-bdf785934d1f",
+              "id": "981fa73a-d21b-4efa-8241-83812b480af6",
               "name": "User created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apiKey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"src\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"user\": {\n    \"id\": 4422,\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"role\": \"string\",\n    \"last_sign_in_ip\": \"string\",\n    \"courses\": [\n      {\n        \"course_id\": 5146,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"2016-09-26T12:47:29.848Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"1969-10-09T05:10:41.992Z\",\n        \"percent_complete\": 8672.618277153451\n      },\n      {\n        \"course_id\": 6558,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"1998-09-08T03:36:10.960Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"2015-07-08T03:33:20.548Z\",\n        \"percent_complete\": 3338.1761890352723\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"string\"\n      },\n      {\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string,null>\",\n    \"email\": \"<string>\",\n    \"role\": \"<string>\",\n    \"last_sign_in_ip\": \"<string,null>\",\n    \"courses\": [\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      },\n      {\n        \"course_id\": \"<integer>\",\n        \"course_name\": \"<string>\",\n        \"enrolled_at\": \"<dateTime>\",\n        \"is_active_enrollment\": \"<boolean>\",\n        \"completed_at\": \"<string,null-date-time>\",\n        \"percent_complete\": \"<number>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-22T02:25:59.000Z",
+              "updatedAt": "2026-10-22T02:25:59.000Z",
+              "uid": "35240-981fa73a-d21b-4efa-8241-83812b480af6"
             },
             {
-              "id": "7bb825eb-180e-4d3b-b5d4-93ba64c25e03",
+              "id": "80544276-0cc0-4897-9dda-46dec7cd1e6c",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apiKey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"src\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:25:59.000Z",
+              "updatedAt": "2026-10-22T02:25:59.000Z",
+              "uid": "35240-80544276-0cc0-4897-9dda-46dec7cd1e6c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1e505008-d8fa-41a4-906b-321bce8eb58a",
-          "name": "Get a user",
-          "request": {
-            "name": "Get a user",
-            "description": {
-              "content": "Return a user by their unique ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":user_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "user_id",
-                  "description": "(Required) The unique ID of the user."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b460fca4-cbe4-48c3-a380-c87c602ebc58",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "user_id",
-                      "description": "(Required) The unique ID of the user."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"user\": {\n    \"id\": 5502,\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"role\": \"string\",\n    \"last_sign_in_ip\": \"string\",\n    \"courses\": [\n      {\n        \"course_id\": 7600,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"1977-12-26T22:07:18.543Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"2007-04-09T07:46:51.305Z\",\n        \"percent_complete\": 1880.5946353684433\n      },\n      {\n        \"course_id\": 439,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"1982-05-07T00:07:11.563Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"1947-08-15T14:09:01.719Z\",\n        \"percent_complete\": 1791.6468880723003\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"string\"\n      },\n      {\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ff79c9d0-5b75-4e3c-a151-2d6db26becf9",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "user_id",
-                      "description": "(Required) The unique ID of the user."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "11b066cf-1608-4e92-90b5-731d5992b462",
-          "name": "Update a user",
-          "request": {
-            "name": "Update a user",
-            "description": {
-              "content": "Update the name or src of a user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":user_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "user_id",
-                  "description": "(Required) The unique ID of the user."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "35b202dd-5d22-4437-85d0-d1a3ffdf5602",
-              "name": "User updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "user_id",
-                      "description": "(Required) The unique ID of the user."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"user\": {\n    \"id\": 5502,\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"role\": \"string\",\n    \"last_sign_in_ip\": \"string\",\n    \"courses\": [\n      {\n        \"course_id\": 7600,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"1977-12-26T22:07:18.543Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"2007-04-09T07:46:51.305Z\",\n        \"percent_complete\": 1880.5946353684433\n      },\n      {\n        \"course_id\": 439,\n        \"course_name\": \"string\",\n        \"enrolled_at\": \"1982-05-07T00:07:11.563Z\",\n        \"is_active_enrollment\": true,\n        \"completed_at\": \"1947-08-15T14:09:01.719Z\",\n        \"percent_complete\": 1791.6468880723003\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"string\"\n      },\n      {\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "05e4d6ab-1aed-4fb0-bc16-4dbb6b625c08",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":user_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "user_id",
-                      "description": "(Required) The unique ID of the user."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "apiKey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"src\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:25:58.000Z",
+          "updatedAt": "2026-10-22T02:25:58.000Z",
+          "uid": "35240-439bc691-6aa2-4625-a702-3668c7e6138e"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://developers.teachable.com/v1",
-      "key": "baseUrl"
+      "id": "00c96ffd-7b4b-4c8c-99cb-9c2c66cd71df",
+      "createdAt": "2026-10-22T02:25:58.000Z",
+      "updatedAt": "2026-10-22T02:25:58.000Z",
+      "uid": "35240-00c96ffd-7b4b-4c8c-99cb-9c2c66cd71df"
     }
   ],
   "auth": {
@@ -620,25 +622,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "apiKey"
+        "value": "apiKey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "695d6d87-8f11-4ab9-9c81-b1ed7a9f61ae",
-    "name": "Teachable Admin Courses Users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
     }
-  }
+  ]
 }

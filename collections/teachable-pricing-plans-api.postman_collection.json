@@ -1,0 +1,291 @@
+{
+  "info": {
+    "_postman_id": "73a2a60f-e4ea-45f4-82ff-be273180cf94",
+    "name": "Teachable Admin Pricing Plans API",
+    "description": "REST API for managing Teachable school data including courses, users, enrollments, quiz responses, pricing plans, transactions, and webhooks. Authenticated via API key header and available on Growth plan and above.\n\nContact Support:\n Name: Teachable Support\n Email: support@teachable.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:25.000Z",
+    "updatedAt": "2026-10-22T02:26:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-73a2a60f-e4ea-45f4-82ff-be273180cf94"
+  },
+  "item": [
+    {
+      "name": "pricing_plans",
+      "item": [
+        {
+          "name": "{pricing_plan_id}",
+          "item": [
+            {
+              "name": "Get a pricing plan",
+              "id": "dae6e879-fc13-4f53-b669-f015a35d7277",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pricing_plans/:pricing_plan_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pricing_plans",
+                    ":pricing_plan_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d2258903-4ec5-41f5-8a6f-2d01a62e37b7",
+                      "key": "pricing_plan_id",
+                      "value": "<integer>",
+                      "description": "(Required) Search for a pricing plan by its unique ID."
+                    }
+                  ]
+                },
+                "description": "Search for a pricing plan by its unique ID."
+              },
+              "response": [
+                {
+                  "id": "e89a6082-cf3b-42a8-a340-fd7f93ca697d",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pricing_plans/:pricing_plan_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pricing_plans",
+                        ":pricing_plan_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "pricing_plan_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pricing_plan\": {\n    \"id\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"price\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"course_id\": \"<integer>\",\n    \"description\": \"<string,null>\",\n    \"free_trial_length\": \"<integer,null>\",\n    \"enrollment_cap\": \"<integer,null>\",\n    \"frequency\": {\n      \"type\": \"subscription\",\n      \"billing_interval\": \"week\",\n      \"billing_interval_count\": \"<integer,null>\",\n      \"access_limit_date\": \"<string,null-date-time>\",\n      \"access_limit_interval\": \"day\",\n      \"access_limit_duration\": \"<integer,null>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:26:26.000Z",
+                  "updatedAt": "2026-10-22T02:26:26.000Z",
+                  "uid": "35240-e89a6082-cf3b-42a8-a340-fd7f93ca697d"
+                },
+                {
+                  "id": "d64373fe-e413-43ba-9ba3-983ef74d7019",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "apiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pricing_plans/:pricing_plan_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pricing_plans",
+                        ":pricing_plan_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "pricing_plan_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:26:26.000Z",
+                  "updatedAt": "2026-10-22T02:26:26.000Z",
+                  "uid": "35240-d64373fe-e413-43ba-9ba3-983ef74d7019"
+                }
+              ],
+              "createdAt": "2026-10-22T02:26:26.000Z",
+              "updatedAt": "2026-10-22T02:26:26.000Z",
+              "uid": "35240-dae6e879-fc13-4f53-b669-f015a35d7277"
+            }
+          ],
+          "id": "e72b9ab4-ff35-4d13-9d88-b36c70995215",
+          "createdAt": "2026-10-22T02:26:26.000Z",
+          "updatedAt": "2026-10-22T02:26:26.000Z",
+          "uid": "35240-e72b9ab4-ff35-4d13-9d88-b36c70995215"
+        },
+        {
+          "name": "List pricing plans",
+          "id": "625c0c94-e79c-4e68-8a7a-a7b4b0546e60",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pricing_plans?page=<integer>&per=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pricing_plans"
+              ],
+              "query": [
+                {
+                  "description": "Used in pagination when number of pricing plans exceeds the maximum amount of results per page.",
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5.",
+                  "key": "per",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Return all pricing plans for the school."
+          },
+          "response": [
+            {
+              "id": "d6342ae8-7837-4adf-b738-949fcd4714c1",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pricing_plans?page=<integer>&per=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pricing_plans"
+                  ],
+                  "query": [
+                    {
+                      "description": "Used in pagination when number of pricing plans exceeds the maximum amount of results per page.",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Used in pagination to define amount of pricing plans per page, when not defined the maximum is 5.",
+                      "key": "per",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"pricing_plans\": [\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"course_id\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"course_id\": \"<integer>\"\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"from\": \"<integer>\",\n    \"to\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"number_of_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:26:26.000Z",
+              "updatedAt": "2026-10-22T02:26:26.000Z",
+              "uid": "35240-d6342ae8-7837-4adf-b738-949fcd4714c1"
+            }
+          ],
+          "createdAt": "2026-10-22T02:26:26.000Z",
+          "updatedAt": "2026-10-22T02:26:26.000Z",
+          "uid": "35240-625c0c94-e79c-4e68-8a7a-a7b4b0546e60"
+        }
+      ],
+      "id": "a3029a15-9df1-4994-9f81-141e86901ab6",
+      "createdAt": "2026-10-22T02:26:26.000Z",
+      "updatedAt": "2026-10-22T02:26:26.000Z",
+      "uid": "35240-a3029a15-9df1-4994-9f81-141e86901ab6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://developers.teachable.com/v1"
+    }
+  ]
+}
